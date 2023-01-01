@@ -1,0 +1,24 @@
+{
+  "name": "mysitestatic",
+  "version": "1.0.0",
+  "description": "insert description here",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "eleventy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keitaay/keitaay.git"
+  },
+  "keywords": [],
+  "author": "Keita A. Yokoyama",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/keitaay/keitaay/issues"
+  },
+  "homepage": "https://github.com/keitaay/keitaay#readme",
+  "devDependencies": {
+    "@11ty/eleventy": "^1.0.2"
+  }
+}
