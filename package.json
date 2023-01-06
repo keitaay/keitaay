@@ -1,7 +1,7 @@
 {
   "name": "mysitestatic",
   "version": "1.0.0",
-  "description": "insert description here",
+  "description": "Static personal website for Keita Yokoyama, generated using 11ty",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,14 +11,9 @@
     "type": "git",
     "url": "git+https://github.com/keitaay/keitaay.git"
   },
-  "keywords": [],
   "author": "Keita A. Yokoyama",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/keitaay/keitaay/issues"
-  },
-  "homepage": "https://github.com/keitaay/keitaay#readme",
-  "devDependencies": {
+  "dependencies": {
     "@11ty/eleventy": "^1.0.2"
   }
 }

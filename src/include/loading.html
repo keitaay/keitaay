@@ -1,0 +1,24 @@
+<div class="UIload">
+    <div class="loading-grid">
+        <div class="loading-cube" style="animation-delay:  0ms"></div>
+        <div class="loading-cube" style="animation-delay:150ms"></div>
+        <div class="loading-cube" style="animation-delay:300ms"></div>
+        <div class="loading-cube" style="animation-delay: 50ms"></div>
+        <div class="loading-cube" style="animation-delay:200ms"></div>
+        <div class="loading-cube" style="animation-delay:350ms"></div>
+        <div class="loading-cube" style="animation-delay:100ms"></div>
+        <div class="loading-cube" style="animation-delay:250ms"></div>
+        <div class="loading-cube" style="animation-delay:400ms"></div>
+    </div>
+</div>
+<script type="text/javascript">
+    // Control the visibility of the loading screen, defined through .UIload.
+    // Remember that the loading screen's style is defined separately from everything else.
+    // This is because the loading screen is a priority-load resource!
+    document.onreadystatechange = function () {
+        if (document.readyState === 'loading') {
+            document.querySelector(".UIload").style.visibility = "visible";
+            document.querySelector("main,footer").style.visibility = "hidden";
+        }
+    };
+</script>

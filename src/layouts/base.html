@@ -1,0 +1,23 @@
+---
+title:
+date: Last Modified
+---
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{ title }} | K&eacute;ita A. Y.</title>
+    {% include "header.html" %}
+</head>
+
+<body>
+    {% include "loading.html" %}
+    {% include "navbar.html" %}
+    {% include "gototop.html" %}
+    <main>
+        {{ content | safe }}
+    </main>
+    {% include "footer.html" %}
+</body>
+
+</html>
