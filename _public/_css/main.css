@@ -135,8 +135,8 @@ p {
   opacity: 1;
   transition: visibility 200ms ease, opacity 200ms ease;
   background-color: rgba(36, 42, 52, 0.5);
-  -webkit-backdrop-filter: blur(2px);
-          backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
 }
 .navOverlay .navMenu .navWindow {
   /* .navWindows contains the actual navigation sidebar */
@@ -376,6 +376,14 @@ input[type=checkbox]:checked ~ .navButton .navClosed {
   max-width: 600px;
   color: #eeeeee;
   background-color: rgba(30, 30, 30, 0.8);
+}
+.article-summary .buttonGoBack {
+  background: none;
+  border: none;
+  padding-bottom: 1em;
+  font-size: 2em;
+  color: #eee;
+  cursor: pointer;
 }
 
 .article {

@@ -99,7 +99,7 @@
 </style>
 
 <!--if JavaScript is allowed, asynchronously load rest of CSS + QoL scripts-->
-<link rel="preload" as="style" href="{{ 'css/main.css' | url }}" onload="this.onload=null; this.rel='stylesheet'">
+<link rel="preload" as="style" href="{{ pathCss | url }}" onload="this.onload=null; this.rel='stylesheet'">
 
 <!--if JavaScript is disabled, omit loading screen + fetch the CSS file-->
 <noscript>
@@ -109,5 +109,5 @@
             display: none
         }
     </style>
-    <link rel="stylesheet" type="text/css" href="{{ 'css/main.css' | url }}" />
+    <link rel="stylesheet" type="text/css" href="{{ pathCss | url }}" />
 </noscript>

@@ -1,0 +1,14 @@
+---
+layout: base.html
+---
+<div class="slide yokoso" id="pgtop" style="background-image:url('{{ post.image.url }}')">
+    <div class="article-summary">
+        <button onclick="history.back()" class="buttonGoBack">&#8617;</button>
+        <h2 style="font-weight:400">{{ title }}</h2>
+        <p class="htert">{{ subject }}</p>
+        <hr>
+    </div>
+</div>
+<div class="article">
+    {{ content | safe }}
+</div>

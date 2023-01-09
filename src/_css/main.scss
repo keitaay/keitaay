@@ -460,6 +460,15 @@ $tilePad: 2vw;
     max-width: 600px;
     color: $colorW;
     background-color: rgba(30, 30, 30, 0.8);
+
+    .buttonGoBack {
+        background: none;
+        border: none;
+        padding-bottom: 1em;
+        font-size: 2em;
+        color: #eee;
+        cursor: pointer;
+    }
 }
 
 .article {
