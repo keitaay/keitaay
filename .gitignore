@@ -1,4 +1,5 @@
 *.DS_Store
+_public/
 
 ## SASS (SCSS)
 .sass-cache/
