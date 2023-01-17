@@ -1,13 +1,14 @@
 ---
 layout: base.html
-title: Designer
+title: Citizen
 ---
-<div class="slide slide4 yokoso" id="pgtop">
+<div class="slide slide5 yokoso" id="pgtop">
     <h1 class="serif" style="font-weight:lighter; font-size:5em">
-        K&eacute;ita the designer subverts traditions to form enduring relationships.
+        K&eacute;ita the citizen transcends boundaries to democratize tomorrow.
     </h1>
     <p style="font-size:1.5rem; max-width:700px">
-        text
+        I believe that it is a civic duty to participate and enhance our own communities. Thus, I aspire to help my
+        community and world become more engaged, informed, and interested in its own destiny.
     </p>
     {% include "godown.html" %}
 </div>
@@ -24,9 +25,9 @@ title: Designer
 </div>
 <div class="tiles" id="cases">
     <div style="width:100%; padding:0 2.5%">
-        <h2 class="serif">All Design Projects</h2>
+        <h2 class="serif">All Civic Projects</h2>
     </div>
-    {% for case in collections.cases | getRole('Designer') %}
+    {% for case in collections.cases | getRole('Citizen') %}
     <a class="tile" href="{{ case.url | url }}"
         style="background-color:#111144;background-image:url('{{ case.data.imageHero | url }}')">
         <div class="tile-overlay">

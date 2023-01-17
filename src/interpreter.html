@@ -1,14 +1,14 @@
 ---
 layout: base.html
-title: Engineer
+title: Interpreter
 ---
-<div class="slide slide2 yokoso" id="pgtop">
+<div class="slide slide3 yokoso" id="pgtop">
     <h1 class="serif" style="font-weight:lighter; font-size:5em">
-        K&eacute;ita the engineer creates technologies to understand and heal.
+        K&eacute;ita the interpreter transcends boundaries to deepen human connections.
     </h1>
     <p style="font-size:1.5rem; max-width:700px">
-        As&nbsp;a biomedical engineer, I&nbsp;design medical&nbsp;devices
-        to&nbsp;understand people's bodies and&nbsp;expand their&nbsp;capabilities.
+        Born in America but raised by Japanese immigrants, I am experienced in bridging cultural divides to connect and
+        empower people in sensitive situations.
     </p>
     {% include "godown.html" %}
 </div>
@@ -59,9 +59,9 @@ title: Engineer
 </div>
 <div class="tiles" id="cases">
     <div style="width:100%; padding:0 2.5%">
-        <h2 class="serif">All Engineering Projects</h2>
+        <h2 class="serif">All Interpreting Projects</h2>
     </div>
-    {% for case in collections.cases | getRole('Engineer') %}
+    {% for case in collections.cases | getRole('Interpreter') %}
     <a class="tile" href="{{ case.url | url }}"
         style="background-color:#111144;background-image:url('{{ case.data.imageHero | url }}')">
         <div class="tile-overlay">

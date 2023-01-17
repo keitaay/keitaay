@@ -360,6 +360,13 @@ input[type=checkbox]:checked~.navButton {
     .content-section {
         width: 100%;
         padding: 5% 2.5%;
+
+        &.content-sectionSticky {
+            position: sticky;
+            top: 0;
+            align-self: flex-start;
+            background-color: $colorW;
+        }
     }
 
     .content-slideThru {

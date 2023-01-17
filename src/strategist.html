@@ -1,13 +1,14 @@
 ---
 layout: base.html
-title: Designer
+title: Strategist
 ---
-<div class="slide slide4 yokoso" id="pgtop">
+<div class="slide slide1 yokoso" id="pgtop">
     <h1 class="serif" style="font-weight:lighter; font-size:5em">
-        K&eacute;ita the designer subverts traditions to form enduring relationships.
+        K&eacute;ita the strategist transcends silos to chart new directions.
     </h1>
     <p style="font-size:1.5rem; max-width:700px">
-        text
+        As a strategy consultant, I help organizations understand and excel in highly-regulated markets. In medtech,
+        global health, public works and beyond, I am dedicated to demistify complex worlds to improve people's lives.
     </p>
     {% include "godown.html" %}
 </div>
@@ -24,9 +25,9 @@ title: Designer
 </div>
 <div class="tiles" id="cases">
     <div style="width:100%; padding:0 2.5%">
-        <h2 class="serif">All Design Projects</h2>
+        <h2 class="serif">All Consulting Projects</h2>
     </div>
-    {% for case in collections.cases | getRole('Designer') %}
+    {% for case in collections.cases | getRole('Strategist') %}
     <a class="tile" href="{{ case.url | url }}"
         style="background-color:#111144;background-image:url('{{ case.data.imageHero | url }}')">
         <div class="tile-overlay">

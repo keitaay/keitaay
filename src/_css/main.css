@@ -251,38 +251,6 @@ input[type=checkbox]:checked ~ .navButton .navClosed {
     transform: translateY(1vh);
   }
 }
-.slide .goTo,
-.content .goTo {
-  -webkit-animation: bounceLat 500ms infinite paused;
-          animation: bounceLat 500ms infinite paused;
-}
-@-webkit-keyframes bounceLat {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateX(0);
-  }
-  40% {
-    transform: translateX(2vw);
-  }
-  60% {
-    transform: translateX(1vw);
-  }
-}
-@keyframes bounceLat {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateX(0);
-  }
-  40% {
-    transform: translateX(2vw);
-  }
-  60% {
-    transform: translateX(1vw);
-  }
-}
-.slide .goTo:hover,
-.content .goTo:hover {
-  -webkit-animation-play-state: running;
-          animation-play-state: running;
-}
 .slide .bigbutton,
 .content .bigbutton {
   text-decoration: none;
@@ -320,6 +288,13 @@ input[type=checkbox]:checked ~ .navButton .navClosed {
 .content .content-section {
   width: 100%;
   padding: 5% 2.5%;
+}
+.content .content-section.content-sectionSticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  background-color: #eeeeee;
 }
 .content .content-slideThru {
   display: flex;
