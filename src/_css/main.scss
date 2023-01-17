@@ -46,6 +46,7 @@ $fontserif: "Noto Serif Display", serif;
 /* global */
 html {
     scroll-behavior: smooth;
+    scroll-snap-type: y proximity;
 }
 
 body {
@@ -61,7 +62,7 @@ main {
     color: $colorX;
 }
 
-a:not(.noFX):not(.tile):not(.navurl):not(.bigbutton) {
+a:not(.noFX):not(.tile):not(.navurl):not(.bigbutton):not(.content-slideThru) {
     text-decoration: none;
     color: $color1;
     background: linear-gradient(to right, transparent 50.05%, rgba($color4, 1) 50.05%);
@@ -131,7 +132,6 @@ h3,
 }
 
 p {
-    margin: 0;
     font-size: 1.3em;
 }
 
@@ -284,12 +284,12 @@ input[type=checkbox]:checked~.navButton {
 
 /* regular content: slideshow-like (keep values unitless since vanilla CSS cannot do dimensional analysis) */
 .slide,
-.intermission {
+.content {
     position: relative;
     margin: 0;
     padding: 20vh 5vw 5vh 5vw;
     min-height: 75vh;
-    /*scroll-snap-align: start*/
+    scroll-snap-align: start;
     background-color: $colorW;
     background: center/cover no-repeat fixed;
 
@@ -301,9 +301,9 @@ input[type=checkbox]:checked~.navButton {
         position: absolute;
         bottom: 0;
         left: 50vw;
-        animation: bounce 2s infinite;
+        animation: bounceVert 2s infinite;
 
-        @keyframes bounce {
+        @keyframes bounceVert {
 
             0%,
             20%,
@@ -329,6 +329,7 @@ input[type=checkbox]:checked~.navButton {
         padding: 0.3em;
         margin: 3vh 0;
         border-radius: 5px;
+        border: 1px solid $colorW;
         color: $colorX;
         background: linear-gradient(to right, rgba($color1, 1) 50.01%, rgba($color4, 1) 50.01%);
         background-size: 201%;
@@ -347,17 +348,26 @@ input[type=checkbox]:checked~.navButton {
     }
 }
 
-.intermission {
+.content {
     display: flex;
     z-index: 400;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
     align-content: space-around;
+    padding: 0;
 
-    .interm-section {
+    .content-section {
         width: 100%;
-        padding-left: 0
+        padding: 5% 2.5%;
+    }
+
+    .content-slideThru {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        min-height: 100vh;
+        background-color: $colorW;
     }
 
     hr {
@@ -434,7 +444,7 @@ $tilePad: 2vw;
     margin: 0;
     padding: $tilePad;
     color: white;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.4) 40%, rgba(0, 0, 0, 0.8) 100%);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.6) 40%, rgba(0, 0, 0, 0.8) 100%);
 
     .artPrelude {
         margin: 0;
@@ -453,13 +463,14 @@ $tilePad: 2vw;
     }
 }
 
-/* articles; "full" versions of tiles */
-.article-summary {
+/* Articles are "full" versions of tiles. It's preceded by "summaries" that render within a "slide". */
+.slide .article-summary {
     padding: 1em;
     margin: 1em;
-    max-width: 600px;
+    max-width: 1000px;
     color: $colorW;
     background-color: rgba(30, 30, 30, 0.8);
+    font-weight: 300;
 
     .buttonGoBack {
         background: none;
@@ -468,6 +479,11 @@ $tilePad: 2vw;
         font-size: 2em;
         color: #eee;
         cursor: pointer;
+    }
+
+    p {
+        padding: 0;
+        font-size: 1.5em;
     }
 }
 
@@ -614,7 +630,7 @@ form {
     }
 
     .slide .goDown,
-    .intermission .goDown {
+    .content .goDown {
         visibility: visible;
     }
 }
@@ -625,11 +641,11 @@ form {
         font-size: medium;
     }
 
-    .yokoso p {
+    .yokoso p :not(.article-summary) {
         max-width: 50vw
     }
 
-    .intermission .interm-section {
-        width: 50%;
+    .content .content-section {
+        width: 45%;
     }
 }

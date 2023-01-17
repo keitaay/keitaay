@@ -1,20 +1,34 @@
 // Define relevant elements and variables
 let transit = 500; // transition duration in milliseconds
-const anchors = document.querySelectorAll('a:not(.noFX)');
-const UIload = document.querySelector(".UIload");
+var anchors = document.querySelectorAll('a:not(.noFX)');
+var UIload = document.querySelector(".UIload");
 
-// Show the loading screen if the page is not fully loaded yet so that
-// .UIload is hidden until window.load. While the HTML header will
-// display the loading screen, this function will ensure that it is
-// visible until window.load so that it may be hidden.
-//
-// The mechanism to show/hide the loading screen is based on the
-// tutorial presented by Tyler Potts at:
-//     https://github.com/TylerPottsDev/js-page-transitions-basic
+// Toggle screen changes and event listeners when the page is fully loaded.
 document.onreadystatechange = function () {
+    // Show the loading screen so that .UIload is hidden until window.load.
     if (document.readyState !== "complete") {
         UIload.style.visibility = "visible";
         document.querySelector("main,footer").style.visibility = "hidden";
+    }
+
+    // For every anchor, add a listener for click events. Only clicks on
+    // internal links and submit buttons will trigger the navAway event.
+    // External links and in-page anchors, on the other hand, will be exempt
+    // from this behavior, and will follow the browser's default behavior.
+    if (document.readyState === "interactive") {
+        anchors.forEach(function (a) {
+            a.addEventListener('click', e => {
+                var hrefDest = e.currentTarget.href;
+                if (
+                    !hrefDest ||
+                    hrefDest == window.location.href ||
+                    e.currentTarget.host != window.location.host
+                ) {
+                    return;
+                }
+                navAway(e);
+            });
+        });
     }
 };
 
@@ -26,31 +40,18 @@ document.onreadystatechange = function () {
 // Remember that the loading screen is initially shown while the main
 // page content is hidden. That behavior is controlled in the page header.
 window.onpageshow = function () {
-    console.log('onpageshow triggered');
     // Hide the loading screen, and make the rest of the page visible.
     UIload.style.transitionDuration = transit.toString() + "ms";
     UIload.style.transform = "scaleX(0)";
     document.querySelector("main,footer").style.visibility = "visible";
-    // When the loading screen finishes retreating, change the transform-origin
-    // of .UIload so that a link click will cause the loading screen to expand
-    // from the right side of the window. Since .UIload's transform-origin
-    // is set to the left, the loading screen will appear as if it's sliding
+    // By changing the transform-origin of .UIload, a link click will cause
+    // the loading screen to expand from the right side of the window.
+    // Since .UIload's transform-origin is set to the left, the loading
+    // screen will appear as if it's sliding from the right to the left.
     // across the viewport from the right to the left.
     UIload.ontransitionend = function () {
         UIload.style.visibility = "hidden";
         UIload.style.transformOrigin = "right";
-    };
-    // For every anchor, add a listener for click events. This causes any
-    // relevant link and submit-button clicks to be followed by navAway.
-    for (let i = 0; i < anchors.length; i++) {
-        if (anchors[i].hostname !== window.location.hostname ||
-            anchors[i].pathname === window.location.pathname) {
-            // Ignore external links and in-page anchors
-            continue;
-        } else {
-            // Otherwise, add listener for clicks
-            anchors[i].addEventListener('click', navAway);
-        };
     };
 }
 
@@ -75,7 +76,7 @@ function reviveLoader(e) {
 
 // Reactivate the loading screen's animation, then navigate to the next page
 function navAway(e) {
-    const destination = e.target.href;
+    const destination = e.currentTarget.href;
     // Ensure menubar is retracted and scrolling is enabled
     document.querySelector("#showMenu").checked = false;
     scrollFreeze();
@@ -83,8 +84,7 @@ function navAway(e) {
     reviveLoader();
     // Prevent default behavior (i.e. immediately loading next page)
     e.preventDefault();
-    // Load next page after the loading screen has returned
-    console.log(destination)
+    // After the loading screen is visible, load the next page
     setTimeout(function () { window.location.href = destination; }, transit);
     return destination;
 };

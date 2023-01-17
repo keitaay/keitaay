@@ -9,6 +9,8 @@
 /* global */
 html {
   scroll-behavior: smooth;
+  -ms-scroll-snap-type: y proximity;
+      scroll-snap-type: y proximity;
 }
 
 body {
@@ -24,7 +26,7 @@ main {
   color: rgb(36, 42, 52);
 }
 
-a:not(.noFX):not(.tile):not(.navurl):not(.bigbutton) {
+a:not(.noFX):not(.tile):not(.navurl):not(.bigbutton):not(.content-slideThru) {
   text-decoration: none;
   color: rgb(255, 168, 34);
   background: linear-gradient(to right, transparent 50.05%, #d6545a 50.05%);
@@ -32,7 +34,7 @@ a:not(.noFX):not(.tile):not(.navurl):not(.bigbutton) {
   background-position: 0 0;
   transition: 500ms ease;
 }
-a:not(.noFX):not(.tile):not(.navurl):not(.bigbutton):hover, a:not(.noFX):not(.tile):not(.navurl):not(.bigbutton):focus {
+a:not(.noFX):not(.tile):not(.navurl):not(.bigbutton):not(.content-slideThru):hover, a:not(.noFX):not(.tile):not(.navurl):not(.bigbutton):not(.content-slideThru):focus {
   background-position: -99% 0;
   color: #eeeeee;
 }
@@ -81,7 +83,6 @@ h3,
 }
 
 p {
-  margin: 0;
   font-size: 1.3em;
 }
 
@@ -207,17 +208,17 @@ input[type=checkbox]:checked ~ .navButton .navClosed {
 
 /* regular content: slideshow-like (keep values unitless since vanilla CSS cannot do dimensional analysis) */
 .slide,
-.intermission {
+.content {
   position: relative;
   margin: 0;
   padding: 20vh 5vw 5vh 5vw;
   min-height: 75vh;
-  /*scroll-snap-align: start*/
+  scroll-snap-align: start;
   background-color: #eeeeee;
   background: center/cover no-repeat fixed;
 }
 .slide .goDown,
-.intermission .goDown {
+.content .goDown {
   font-size: 2em;
   text-align: center;
   margin: 5% 0;
@@ -225,10 +226,10 @@ input[type=checkbox]:checked ~ .navButton .navClosed {
   position: absolute;
   bottom: 0;
   left: 50vw;
-  -webkit-animation: bounce 2s infinite;
-          animation: bounce 2s infinite;
+  -webkit-animation: bounceVert 2s infinite;
+          animation: bounceVert 2s infinite;
 }
-@-webkit-keyframes bounce {
+@-webkit-keyframes bounceVert {
   0%, 20%, 50%, 80%, 100% {
     transform: translateY(0);
   }
@@ -239,7 +240,7 @@ input[type=checkbox]:checked ~ .navButton .navClosed {
     transform: translateY(1vh);
   }
 }
-@keyframes bounce {
+@keyframes bounceVert {
   0%, 20%, 50%, 80%, 100% {
     transform: translateY(0);
   }
@@ -249,14 +250,47 @@ input[type=checkbox]:checked ~ .navButton .navClosed {
   60% {
     transform: translateY(1vh);
   }
+}
+.slide .goTo,
+.content .goTo {
+  -webkit-animation: bounceLat 500ms infinite paused;
+          animation: bounceLat 500ms infinite paused;
+}
+@-webkit-keyframes bounceLat {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(0);
+  }
+  40% {
+    transform: translateX(2vw);
+  }
+  60% {
+    transform: translateX(1vw);
+  }
+}
+@keyframes bounceLat {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(0);
+  }
+  40% {
+    transform: translateX(2vw);
+  }
+  60% {
+    transform: translateX(1vw);
+  }
+}
+.slide .goTo:hover,
+.content .goTo:hover {
+  -webkit-animation-play-state: running;
+          animation-play-state: running;
 }
 .slide .bigbutton,
-.intermission .bigbutton {
+.content .bigbutton {
   text-decoration: none;
   font-size: 2em;
   padding: 0.3em;
   margin: 3vh 0;
   border-radius: 5px;
+  border: 1px solid #eeeeee;
   color: rgb(36, 42, 52);
   background: linear-gradient(to right, #ffa822 50.01%, #d6545a 50.01%);
   background-size: 201%;
@@ -264,29 +298,37 @@ input[type=checkbox]:checked ~ .navButton .navClosed {
   transition: 500ms ease;
 }
 .slide .bigbutton:hover, .slide .bigbutton:focus,
-.intermission .bigbutton:hover,
-.intermission .bigbutton:focus {
+.content .bigbutton:hover,
+.content .bigbutton:focus {
   background-position: -99% 0;
   color: #eeeeee;
 }
 .slide p,
-.intermission p {
+.content p {
   padding-top: 2vh;
 }
 
-.intermission {
+.content {
   display: flex;
   z-index: 400;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
   align-content: space-around;
+  padding: 0;
 }
-.intermission .interm-section {
+.content .content-section {
   width: 100%;
-  padding-left: 0;
+  padding: 5% 2.5%;
 }
-.intermission hr {
+.content .content-slideThru {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #eeeeee;
+}
+.content hr {
   max-width: 20em;
   margin-top: 2em;
   margin-bottom: 2em;
@@ -353,7 +395,7 @@ input[type=checkbox]:checked ~ .navButton .navClosed {
   margin: 0;
   padding: 2vw;
   color: white;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 40%, rgba(0, 0, 0, 0.8) 100%);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 40%, rgba(0, 0, 0, 0.8) 100%);
 }
 .tile-overlay .artPrelude {
   margin: 0;
@@ -369,21 +411,26 @@ input[type=checkbox]:checked ~ .navButton .navClosed {
   font-weight: lighter;
 }
 
-/* articles; "full" versions of tiles */
-.article-summary {
+/* Articles are "full" versions of tiles. It's preceded by "summaries" that render within a "slide". */
+.slide .article-summary {
   padding: 1em;
   margin: 1em;
-  max-width: 600px;
+  max-width: 1000px;
   color: #eeeeee;
   background-color: rgba(30, 30, 30, 0.8);
+  font-weight: 300;
 }
-.article-summary .buttonGoBack {
+.slide .article-summary .buttonGoBack {
   background: none;
   border: none;
   padding-bottom: 1em;
   font-size: 2em;
   color: #eee;
   cursor: pointer;
+}
+.slide .article-summary p {
+  padding: 0;
+  font-size: 1.5em;
 }
 
 .article {
@@ -509,7 +556,7 @@ form button:hover, form button:focus {
     width: 600px;
   }
   .slide .goDown,
-.intermission .goDown {
+.content .goDown {
     visibility: visible;
   }
 }
@@ -518,10 +565,10 @@ form button:hover, form button:focus {
     padding: 3vw 5vw;
     font-size: medium;
   }
-  .yokoso p {
+  .yokoso p :not(.article-summary) {
     max-width: 50vw;
   }
-  .intermission .interm-section {
-    width: 50%;
+  .content .content-section {
+    width: 45%;
   }
 }/*# sourceMappingURL=main.css.map */

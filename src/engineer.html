@@ -1,0 +1,35 @@
+---
+layout: base.html
+title: Engineer
+---
+<div class="slide slide2 yokoso" id="pgtop">
+    <h1 class="serif" style="font-weight:lighter; font-size:5em">
+        K&eacute;ita the engineer creates technologies to understand and heal.
+    </h1>
+    <p style="font-size:1.5rem; max-width:700px">
+        As&nbsp;a biomedical engineer, I&nbsp;design medical&nbsp;devices
+        to&nbsp;understand people's bodies and&nbsp;expand their&nbsp;capabilities.
+    </p>
+    <br>
+    <a class="bigbutton" href="mailto:hello@keitaay.com">Let's Chat!</a>
+    {% include "godown.html" %}
+</div>
+<div class="content" id="service" style="padding:10vh 5vw">
+    <div class="content-section">
+        <h2 class="serif">Who is K&eacute;ita?</h2>
+        <p>
+            text
+        </p>
+    </div>
+</div>
+<div class="tiles" id="cases">
+    {% for case in collections.cases | getRole('Engineer') %}
+    <a class="tile" href="{{ case.url | url }}"
+        style="background-color:#111144;background-image:url('{{ case.data.imageHero | url }}')">
+        <div class="tile-overlay">
+            <div class="artPrelude">{{ case.data.subject }}</div>
+            <div class="artTagline">{{ case.data.title }}</div>
+        </div>
+    </a>
+    {% endfor %}
+</div>

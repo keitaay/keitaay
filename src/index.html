@@ -6,7 +6,7 @@ title: Home
     <h1 class="serif" style="font-weight:lighter; font-size:5em">
         K&eacute;ita Yokoyama<br>engineers solutions.
     </h1>
-    <p style="font-size:1.5rem">
+    <p style="font-size:1.5rem; max-width:700px">
         I&nbsp;unify&nbsp;people across cultures and&nbsp;professions, drive&nbsp;growth,
         and&nbsp;solve complex&nbsp;problems in&nbsp;healthcare, business&nbsp;strategy, and&nbsp;design.
     </p>
@@ -14,41 +14,102 @@ title: Home
     <a class="bigbutton" href="mailto:hello@keitaay.com">Let's Chat!</a>
     {% include "godown.html" %}
 </div>
-<div class="intermission" id="service" style="padding:10vh 5vw">
-    <div class="interm-section" style="max-width:600px">
+<div id="aboutme" class="content">
+    <div class="content-section" style="position:sticky; top:0; align-self:flex-start; background-color:#eee">
         <h2 class="serif">Who is K&eacute;ita?</h2>
         <p>
-            I&nbsp;create businesses, experiences, and&nbsp;solutions to&nbsp;unify communities,
-            disrupt the&nbsp;status&nbsp;quo, and&nbsp;empower people&nbsp;to&nbsp;thrive.
+            I'm&nbsp;a&nbsp;creator of&nbsp;businesses, experiences, and&nbsp;solutions that&nbsp;unify
+            communities, disrupt the&nbsp;status&nbsp;quo, and&nbsp;empower people&nbsp;to&nbsp;thrive.
         </p>
         <p>
-            I accomplish this by wearing multiple hats:
+            I&nbsp;revel&nbsp;in addressing undermet&nbsp;needs in&nbsp;healthcare and&nbsp;society
+            with thoughtful&nbsp;people across multiple&nbsp;disciplines. I&nbsp;do&nbsp;so
+            by wearing&nbsp;several&nbsp;hats:
         </p>
-        <br><!--this break is needed for mobile rendering-->
     </div>
-    <div class="interm-section" style="max-width:600px">
-        <h3>A silo-breaking bioengineer by training.</h3>
-        <p>Text</p>
-        <br>
-        <h3>An versatile consultant by calling.</h3>
-        <p>Text</p>
-        <br>
-        <h3>A cultured interpreter by upbringing.</h3>
-        <p>Text</p>
-        <br>
-        <h3>A practical designer by passion.</h3>
-        <p>Text</p>
-        <br>
-        <h3>A thoughtful citizen by duty.</h3>
-        <p>Text</p>
+    <div class="content-section">
+        <div class="content-slideThru">
+            <div class="content-slideThru-text">
+                <h3 class="serif">A protean bioengineer by training.</h3>
+                <p>
+                    As a doctoral student in Biomedical Engineering, I develop new technologies to enhance
+                    the human condition. I enable clinicians and patients to access new dimensions of information.
+                </p>
+                <p>
+                    <a href="{{ '/engineer' | url }}" style="padding:0 0.25em">
+                        View my engineering work. {% include "goto.html" %}
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="content-slideThru">
+            <div class="content-slideThru-text">
+                <h3 class="serif">A versatile strategist by calling.</h3>
+                <p>
+                    When new technologies are born, I want to ensure they truly reach the people who
+                    need them, with every stakeholder on board. I empower organizations with the
+                    knowledge and processes to survive and thrive.
+                </p>
+                <p>
+                    <a href="{{ '/strategist' | url }}" style="padding:0 0.25em">
+                        View my strategy consultant work. {% include "goto.html" %}
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="content-slideThru">
+            <div class="content-slideThru-text">
+                <h3 class="serif">A cultured interpreter by upbringing.</h3>
+                <p>
+                    I grew up in multiple cultures, and understand the power and pain of bridging cultural gaps.
+                    I connect people and companies by enriching relationships in both Japanese and English.
+                </p>
+                <p>
+                    <a href="{{ '/interpreter' | url }}" style="padding:0 0.25em">
+                        View my interpreting work. {% include "goto.html" %}
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="content-slideThru">
+            <div class="content-slideThru-text">
+                <h3 class="serif">A practical designer by passion.</h3>
+                <p>
+                    As a self-taught digital artist, I create interfaces and environments that are
+                    accessible and intuitive. I create digital media to help communicate, connect, and impress.
+                </p>
+                <p>
+                    <a href="{{ '/designer' | url }}" style="padding:0 0.25em">
+                        View my designing work. {% include "goto.html" %}
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="content-slideThru">
+            <div class="content-slideThru-text">
+                <h3 class="serif">A thoughtful citizen by duty.</h3>
+                <p>
+                    It is each of our duties to create the world we want to live in. I adhere to this mission
+                    by being involved in a variety of policy issues related to social equity and quality of life.
+                </p>
+                <p>
+                    <a href="{{ '/citizen' | url }}" style="padding:0 0.25em">
+                        View my activism and civic work. {% include "goto.html" %}
+                    </a>
+                </p>
+            </div>
+        </div>
     </div>
 </div>
 <div class="tiles" id="featured">
-    {% for case in collections.casesFeatured %}
+    <div style="width:100%; padding:0 2.5%">
+        <h2 class="serif">Featured Work</h2>
+    </div>
+    {% for case in collections.caseFeatured | limit(8) %}
     <a class="tile" href="{{ case.url | url }}"
         style="background-color:#111144;background-image:url('{{ case.data.imageHero | url }}')">
         <div class="tile-overlay">
-            <div class="artPrelude">{{ case.data.role }}: {{ case.data.subject }}</div>
+            <div class="artPrelude">{{ case.data.role[0] }}: {{ case.data.subject }}</div>
             <div class="artTagline">{{ case.data.title }}</div>
         </div>
     </a>
@@ -56,7 +117,7 @@ title: Home
     <a class="tile" href="#" style="background-color:#111144;">
         <div class="tile-overlay">
             <div class="artPreulde">But&nbsp;wait, there's&nbsp;more!</div>
-            <div class="artTagline">Click&nbsp;here to&nbsp;read more case&nbsp;studies.</div>
+            <div class="artTagline">Click&nbsp;here to&nbsp;view more case&nbsp;studies.</div>
         </div>
     </a>
 </div>

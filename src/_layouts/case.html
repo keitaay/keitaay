@@ -1,12 +1,51 @@
 ---
 layout: base.html
+subject: Personal project.
+role: Designer
+taskList:
+techList:
 ---
-<div class="slide yokoso" id="pgtop" style="background-image:url('{{ post.image.url }}')">
+<div class="slide yokoso" id="pgtop" style="background-image:url('{{ imageHero | url }}')">
     <div class="article-summary">
-        <button onclick="history.back()" class="buttonGoBack">&#8617;</button>
-        <h2 style="font-weight:400">{{ title }}</h2>
-        <p class="htert">{{ subject }}</p>
+        <button onclick="pauseGoBack()" class="buttonGoBack" title="Return to Previous Page">&#8617;</button>
+        <h1 class="serif">{{ title }}</h1>
         <hr>
+        <p>{{ summary }}</p>
+    </div>
+    {% include "godown.html" %}
+</div>
+<div class="content" id="service" style="padding:10vh 5vw">
+    <div id="summary" class="content-section" style="max-width:700px">
+        <h2 class="serif">{{ subject }}</h2>
+        <p>{{ brief }}</p>
+        <br><!--this break is needed for mobile rendering-->
+    </div>
+    <div class="content-section" style="max-width:400px">
+        <h3 style="font-weight:bolder; font-size:1.4em">About the Project</h3>
+        <ul>
+            <li>Category: {{ role }}</li>
+            <li>Timespan: {{ dateProj }}</li>
+        </ul>
+        <h3 style="font-weight:bolder; font-size:1.4em">My Roles</h3>
+        <ul>
+            {% for task in taskList %}
+            <li>{{ task }}</li>
+            {% endfor %}
+        </ul>
+        {% if techList %}
+        <h3 style="font-weight:bolder; font-size:1.4em">Tools Used</h3>
+        <ul>
+            {% for tech in techList %}
+            <li>{{ tech }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% if linkLive %}
+        <br>
+        <a class="bigbutton" href="{{ linkLive | url }}" style="font-size:1.5em">
+            See it Live!
+        </a>
+        {% endif %}
     </div>
 </div>
 <div class="article">
