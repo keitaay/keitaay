@@ -3,7 +3,7 @@ layout: base.html
 title: Home
 ---
 <div class="slide slide0 yokoso" id="pgtop">
-    <h1 class="serif" style="font-weight:lighter; font-size:5em">
+    <h1 class="serif" style="font-size:5em">
         K&eacute;ita Yokoyama<br>engineers solutions.
     </h1>
     <p style="font-size:1.5rem; max-width:700px">
@@ -30,10 +30,9 @@ title: Home
     <div class="content-section">
         <div class="content-slideThru">
             <div class="content-slideThru-text">
-                <h3 class="serif">A protean bioengineer by training.</h3>
+                <h3 class="serif">A versatile bioengineer by training.</h3>
                 <p>
-                    As a doctoral student in Biomedical Engineering, I develop new technologies to enhance
-                    the human condition. I enable clinicians and patients to access new dimensions of information.
+                    As a PhD candidate in Biomedical Engineering, I develop new technologies to enhance the human condition. I enable clinicians and patients to access new dimensions of information.
                 </p>
                 <p>
                     <a href="{{ '/engineer' | url }}" style="padding:0 0.25em">
@@ -44,11 +43,9 @@ title: Home
         </div>
         <div class="content-slideThru">
             <div class="content-slideThru-text">
-                <h3 class="serif">A versatile strategist by calling.</h3>
+                <h3 class="serif">A resourceful strategist by calling.</h3>
                 <p>
-                    When new technologies are born, I want to ensure they truly reach the people who
-                    need them, with every stakeholder on board. I empower organizations with the
-                    knowledge and processes to survive and thrive.
+                    When new technologies are born, I want to ensure they truly reach the people who need them, with every stakeholder on board. I empower organizations with the knowledge and processes to survive and thrive.
                 </p>
                 <p>
                     <a href="{{ '/strategist' | url }}" style="padding:0 0.25em">
@@ -57,26 +54,11 @@ title: Home
                 </p>
             </div>
         </div>
-        <!--<div class="content-slideThru">
-            <div class="content-slideThru-text">
-                <h3 class="serif">A cultured interpreter by upbringing.</h3>
-                <p>
-                    I grew up in multiple cultures, and understand the power and pain of bridging cultural gaps.
-                    I connect people and companies by deepening human connections in both Japanese and English.
-                </p>
-                <p>
-                    <a href="{{ '/interpreter' | url }}" style="padding:0 0.25em">
-                        View my interpreting work. {% include "goto.html" %}
-                    </a>
-                </p>
-            </div>
-        </div>-->
         <div class="content-slideThru">
             <div class="content-slideThru-text">
                 <h3 class="serif">A practical designer by passion.</h3>
                 <p>
-                    As a self-taught digital artist, I create interfaces and environments that are
-                    accessible and intuitive. I create digital media to help communicate, connect, and impress.
+                    As a self-taught digital artist, I create interfaces and environments that are accessible and intuitive. I create digital media to help communicate, connect, and impress.
                 </p>
                 <p>
                     <a href="{{ '/designer' | url }}" style="padding:0 0.25em">
@@ -89,8 +71,7 @@ title: Home
             <div class="content-slideThru-text">
                 <h3 class="serif">A thoughtful citizen by duty.</h3>
                 <p>
-                    It is each of our duties to create the world we want to live in. I adhere to this mission
-                    by being involved in a variety of policy issues related to social equity and quality of life.
+                    It is each of our duties to create the world we want to live in. I adhere to this mission by being involved in a variety of policy issues related to social equity and quality of life.
                 </p>
                 <p>
                     <a href="{{ '/citizen' | url }}" style="padding:0 0.25em">
@@ -105,11 +86,11 @@ title: Home
     <div style="width:100%; padding:0 2.5%">
         <h2 class="serif">Featured Work</h2>
     </div>
-    {% for case in collections.caseFeatured | limit(8) %}
+    {% for case in collections.Featured | limit(8) %}
     <a class="tile" href="{{ case.url | url }}"
         style="background-color:#111144;background-image:url('{{ case.data.imageHero | url }}')">
         <div class="tile-overlay">
-            <div class="artPrelude">{{ case.data.role[0] }}: {{ case.data.subject }}</div>
+            <div class="artPrelude">{{ case.data.roles[0] }}: {{ case.data.subject }}</div>
             <div class="artTagline">{{ case.data.title }}</div>
         </div>
     </a>
