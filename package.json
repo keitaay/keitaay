@@ -12,8 +12,8 @@
     "url": "git+https://github.com/keitaay/keitaay.git"
   },
   "author": "Keita A. Yokoyama",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
-    "@11ty/eleventy": "^1.0.2"
+    "@11ty/eleventy": "^3.0.0"
   }
 }

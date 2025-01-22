@@ -1,16 +1,23 @@
+@charset "UTF-8";
 /* define global variables */
 /* control fonts */
 :not(.serif) {
-  font-family: "Mulish", "Verdana", "Arial", sans-serif;
+  font-family: "Anek Latin", "Verdana", "Arial", sans-serif;
+  font-optical-sizing: auto;
+  /* @supports (font-variation-settings: "param" 100) {} */
 }
+
 .serif {
   font-family: "Noto Serif Display", serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  /* @supports (font-variation-settings: "param" 100) {} */
 }
+
 /* global */
 html {
   scroll-behavior: smooth;
-  -ms-scroll-snap-type: y proximity;
-      scroll-snap-type: y proximity;
+  scroll-snap-type: y proximity;
 }
 
 body {
@@ -207,6 +214,11 @@ input[type=checkbox]:checked ~ .navButton .navClosed {
 }
 
 /* regular content: slideshow-like (keep values unitless since vanilla CSS cannot do dimensional analysis) */
+ul,
+ol {
+  padding-inline-start: 1.5em;
+}
+
 .slide,
 .content {
   position: relative;
@@ -226,19 +238,7 @@ input[type=checkbox]:checked ~ .navButton .navClosed {
   position: absolute;
   bottom: 0;
   left: 50vw;
-  -webkit-animation: bounceVert 2s infinite;
-          animation: bounceVert 2s infinite;
-}
-@-webkit-keyframes bounceVert {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(2vh);
-  }
-  60% {
-    transform: translateY(1vh);
-  }
+  animation: bounceVert 2s infinite;
 }
 @keyframes bounceVert {
   0%, 20%, 50%, 80%, 100% {
@@ -290,18 +290,21 @@ input[type=checkbox]:checked ~ .navButton .navClosed {
   padding: 5% 2.5%;
 }
 .content .content-section.content-sectionSticky {
-  position: -webkit-sticky;
   position: sticky;
   top: 0;
   align-self: flex-start;
   background-color: #eeeeee;
+}
+.content .content-section.content-sectionNoPadMobile {
+  padding: 0;
 }
 .content .content-slideThru {
   display: flex;
   align-items: center;
   width: 100%;
   min-height: 100vh;
-  background-color: #eeeeee;
+  color: #eeeeee;
+  background-color: rgb(36, 42, 52);
 }
 .content hr {
   max-width: 20em;
@@ -340,7 +343,7 @@ input[type=checkbox]:checked ~ .navButton .navClosed {
   color: #eeeeee;
 }
 
-/* tile-based previews of portfolio entries and articles */
+/* Tiles allow for visual previews of portfolio entries and articles */
 .tiles {
   display: flex;
   padding: 2em 0;
@@ -365,7 +368,6 @@ input[type=checkbox]:checked ~ .navButton .navClosed {
   transform: scale(1.02, 1.02);
 }
 
-/*.slide,.tiles{scroll-snap-align: start;}*/
 .tile-overlay {
   margin: 0;
   padding: 2vw;
@@ -407,6 +409,19 @@ input[type=checkbox]:checked ~ .navButton .navClosed {
   padding: 0;
   font-size: 1.5em;
 }
+.slide .article-summary .article-summary-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding-top: 3vh;
+}
+.slide .article-summary .article-summary-tags .article-summary-tag {
+  margin: 0.5em;
+  padding: 0.5em;
+  border-radius: 7px;
+  border: 1px solid rgba(238, 238, 238, 0.5);
+  color: rgba(238, 238, 238, 0.5);
+}
 
 .article {
   padding: 1em;
@@ -431,10 +446,60 @@ input[type=checkbox]:checked ~ .navButton .navClosed {
   background-color: #e0e0e0;
 }
 
-/* footer */
+/* Any of the above elements may contain additional widgets  */
+.accordion {
+  /* based on Raúl Barrera at https://codepen.io/raubaca/pen/PZzpVe */
+  overflow: hidden;
+}
+.accordion .accordion-tab {
+  width: 100%;
+  color: rgb(36, 42, 52);
+  overflow: hidden;
+}
+.accordion .accordion-tab:first-child {
+  border-top: 1px solid rgb(36, 42, 52);
+}
+.accordion .accordion-tab:nth-child(n+1) {
+  border-bottom: 1px solid rgb(36, 42, 52);
+}
+.accordion .accordion-tab-label {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+  color: rgb(36, 42, 52);
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 250ms;
+}
+.accordion .accordion-tab-label::after {
+  content: "❯";
+  width: 1em;
+  height: 1em;
+  text-align: center;
+  transition: all 200ms;
+}
+.accordion .accordion-tab-content {
+  max-height: 0;
+  padding: 0 1em;
+  color: rgb(36, 42, 52);
+  transition: all 200ms;
+}
+.accordion .accordion-toggler {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+.accordion .accordion-toggler:checked + .accordion-tab-label::after {
+  transform: rotate(90deg);
+}
+.accordion .accordion-toggler:checked ~ .accordion-tab-content {
+  max-height: 100vh;
+  padding: 1em;
+}
+
+/* Footer */
 footer {
   display: flex;
-  position: -webkit-sticky;
   position: sticky;
   min-height: 50vh;
   width: 100%;
@@ -493,7 +558,7 @@ form select option {
   width: 90%;
   border: 0;
   margin: 0;
-  font-family: "Mulish", "Verdana", "Arial", sans-serif;
+  font-family: "Anek Latin", "Verdana", "Arial", sans-serif;
 }
 form input,
 form textarea,
@@ -531,7 +596,7 @@ form button:hover, form button:focus {
     width: 600px;
   }
   .slide .goDown,
-.content .goDown {
+  .content .goDown {
     visibility: visible;
   }
 }
@@ -545,5 +610,12 @@ form button:hover, form button:focus {
   }
   .content .content-section {
     width: 45%;
+  }
+  .content .content-slideThru {
+    color: rgb(36, 42, 52);
+    background-color: #eeeeee;
+  }
+  .content-section.content-sectionNoPadMobile {
+    padding: inherit;
   }
 }/*# sourceMappingURL=main.css.map */

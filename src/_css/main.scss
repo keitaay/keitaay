@@ -6,7 +6,7 @@ $max_tablet: 999.99px;
 $min_desktop: 1000px;
 $alpha: 0.5;
 $angGolden: 35.4deg;
-$angGoRvrs: -1*$angGolden;
+$angGoRvrs: -1 * $angGolden;
 $colorW: #eeeeee;
 $colorWt: rgba($colorW, $alpha);
 $colorX: rgb(36, 42, 52);
@@ -28,77 +28,80 @@ $colorOR: #a6ce39;
 $colorGH: #6e5494;
 
 /* control fonts */
-$fontnames: "Mulish", "Verdana", "Arial", sans-serif;
+$fontnames: "Anek Latin", "Verdana", "Arial", sans-serif;
 $fontserif: "Noto Serif Display", serif;
 
 :not(.serif) {
-    font-family: $fontnames;
-
-    @supports (font-variation-settings: normal) {}
+  font-family: $fontnames;
+  font-optical-sizing: auto;
+  /* @supports (font-variation-settings: "param" 100) {} */
 }
 
 .serif {
-    font-family: $fontserif;
-
-    @supports (font-variation-settings: normal) {}
+  font-family: $fontserif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  /* @supports (font-variation-settings: "param" 100) {} */
 }
 
 /* global */
 html {
-    scroll-behavior: smooth;
-    scroll-snap-type: y proximity;
+  scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    background-color: $colorX;
+  margin: 0;
+  padding: 0;
+  background-color: $colorX;
 }
 
 main {
-    position: relative;
-    z-index: 1;
-    background-color: $colorW;
-    color: $colorX;
+  position: relative;
+  z-index: 1;
+  background-color: $colorW;
+  color: $colorX;
 }
 
 a:not(.noFX):not(.tile):not(.navurl):not(.bigbutton):not(.content-slideThru) {
-    text-decoration: none;
-    color: $color1;
-    background: linear-gradient(to right, transparent 50.05%, rgba($color4, 1) 50.05%);
-    background-size: 201%;
-    background-position: 0 0;
-    transition: 500ms ease;
+  text-decoration: none;
+  color: $color1;
+  background: linear-gradient(to right,
+      transparent 50.05%,
+      rgba($color4, 1) 50.05%);
+  background-size: 201%;
+  background-position: 0 0;
+  transition: 500ms ease;
 
-    &:hover,
-    &:focus {
-        background-position: -99% 0;
-        color: $colorW
-    }
+  &:hover,
+  &:focus {
+    background-position: -99% 0;
+    color: $colorW;
+  }
 }
 
 a.navurl {
-    text-decoration: none;
-    color: $colorW;
-    background: linear-gradient(to right, transparent 50%, $colorW 50%);
-    background-size: 200%;
-    background-position: 0 0;
-    transition: 500ms ease;
+  text-decoration: none;
+  color: $colorW;
+  background: linear-gradient(to right, transparent 50%, $colorW 50%);
+  background-size: 200%;
+  background-position: 0 0;
+  transition: 500ms ease;
 
-    &:hover,
-    &:focus {
-        background-position: -100% 0;
-        color: $colorX
-    }
+  &:hover,
+  &:focus {
+    background-position: -100% 0;
+    color: $colorX;
+  }
 }
 
 /* text sizes */
-$h1Ymax: 3.0;
-$h1Ymin: 1.50;
+$h1Ymax: 3;
+$h1Ymin: 1.5;
 $hXmin: 25;
 $hXmax: 90;
-$h2Ymax: 2.0;
-$h2Ymin: 1.30;
+$h2Ymax: 2;
+$h2Ymin: 1.3;
 $h3Ymax: 1.5;
 $h3Ymin: 1.15;
 
@@ -107,552 +110,652 @@ h2,
 h3,
 .hsub,
 .htert {
-    margin: 0;
-    line-height: 89%;
-    text-transform: none;
+  margin: 0;
+  line-height: 89%;
+  text-transform: none;
 }
 
 h1 {
-    font-size:calc(3.0rem + (#{$h1Ymax} - #{$h1Ymin}) * ((100vw - #{$hXmin * 1px}) / (#{$hXmax} - #{$hXmin})));
+  font-size: calc(3rem + (#{$h1Ymax} - #{$h1Ymin}) * ((100vw - #{$hXmin * 1px}) / (#{$hXmax} - #{$hXmin})));
 }
 
 h2,
 .hsub {
-    font-size:calc(2.0rem + (#{$h2Ymax} - #{$h2Ymin}) * ((100vw - #{$hXmin * 1px}) / (#{$hXmax} - #{$hXmin})));
+  font-size: calc(2rem + (#{$h2Ymax} - #{$h2Ymin}) * ((100vw - #{$hXmin * 1px}) / (#{$hXmax} - #{$hXmin})));
 }
 
 h3,
 .htert {
-    font-size:calc(1.5rem + (#{$h3Ymax} - #{$h3Ymin}) * ((100vw - #{$hXmin * 1px}) / (#{$hXmax} - #{$hXmin})));
+  font-size: calc(1.5rem + (#{$h3Ymax} - #{$h3Ymin}) * ((100vw - #{$hXmin * 1px}) / (#{$hXmax} - #{$hXmin})));
 }
 
 .hsub:not(.serif),
 .htert:not(.serif) {
-    letter-spacing: 0.05em;
+  letter-spacing: 0.05em;
 }
 
 p {
-    font-size: 1.3em;
+  font-size: 1.3em;
 }
 
 /* language change */
 .changeLang {
-    text-decoration: none;
-    font-weight: 300;
-    color: $colorX
+  text-decoration: none;
+  font-weight: 300;
+  color: $colorX;
 }
 
 /* UI: cross-component definitions */
 $btnOffset: 1.4em;
 $btnRadius: 0.8em;
-$btnDiamtr: 2*$btnRadius;
+$btnDiamtr: 2 * $btnRadius;
 
 .UIbutton {
-    display: inline-block;
-    position: fixed;
-    cursor: pointer;
-    height: $btnDiamtr;
-    width: $btnDiamtr;
-    left:calc(100vw - 2 * #{$btnOffset});
-    /* "left" used to avoid shift due to scroll bar */
-    border-radius: $btnRadius;
-    font-size: $btnDiamtr;
-    line-height: $btnDiamtr;
-    text-align: center;
-    text-decoration: none;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
-    background-color: $colorWt;
-    color: $colorXt;
-    transition: background-color 500ms ease, color 500ms ease;
+  display: inline-block;
+  position: fixed;
+  cursor: pointer;
+  height: $btnDiamtr;
+  width: $btnDiamtr;
+  left: calc(100vw - 2 * #{$btnOffset});
+  /* "left" used to avoid shift due to scroll bar */
+  border-radius: $btnRadius;
+  font-size: $btnDiamtr;
+  line-height: $btnDiamtr;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+  background-color: $colorWt;
+  color: $colorXt;
+  transition: background-color 500ms ease, color 500ms ease;
 
-    &:hover,
-    &:focus {
-        background-color: darkorange;
-        color: white;
-    }
+  &:hover,
+  &:focus {
+    background-color: darkorange;
+    color: white;
+  }
 }
 
 /* UI: navbar */
 $navMargin: 2vw;
-$navPadTop: $btnOffset + 2*$btnRadius;
-$navHeightBgn: 3.0em;
+$navPadTop: $btnOffset + 2 * $btnRadius;
+$navHeightBgn: 3em;
 $navHeightExt: 2.5em;
 
 .navOverlay {
-    transition: all 1s;
+  transition: all 1s;
 
-    input[type=checkbox] {
-        display: none;
-    }
+  input[type="checkbox"] {
+    display: none;
+  }
 
-    .navMenu {
-        /* .navMenu contains the entire overlay screen for the nav menu */
+  .navMenu {
+    /* .navMenu contains the entire overlay screen for the nav menu */
+    display: block;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 700;
+    opacity: 1;
+    transition: visibility 200ms ease, opacity 200ms ease;
+    background-color: $colorXt;
+    backdrop-filter: blur(5px);
+
+    .navWindow {
+      /* .navWindows contains the actual navigation sidebar */
+      display: block;
+      position: fixed;
+      right: 0;
+      padding: $navPadTop $navMargin $navMargin $navMargin;
+      height: calc(100vh - #{$navPadTop});
+      width: calc(80vw - 2 * #{$navMargin});
+      overflow-x: hidden;
+      background-color: $colorX;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6),
+        0 6px 20px 0 rgba(0, 0, 0, 0.2);
+
+      .opt,
+      .navExt {
+        padding: 0;
+        width: 100%;
+        text-decoration: none;
+      }
+
+      .opt {
+        /* .opt denotes navigation options */
         display: block;
-        position: fixed;
-        right: 0;
-        top: 0;
-        width: 100vw;
-        height: 100vh;
-        z-index: 700;
-        opacity: 1;
-        transition: visibility 200ms ease, opacity 200ms ease;
-        background-color: $colorXt;
-        backdrop-filter: blur(5px);
+        margin: 1vh 0;
+        font-size: 1.5em;
+      }
 
-        .navWindow {
-            /* .navWindows contains the actual navigation sidebar */
-            display: block;
-            position: fixed;
-            right: 0;
-            padding: $navPadTop $navMargin $navMargin $navMargin;
-            height:calc(100vh - #{$navPadTop});
-            width:calc(80vw - 2 * #{$navMargin});
-            overflow-x: hidden;
-            background-color: $colorX;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+      .navHead,
+      .navMain,
+      .navExt {
+        width: calc(100% - 3 * #{$navMargin});
+      }
 
-            .opt,
-            .navExt {
-                padding: 0;
-                width: 100%;
-                text-decoration: none;
-            }
+      .navHead {
+        min-height: $navHeightBgn;
+      }
 
-            .opt {
-                /* .opt denotes navigation options */
-                display: block;
-                margin: 1vh 0;
-                font-size: 1.5em;
-            }
-
-            .navHead,
-            .navMain,
-            .navExt {
-                width:calc(100% - 3 * #{$navMargin});
-            }
-
-            .navHead {
-                min-height: $navHeightBgn;
-            }
-
-            .navMain {
-                overflow-y: auto;
-                height:calc(100% - #{navHeightBgn} - #{$navHeightExt});
-            }
-        }
+      .navMain {
+        overflow-y: auto;
+        height: calc(100% - #{navHeightBgn} - #{$navHeightExt});
+      }
     }
+  }
 }
 
 .navButton {
-    top: $btnOffset;
-    z-index: 900;
+  top: $btnOffset;
+  z-index: 900;
 
-    .navOpen {
-        display: none
-    }
+  .navOpen {
+    display: none;
+  }
 
-    ;
-
-    .navClosed {
-        display: inline-block
-    }
+  .navClosed {
+    display: inline-block;
+  }
 }
 
 /* UI: menu toggled off; based on workaround by Morgan Feeney, via codepen.io/morganfeeney/pen/KiBty */
-input[type=checkbox]:not(:checked)~.navMenu {
-    visibility: hidden;
-    opacity: 0;
+input[type="checkbox"]:not(:checked)~.navMenu {
+  visibility: hidden;
+  opacity: 0;
 }
 
-input[type=checkbox]:checked~.navButton {
-    .navOpen {
-        display: inline
-    }
+input[type="checkbox"]:checked~.navButton {
+  .navOpen {
+    display: inline;
+  }
 
-    ;
-
-    .navClosed {
-        display: none
-    }
+  .navClosed {
+    display: none;
+  }
 }
 
 /* UI: return to top of page */
 .returnToPgtop {
-    top:calc(2 * #{$btnOffset} + #{$btnDiamtr});
-    z-index: 600;
+  top: calc(2 * #{$btnOffset} + #{$btnDiamtr});
+  z-index: 600;
 }
 
 /* regular content: slideshow-like (keep values unitless since vanilla CSS cannot do dimensional analysis) */
+ul,
+ol {
+  padding-inline-start: 1.5em;
+}
+
 .slide,
 .content {
-    position: relative;
-    margin: 0;
-    padding: 20vh 5vw 5vh 5vw;
-    min-height: 75vh;
-    scroll-snap-align: start;
-    background-color: $colorW;
-    background: center/cover no-repeat fixed;
+  position: relative;
+  margin: 0;
+  padding: 20vh 5vw 5vh 5vw;
+  min-height: 75vh;
+  scroll-snap-align: start;
+  background-color: $colorW;
+  background: center/cover no-repeat fixed;
 
-    .goDown {
-        font-size: 2em;
-        text-align: center;
-        margin: 5% 0;
-        visibility: hidden;
-        position: absolute;
-        bottom: 0;
-        left: 50vw;
-        animation: bounceVert 2s infinite;
+  .goDown {
+    font-size: 2em;
+    text-align: center;
+    margin: 5% 0;
+    visibility: hidden;
+    position: absolute;
+    bottom: 0;
+    left: 50vw;
+    animation: bounceVert 2s infinite;
 
-        @keyframes bounceVert {
+    @keyframes bounceVert {
 
-            0%,
-            20%,
-            50%,
-            80%,
-            100% {
-                transform: translateY(0);
-            }
+      0%,
+      20%,
+      50%,
+      80%,
+      100% {
+        transform: translateY(0);
+      }
 
-            40% {
-                transform: translateY(2vh);
-            }
+      40% {
+        transform: translateY(2vh);
+      }
 
-            60% {
-                transform: translateY(1vh);
-            }
-        }
+      60% {
+        transform: translateY(1vh);
+      }
     }
+  }
 
-    .bigbutton {
-        text-decoration: none;
-        font-size: 2em;
-        padding: 0.3em;
-        margin: 3vh 0;
-        border-radius: 5px;
-        border: 1px solid $colorW;
-        color: $colorX;
-        background: linear-gradient(to right, rgba($color1, 1) 50.01%, rgba($color4, 1) 50.01%);
-        background-size: 201%;
-        background-position: 0 0;
-        transition: 500ms ease;
+  .bigbutton {
+    text-decoration: none;
+    font-size: 2em;
+    padding: 0.3em;
+    margin: 3vh 0;
+    border-radius: 5px;
+    border: 1px solid $colorW;
+    color: $colorX;
+    background: linear-gradient(to right,
+        rgba($color1, 1) 50.01%,
+        rgba($color4, 1) 50.01%);
+    background-size: 201%;
+    background-position: 0 0;
+    transition: 500ms ease;
 
-        &:hover,
-        &:focus {
-            background-position: -99% 0;
-            color: $colorW
-        }
+    &:hover,
+    &:focus {
+      background-position: -99% 0;
+      color: $colorW;
     }
+  }
 
-    p {
-        padding-top: 2vh;
-    }
+  p {
+    padding-top: 2vh;
+  }
 }
 
 .content {
+  display: flex;
+  z-index: 400;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: space-around;
+  padding: 0;
+
+  .content-section {
+    width: 100%;
+    padding: 5% 2.5%;
+
+    &.content-sectionSticky {
+      position: sticky;
+      top: 0;
+      align-self: flex-start;
+      background-color: $colorW;
+    }
+
+    &.content-sectionNoPadMobile {
+      padding: 0;
+    }
+  }
+
+  .content-slideThru {
     display: flex;
-    z-index: 400;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-content: space-around;
-    padding: 0;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    color: $colorW;
+    background-color: $colorX;
+  }
 
-    .content-section {
-        width: 100%;
-        padding: 5% 2.5%;
-
-        &.content-sectionSticky {
-            position: sticky;
-            top: 0;
-            align-self: flex-start;
-            background-color: $colorW;
-        }
-    }
-
-    .content-slideThru {
-        display: flex;
-        align-items: center;
-        width: 100%;
-        min-height: 100vh;
-        background-color: $colorW;
-    }
-
-    hr {
-        max-width: 20em;
-        margin-top: 2em;
-        margin-bottom: 2em;
-        text-align: center;
-    }
+  hr {
+    max-width: 20em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    text-align: center;
+  }
 }
 
 .slide0 {
-    background-color: #132736;
-    color: $colorW
+  background-color: #132736;
+  color: $colorW;
 }
 
 .slide1 {
-    background-color: $color1;
-    color: $colorX
+  background-color: $color1;
+  color: $colorX;
 }
 
 .slide2 {
-    background-color: $color2;
-    color: $colorW
+  background-color: $color2;
+  color: $colorW;
 }
 
 .slide3 {
-    background-color: $color3;
-    color: $colorX
+  background-color: $color3;
+  color: $colorX;
 }
 
 .slide4 {
-    background-color: $color4;
-    color: $colorW
+  background-color: $color4;
+  color: $colorW;
 }
 
 .slide5 {
-    background-color: $color5;
-    color: $colorW
+  background-color: $color5;
+  color: $colorW;
 }
 
-/* tile-based previews of portfolio entries and articles */
+/* Tiles allow for visual previews of portfolio entries and articles */
 $tileSize: 26vw;
 $tilePad: 2vw;
 
 .tiles {
-    display: flex;
-    padding: 2em 0;
-    margin: 0;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-content: space-around;
-    align-items: flex-start;
+  display: flex;
+  padding: 2em 0;
+  margin: 0;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: space-around;
+  align-items: flex-start;
 
-    .tile {
-        flex-grow: 0;
-        flex-basis: 100vw;
-        margin: $tilePad;
-        min-height: $tileSize;
-        text-decoration: none;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-        background: center/cover no-repeat;
-        transition: all 300ms ease;
+  .tile {
+    flex-grow: 0;
+    flex-basis: 100vw;
+    margin: $tilePad;
+    min-height: $tileSize;
+    text-decoration: none;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    background: center/cover no-repeat;
+    transition: all 300ms ease;
 
-        &:hover,
-        &:focus {
-            transform: scale(1.02, 1.02)
-        }
+    &:hover,
+    &:focus {
+      transform: scale(1.02, 1.02);
     }
+  }
 }
 
-/*.slide,.tiles{scroll-snap-align: start;}*/
 .tile-overlay {
+  margin: 0;
+  padding: $tilePad;
+  color: white;
+  background: linear-gradient(0deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.6) 40%,
+      rgba(0, 0, 0, 0.8) 100%);
+
+  .artPrelude {
     margin: 0;
-    padding: $tilePad;
-    color: white;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.6) 40%, rgba(0, 0, 0, 0.8) 100%);
+    font-size: 1em;
+    font-weight: lighter;
+    text-transform: uppercase;
+  }
 
-    .artPrelude {
-        margin: 0;
-        font-size: 1.0em;
-        font-weight: lighter;
-        text-transform: uppercase
-    }
+  .artTagline {
+    margin: 0;
+    font-size: 1.7em;
+  }
 
-    .artTagline {
-        margin: 0;
-        font-size: 1.7em;
-    }
-
-    .artAbstract {
-        font-weight: lighter
-    }
+  .artAbstract {
+    font-weight: lighter;
+  }
 }
 
 /* Articles are "full" versions of tiles. It's preceded by "summaries" that render within a "slide". */
 .slide .article-summary {
-    padding: 1em;
-    margin: 1em;
-    max-width: 1000px;
-    color: $colorW;
-    background-color: rgba(30, 30, 30, 0.8);
-    font-weight: 300;
+  padding: 1em;
+  margin: 1em;
+  max-width: 1000px;
+  color: $colorW;
+  background-color: rgba(30, 30, 30, 0.8);
+  font-weight: 300;
 
-    .buttonGoBack {
-        background: none;
-        border: none;
-        padding-bottom: 1em;
-        font-size: 2em;
-        color: #eee;
-        cursor: pointer;
-    }
+  .buttonGoBack {
+    background: none;
+    border: none;
+    padding-bottom: 1em;
+    font-size: 2em;
+    color: #eee;
+    cursor: pointer;
+  }
 
-    p {
-        padding: 0;
-        font-size: 1.5em;
+  p {
+    padding: 0;
+    font-size: 1.5em;
+  }
+
+  .article-summary-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding-top: 3vh;
+
+    .article-summary-tag {
+      margin: 0.5em;
+      padding: 0.5em;
+      border-radius: 7px;
+      border: 1px solid $colorWt;
+      color: $colorWt;
     }
+  }
 }
 
 .article {
+  padding: 1em;
+  margin: auto;
+
+  h1,
+  h2,
+  h3 {
+    margin-block: 0.5em 0.5em;
+  }
+
+  h1 {
+    font-size: calc(1.5em + (#{$h1Ymax} - #{$h1Ymin}) * ((100vw - #{$hXmin * 1px}) / (#{$hXmax} - #{$hXmin})));
+  }
+
+  h2 {
+    font-size: calc(1.3em + (#{$h2Ymax} - #{$h2Ymin}) * ((100vw - #{$hXmin * 1px}) / (#{$hXmax} - #{$hXmin})));
+  }
+
+  h3 {
+    font-size: calc(1.15em + (#{$h2Ymax} - #{$h2Ymin}) * ((100vw - #{$hXmin * 1px}) / (#{$hXmax} - #{$hXmin})));
+  }
+
+  pre {
     padding: 1em;
-    margin: auto;
-
-    h1,
-    h2,
-    h3 {
-        margin-block: 0.5em 0.5em;
-    }
-
-    h1 {
-        font-size:calc(1.50em + (#{$h1Ymax} - #{$h1Ymin}) * ((100vw - #{$hXmin * 1px}) / (#{$hXmax} - #{$hXmin})))
-    }
-
-    h2 {
-        font-size:calc(1.30em + (#{$h2Ymax} - #{$h2Ymin}) * ((100vw - #{$hXmin * 1px}) / (#{$hXmax} - #{$hXmin})))
-    }
-
-    h3 {
-        font-size:calc(1.15em + (#{$h2Ymax} - #{$h2Ymin}) * ((100vw - #{$hXmin * 1px}) / (#{$hXmax} - #{$hXmin})))
-    }
-
-    pre {
-        padding: 1em;
-        background-color: #e0e0e0
-    }
+    background-color: #e0e0e0;
+  }
 }
 
-/* footer */
-footer {
-    display: flex;
-    position: sticky;
-    min-height: 50vh;
+/* Any of the above elements may contain additional widgets  */
+.accordion {
+  /* based on Raúl Barrera at https://codepen.io/raubaca/pen/PZzpVe */
+  overflow: hidden;
+
+  .accordion-tab {
     width: 100%;
-    bottom: 0;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-content: flex-start;
-    align-items: flex-start;
-    z-index: 0;
+    color: $colorX;
+    overflow: hidden;
+
+    &:first-child {
+      border-top: 1px solid $colorX;
+    }
+
+    &:nth-child(n + 1) {
+      border-bottom: 1px solid $colorX;
+    }
+
+    &-label {
+      display: flex;
+      justify-content: space-between;
+      padding: 1em;
+      color: $colorX;
+      font-weight: bold;
+      cursor: pointer;
+      transition: opacity 250ms;
+
+      &::after {
+        content: "\276F";
+        width: 1em;
+        height: 1em;
+        text-align: center;
+        transition: all 200ms;
+      }
+    }
+
+    &-content {
+      max-height: 0;
+      padding: 0 1em;
+      color: $colorX;
+      transition: all 200ms;
+    }
+  }
+
+  .accordion-toggler {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+
+    &:checked {
+      +.accordion-tab-label::after {
+        transform: rotate(90deg);
+      }
+
+      ~.accordion-tab-content {
+        max-height: 100vh;
+        padding: 1em;
+      }
+    }
+  }
+}
+
+/* Footer */
+footer {
+  display: flex;
+  position: sticky;
+  min-height: 50vh;
+  width: 100%;
+  bottom: 0;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: flex-start;
+  align-items: flex-start;
+  z-index: 0;
+  color: $colorW;
+
+  a {
     color: $colorW;
+    text-decoration: none;
+  }
 
-    a {
-        color: $colorW;
-        text-decoration: none
-    }
+  .footpodL,
+  .footpodR {
+    padding: 2em;
+    min-height: 20vh;
+    flex-grow: 0;
+    flex-basis: 600px;
+    font-size: 1.2em;
+    font-weight: 300;
+  }
 
-    .footpodL,
-    .footpodR {
-        padding: 2em;
-        min-height: 20vh;
-        flex-grow: 0;
-        flex-basis: 600px;
-        font-size: 1.2em;
-        font-weight: 300
-    }
-
-    .copyright {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        text-align: center
-    }
+  .copyright {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+  }
 }
 
 /* general forms, including the "contact me" form */
 form {
-    label {
-        font-size: 0.9rem;
-    }
+  label {
+    font-size: 0.9rem;
+  }
 
-    textarea,
-    select {
-        resize: none;
-        font-size: 1.0rem;
-    }
+  textarea,
+  select {
+    resize: none;
+    font-size: 1rem;
+  }
 
-    select,
-    input[type=text],
-    [type=email] {
-        font-size: 1.2rem;
-    }
+  select,
+  input[type="text"],
+  [type="email"] {
+    font-size: 1.2rem;
+  }
 
-    input.formerror,
-    textarea.formerror {
-        border: 2px red solid;
-    }
+  input.formerror,
+  textarea.formerror {
+    border: 2px red solid;
+  }
 
-    label,
-    input,
-    textarea,
-    select,
-    select option {
-        width: 90%;
-        border: 0;
-        margin: 0;
-        font-family: $fontnames;
-    }
+  label,
+  input,
+  textarea,
+  select,
+  select option {
+    width: 90%;
+    border: 0;
+    margin: 0;
+    font-family: $fontnames;
+  }
 
-    input,
-    textarea,
-    select {
-        background-color: #f8f8f8;
-    }
+  input,
+  textarea,
+  select {
+    background-color: #f8f8f8;
+  }
 
-    button {
-        font-size: 1.2rem;
-        padding: 0.5em;
-        border: 2px solid $color3;
-        border-radius: 5px;
-        background-color: $colorW;
-        color: $color3;
-        cursor: pointer;
-        transition: all 300ms ease;
-        background: linear-gradient(to right, transparent 50%, rgba($color3, 1) 50%);
-        background-size: 200%;
-        background-position: 0 0;
-        transition: 500ms ease;
+  button {
+    font-size: 1.2rem;
+    padding: 0.5em;
+    border: 2px solid $color3;
+    border-radius: 5px;
+    background-color: $colorW;
+    color: $color3;
+    cursor: pointer;
+    transition: all 300ms ease;
+    background: linear-gradient(to right,
+        transparent 50%,
+        rgba($color3, 1) 50%);
+    background-size: 200%;
+    background-position: 0 0;
+    transition: 500ms ease;
 
-        &:hover,
-        &:focus {
-            background-position: -100% 0;
-            color: $colorW
-        }
+    &:hover,
+    &:focus {
+      background-position: -100% 0;
+      color: $colorW;
     }
+  }
 }
 
 /* responsive to variable screen sizes */
-@media (orientation:landscape) and (min-width: $min_tablet) {
-    .navOverlay .navMenu .navWindow {
-        width:calc(400px - 2 * #{$navMargin});
-    }
+@media (orientation: landscape) and (min-width: $min_tablet) {
+  .navOverlay .navMenu .navWindow {
+    width: calc(400px - 2 * #{$navMargin});
+  }
 
-    .tiles .tile {
-        flex-basis: $tileSize
-    }
+  .tiles .tile {
+    flex-basis: $tileSize;
+  }
 
-    .article {
-        width: $min_tablet
-    }
+  .article {
+    width: $min_tablet;
+  }
 
-    .slide .goDown,
-    .content .goDown {
-        visibility: visible;
-    }
+  .slide .goDown,
+  .content .goDown {
+    visibility: visible;
+  }
+
 }
 
-@media (orientation:landscape) and (min-width: $min_desktop) {
-    .opt {
-        padding: 3vw 5vw;
-        font-size: medium;
-    }
+@media (orientation: landscape) and (min-width: $min_desktop) {
+  .opt {
+    padding: 3vw 5vw;
+    font-size: medium;
+  }
 
-    .yokoso p :not(.article-summary) {
-        max-width: 50vw
-    }
+  .yokoso p :not(.article-summary) {
+    max-width: 50vw;
+  }
 
-    .content .content-section {
-        width: 45%;
-    }
+  .content .content-section {
+    width: 45%;
+  }
+
+  .content .content-slideThru {
+    color: $colorX;
+    background-color: $colorW;
+  }
+
+  .content-section.content-sectionNoPadMobile {
+    padding: inherit;
+  }
 }

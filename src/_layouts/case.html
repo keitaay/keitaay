@@ -1,7 +1,7 @@
 ---
 layout: base.html
 subject: Personal project.
-role: Designer
+roles: Designer
 taskList:
 techList:
 ---
@@ -11,6 +11,11 @@ techList:
         <h1 class="serif">{{ title }}</h1>
         <hr>
         <p>{{ summary }}</p>
+        <div class="article-summary-tags">
+            {% for tag in tags | limit(8) %}
+            <div class="article-summary-tag">{{ tag }}</div>
+            {% endfor %}
+        </div>
     </div>
     {% include "godown.html" %}
 </div>
@@ -23,7 +28,7 @@ techList:
     <div class="content-section" style="max-width:400px">
         <h3 style="font-weight:bolder; font-size:1.4em">About the Project</h3>
         <ul>
-            <li>Category: {{ role }}</li>
+            <li>Category: <ul>{% for role in roles %}<li>{{ role }}</li>{% endfor %}</ul></li>
             <li>Timespan: {{ dateProj }}</li>
         </ul>
         <h3 style="font-weight:bolder; font-size:1.4em">My Roles</h3>

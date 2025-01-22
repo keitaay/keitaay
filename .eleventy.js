@@ -15,7 +15,10 @@ module.exports = function (eleventyConfig) {
         return arr.slice(0, limit);
     });
     eleventyConfig.addFilter('getRole', function (arr, role) {
-        return arr.filter(item => item.data.role.includes(role))
+        if (!arr || !Array.isArray(arr)) {
+            return [];
+        }
+        return arr.filter(item => item.data.roles.includes(role))
     });
 
     // Return Object
