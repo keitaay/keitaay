@@ -6,80 +6,18 @@ My GitHub contains a variety of projects, including some personal projects as we
 
 Take a look at my work, and feel free to reach out if you have any questions!
 
-## About my website
+<div id="header" align="center">
+  <a href="keitaay.com">
+    <img src="https://img.shields.io/badge/Go_to-my_website-orange" alt="Go to my website"/>
+  </a>
+  <a href="https://www.linkedin.com/in/keitaay/">
+  <img src="https://custom-icon-badges.demolab.com/badge/LinkedIn-0A66C2?logo=linkedin-white&logoColor=fff" alt="Go to my LinkedIn"/>
+  </a>
+  <a href="https://www.buymeacoffee.com/keita">
+  <img src="https://raw.githubusercontent.com/pachadotdev/buymeacoffee-badges/main/bmc-white.svg" alt="Buy me a coffee?"/>
+  </a>
+</div>
 
-This README is part of my personal website, which is hosted on GitHub Pages. The website is built using 11ty, a static site generator that's great for creating simple, fast websites. The website is built using a combination of custom-written HTML, CSS, and JavaScript, and is designed to be simple, easy to navigate, and responsive across a variety of devices.
+## My website
 
-To create a local copy, download:
-
-- A system with a modern web browser
-- [Node.js](https://nodejs.org/en/) v. 22.0 or higher
-- [11ty](https://www.11ty.dev/) v.3.0 or higher
-- [Prettier](https://prettier.io/) to maintain consistent code formatting
-
-Then run:
-
-```
-npx @11ty/eleventy --serve
-```
-
-### Repository structure
-
-The website is organized as a set of pages specific to my professional roles, and a larger set of case studies that highlight my previous work.
-
-- `/src/`: Source files for content on this website.
-  - `/cases/`: Case studies of my previous work, described in more detail after this section.
-    - `img/`: Images used in the case studies.
-    - `cases.json`: JSON file that defines the case study collection for 11ty.
-  - `/_css/`: Stylesheets for this website.
-  - `/_js/`: JavaScript files for this website.
-  - `/_include`: Reusable HTML snippets for this website.
-  - `/_layouts`: Layout templates for this website.
-  - `index.html`: Template for home page.
-  - `*.html`: Template for role-specific pages.
-- `.eleventy.js`: Configuration file for 11ty.
-- `package.json` and `package-lock.json`: Node.js package definitions for this website.
-
-### Case studies
-
-Each case study is associated with one or more roles that I can fulfill at a professional capacity. This information, as well as other metadata that can be associated with each case study, is stored as [YAML front matter](https://jekyllrb.com/docs/front-matter/) in each case study's Markdown file. Each case study's YAML objects are used to populate specific parts of 11ty's page templates, and the fully-completed page is rendered as individual webpage on the website.
-
-```yaml
-title: Text #                - Case study title
-tags: #                      - Tags for grouping case studies
-  - Featured
-subject: Text #              - Client or technology name
-roles: #                     - Roles fulfilled
-  - Engineer
-  - Strategist
-  - Designer
-  - Citizen
-dateProj: Fall 2022 #       - Date of project
-imageHero: /cases/img/... # - Main image to represent project
-linkLive: https://... #     - Link to live project deliverable
-summary: Text #             - 1-sentence tagline of task
-brief: Text #               - Short paragraph about project
-taskList: #                 - Releveant skills used
-  - Text 1
-  - Text 2
-techList: #                 - Technologies used
-  - Text 1
-  - Text 2
-```
-
-The remainder of source files for each case study are written in Markdown, and are organized into the following sections:
-
-- **Problem:** Description of the problem that a project is trying to address. This may include discussions of business requirements, user needs, pain points, end-users, target markets, platforms, technical constraints, or business KPIs.
-
-- **Solution:** Description of how a project's goals were achieved. This should include steps in the design process, justifications for key decisions, design artifacts, and any relevant deliverables. This section may include artifacts such as:
-
-  - Personas
-  - Sketches
-  - Interview notes
-  - Usability tests results
-  - Whiteboards
-  - Wireframes
-  - UI designs
-  - Prototypes
-
-- **Results:** Description of the project's success metrics, next steps, or lessons learned. This section should make the case for how I was invested in both the project’s life cycle and my career development.
+My namespace-based repo is also the home of the source code for my personal website. To learn more, visit [its readme](https://www.github.com/keitaay/keitaay/blob/main/src/README.md).
