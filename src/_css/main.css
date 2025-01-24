@@ -1,23 +1,22 @@
-@charset "UTF-8";
 /* define global variables */
 /* control fonts */
 :not(.serif) {
   font-family: "Anek Latin", "Verdana", "Arial", sans-serif;
-  font-optical-sizing: auto;
-  /* @supports (font-variation-settings: "param" 100) {} */
+  font-weight: 300;
+  font-variation-settings: "wght" 300;
 }
 
 .serif {
   font-family: "Noto Serif Display", serif;
   font-optical-sizing: auto;
-  font-weight: normal;
+  font-weight: 450;
+  font-variation-settings: "wght" 450;
   /* @supports (font-variation-settings: "param" 100) {} */
 }
 
 /* global */
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y proximity;
 }
 
 body {
@@ -287,24 +286,35 @@ ol {
 }
 .content .content-section {
   width: 100%;
+}
+.content .content-section .content-part {
   padding: 5% 2.5%;
 }
-.content .content-section.content-sectionSticky {
+.content .content-sectionSticky {
+  z-index: 600;
   position: sticky;
   top: 0;
   align-self: flex-start;
   background-color: #eeeeee;
 }
-.content .content-section.content-sectionNoPadMobile {
-  padding: 0;
-}
 .content .content-slideThru {
   display: flex;
-  align-items: center;
-  width: 100%;
+  align-items: start;
   min-height: 100vh;
   color: #eeeeee;
   background-color: rgb(36, 42, 52);
+  background-attachment: fixed;
+}
+.content .content-slideThru .content-slideThru-text {
+  padding: 1em;
+  margin-top: 25vh;
+  width: 100%;
+  -webkit-backdrop-filter: blur(5px) brightness(0.3);
+          backdrop-filter: blur(5px) brightness(0.3);
+  border-radius: 0.5em;
+}
+.content .content-sectionNoPadMobile {
+  padding: 0;
 }
 .content hr {
   max-width: 20em;
@@ -377,15 +387,25 @@ ol {
 .tile-overlay .artPrelude {
   margin: 0;
   font-size: 1em;
-  font-weight: lighter;
-  text-transform: uppercase;
+  font-weight: 200;
+  font-variant: small-caps;
 }
 .tile-overlay .artTagline {
   margin: 0;
   font-size: 1.7em;
 }
 .tile-overlay .artAbstract {
-  font-weight: lighter;
+  font-weight: 200;
+}
+
+.buttonGoBack {
+  background: rgba(36, 42, 52, 0.5);
+  border: 0.5px solid #eeeeee;
+  border-radius: 2em;
+  margin-bottom: 1em;
+  font-size: 2em;
+  color: #eeeeee;
+  cursor: pointer;
 }
 
 /* Articles are "full" versions of tiles. It's preceded by "summaries" that render within a "slide". */
@@ -395,15 +415,6 @@ ol {
   max-width: 1000px;
   color: #eeeeee;
   background-color: rgba(30, 30, 30, 0.8);
-  font-weight: 300;
-}
-.slide .article-summary .buttonGoBack {
-  background: none;
-  border: none;
-  padding-bottom: 1em;
-  font-size: 2em;
-  color: #eee;
-  cursor: pointer;
 }
 .slide .article-summary p {
   padding: 0;
@@ -448,53 +459,13 @@ ol {
 
 /* Any of the above elements may contain additional widgets  */
 .accordion {
-  /* based on Raúl Barrera at https://codepen.io/raubaca/pen/PZzpVe */
-  overflow: hidden;
+  border-left: 0.1rem solid #eeeeee;
+  padding-left: 0.3em;
+  margin: 0.5em 0;
 }
-.accordion .accordion-tab {
-  width: 100%;
-  color: rgb(36, 42, 52);
-  overflow: hidden;
-}
-.accordion .accordion-tab:first-child {
-  border-top: 1px solid rgb(36, 42, 52);
-}
-.accordion .accordion-tab:nth-child(n+1) {
-  border-bottom: 1px solid rgb(36, 42, 52);
-}
-.accordion .accordion-tab-label {
-  display: flex;
-  justify-content: space-between;
-  padding: 1em;
-  color: rgb(36, 42, 52);
-  font-weight: bold;
+.accordion .accordion-title:hover,
+.accordion .accordion-title:focus {
   cursor: pointer;
-  transition: opacity 250ms;
-}
-.accordion .accordion-tab-label::after {
-  content: "❯";
-  width: 1em;
-  height: 1em;
-  text-align: center;
-  transition: all 200ms;
-}
-.accordion .accordion-tab-content {
-  max-height: 0;
-  padding: 0 1em;
-  color: rgb(36, 42, 52);
-  transition: all 200ms;
-}
-.accordion .accordion-toggler {
-  position: absolute;
-  opacity: 0;
-  z-index: -1;
-}
-.accordion .accordion-toggler:checked + .accordion-tab-label::after {
-  transform: rotate(90deg);
-}
-.accordion .accordion-toggler:checked ~ .accordion-tab-content {
-  max-height: 100vh;
-  padding: 1em;
 }
 
 /* Footer */
@@ -609,11 +580,7 @@ form button:hover, form button:focus {
     max-width: 50vw;
   }
   .content .content-section {
-    width: 45%;
-  }
-  .content .content-slideThru {
-    color: rgb(36, 42, 52);
-    background-color: #eeeeee;
+    width: 50vw;
   }
   .content-section.content-sectionNoPadMobile {
     padding: inherit;

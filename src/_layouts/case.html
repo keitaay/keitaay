@@ -7,7 +7,7 @@ techList:
 ---
 <div class="slide yokoso" id="pgtop" style="background-image:url('{{ imageHero | url }}')">
     <div class="article-summary">
-        <button onclick="pauseGoBack()" class="buttonGoBack" title="Return to Previous Page">&#8617;</button>
+        {% include "goback.html" %}
         <h1 class="serif">{{ title }}</h1>
         <hr>
         <p>{{ summary }}</p>

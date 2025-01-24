@@ -67,6 +67,25 @@ function scrollFreeze() {
     }
 };
 
+// Update the URL to the current page based on where the user is scrolling
+const sections = document.querySelectorAll('section');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop;
+
+    // Get ID of the section that is currently in view
+    if (window.scrollY >= sectionTop) {
+      current = section.getAttribute('id');
+    }
+  });
+
+  // Update URL hash based on current section
+  if (current !== history.state) {
+    history.pushState(null, null, `#${current}`);
+  }
+});
+
 // Re-activate the loading screen after it has retreated following window.onload.
 function reviveLoader(e) {
     UIload.style.transform = "scaleX(1)";
@@ -88,14 +107,6 @@ function navAway(e) {
     setTimeout(function () { window.location.href = destination; }, transit);
     return destination;
 };
-
-// Briefly apply a time delay before a form's action is triggered. This was initially
-// intended to allow the loading screen's animation to occur before a form is submitted.
-function pauseForm() {
-    this.disabled = true;
-    reviveLoader();
-    setTimeout(function () { this.disabled = false; }, transit);
-}
 
 // Reactivate the loading screen's animation, then go back one page in the browser history
 function pauseGoBack() {

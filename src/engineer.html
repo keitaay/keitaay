@@ -2,7 +2,7 @@
 layout: base.html
 title: Engineer
 ---
-<div class="slide slide2 yokoso" id="pgtop">
+<section id="pgtop" class="slide slide2 yokoso">
     <h1 class="serif" style="font-size:5em">
         K&eacute;ita the engineer creates technologies to understand and heal.
     </h1>
@@ -11,67 +11,66 @@ title: Engineer
         to&nbsp;understand people's bodies and&nbsp;expand their&nbsp;capabilities.
     </p>
     {% include "godown.html" %}
-</div>
+</section>
 <div id="aboutme" class="content">
     <div class="content-section content-sectionSticky">
-        <h2 class="serif">Build on a track record of innovation.</h2>
-        <p>
-            By&nbsp;training, I&nbsp;am a&nbsp;biomedical engineer focused&nbsp;on
-            creating new&nbsp;technologies to access new&nbsp;information about the&nbsp;human body
-            and&nbsp;enhance their&nbsp;functions. Over&nbsp;my academic career, I&nbsp;have
-            designed and&nbsp;validated various technologies to&nbsp;make medical devices
-            and&nbsp;diagnostic information more&nbsp;accessible to&nbsp;patients and&nbsp;clinicians.
-        </p>
+        <div class="content-part">
+            <h2 class="serif">Build on a track record of innovation.</h2>
+            <p>
+                By&nbsp;training, I&nbsp;am a&nbsp;biomedical engineer focused&nbsp;on creating new&nbsp;technologies to access new&nbsp;information about the&nbsp;human body and&nbsp;enhance their&nbsp;functions. Over&nbsp;my academic career, I&nbsp;have designed and&nbsp;validated various technologies to&nbsp;make medical devices and&nbsp;diagnostic information more&nbsp;accessible to&nbsp;patients and&nbsp;clinicians.
+            </p>
+        </div>
     </div>
-    <div class="content-section">
-        <div>
-            <h3 class="serif">
-                Ph.D., Biomedical Engineering<br>
-                <span style="font-size:0.8em; font-weight:lighter">
-                    Ongoing: University of North Carolina at Chapel Hill and North Carolina State University
-                </span>
-            </h3>
-            <p>
-                short text
-            </p>
-        </div>
-        <br>
-        <div>
-            <h3 class="serif">
-                B.S., Biomedical Engineering<br>
-                <span style="font-size:0.8em; font-weight:lighter">
-                    2018: University of North Carolina at Chapel Hill and North Carolina State University
-                </span>
-            </h3>
-            <p>
-                I was one of the first recipients of a truly joint Bachelors degree between two globally renowned
-                institutions for Biomedical and Health Sciences Engineering. My coursework emphasized
-                signal processing and neural rehabilitation, while my practical experience heavily involved
-                design thinking and validation research. This combination built a strong foundation for my
-                professional interest in translational research and tech transfer.
-            </p>
-        </div>
-        <br>
-        <div>
-            <h3 class="serif">
-                Study Abroad, Biochemistry<br>
-                <span style="font-size:0.8em; font-weight:lighter">
-                    2016: Universit&eacute; Grenoble-Alpes
-                </span>
-            </h3>
-            <p>
-                I attended the Universit&eacute; Grenoble-Alpes in Grenoble, France for a summer study abroad program.
-                This program expanded my understanding of organic chemistry in biologically relevant settings, and
-                also recreated my immigrant experience of culturally "learning by doing" (but en Fran&ccedil;ais).
-            </p>
+    <div id="phd" class="content-section">
+        <section class="content-part content-slideThru">
+            <div class="content-slideThru-text">
+                <h3 class="serif">
+                    Ph.D., Biomedical Engineering<br>
+                    <span style="font-size:0.8em; font-weight:lighter; font-variation-settings:'wght' 200">
+                        Univ. of North Carolina at Chapel Hill and N. C. State Univ.<br>
+                        2018 - present
+                    </span>
+                </h3>
+                <p>
+                    short text
+                </p>
+            </div>
+        </section>
+        <section id="bs" class="content-part content-slideThru">
+            <div class="content-slideThru-text">
+                <h3 class="serif">
+                    B.S., Biomedical Engineering<br>
+                    <span style="font-size:0.8em; font-weight:lighter; font-variation-settings:'wght' 200">
+                        Univ. of North Carolina at Chapel Hill and N. C. State Univ.<br>
+                        2014 - 2018
+                    </span>
+                </h3>
+                <p>
+                    I was one of the first recipients of a truly joint Bachelors degree between two globally renowned institutions for Biomedical and Health Sciences Engineering. My coursework emphasized signal processing and neural rehabilitation, while my practical experience heavily involved design thinking and validation research. This combination built a strong foundation for my professional interest in translational research and tech transfer.
+                </p>
+            </div>
+        </section>
+        <div class="content-part content-slideThru">
+            <div class="content-slideThru-text">
+                <h3 class="serif">
+                    Study Abroad, Biochemistry<br>
+                    <span style="font-size:0.8em; font-weight:lighter; font-variation-settings:'wght' 200">
+                        Universit&eacute; Grenoble-Alpes<br>
+                        2016
+                    </span>
+                </h3>
+                <p>
+                    I attended the Universit&eacute; Grenoble-Alpes in Grenoble, France for a summer study abroad program. This program expanded my understanding of organic chemistry in biologically relevant settings, and also recreated my immigrant experience of culturally "learning by doing" (but en Fran&ccedil;ais).
+                </p>
+            </div>
         </div>
     </div>
 </div>
-<div class="tiles" id="cases">
+<section id="cases" class="tiles">
     <div style="width:100%; padding:0 2.5%">
         <h2 class="serif">All Engineering Projects</h2>
     </div>
-    {% for case in collections.cases | getRole('Engineer') %}
+    {% for case in collections['Case Study'] | getRole('Engineer') | exclude %}
     <a class="tile" href="{{ case.url | url }}"
         style="background-color:#111144;background-image:url('{{ case.data.imageHero | url }}')">
         <div class="tile-overlay">
@@ -80,4 +79,5 @@ title: Engineer
         </div>
     </a>
     {% endfor %}
-</div>
+    {% include "gotoallcases.html" %}
+</section>

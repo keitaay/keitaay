@@ -38,6 +38,7 @@ Each case study is associated with one or more roles that I can fulfill at a pro
 
 ```yaml
 title: Text #                - Case study title
+doIgnore: false #            - Hide case study from website?
 tags: #                      - Tags for grouping case studies
   - Featured
 subject: Text #              - Client or technology name

@@ -2,7 +2,7 @@
 layout: base.html
 title: Designer
 ---
-<div class="slide slide3 yokoso" id="pgtop">
+<section class="slide slide3 yokoso" id="pgtop">
     <h1 class="serif" style="font-size:5em">
         K&eacute;ita the designer subverts traditions to form enduring relationships.
     </h1>
@@ -11,57 +11,61 @@ title: Designer
         I&nbsp;enable people and&nbsp;organizations to&nbsp;connect with the&nbsp;world&nbsp;around&nbsp;them.
     </p>
     {% include "godown.html" %}
-</div>
-<div class="content" style="padding:10vh 5vw">
+</section>
+<div class="content">
     <div class="content-section content-sectionSticky">
-        <h2 class="serif">Impress right off the bat.</h2>
-        <p>
-            Text&nbsp;blah blah blah.
-        </p>
+        <div class="content-part">
+            <h2 class="serif">Impress right off the bat.</h2>
+            <p>
+                Text&nbsp;blah blah blah.
+            </p>
+        </div>
     </div>
     <div class="content-section">
-        <div class="content-slideThru">
+        <section id="webdev" class="content-part content-slideThru">
             <div class="content-slideThru-text">
                 <h3 class="serif">Website Design</h3>
                 <p>
                     short text
                 </p>
             </div>
-        </div>
-        <div class="content-slideThru">
+        </section>
+        <section id="branding" class="content-part content-slideThru">
             <div class="content-slideThru-text">
                 <h3 class="serif">Digital Identity and Branding</h3>
                 <p>
                     short text
                 </p>
             </div>
-        </div>
+        </section>
     </div>
 </div>
-<div class="content" style="padding:10vh 5vw">
+<div class="content">
     <div class="content-section content-sectionSticky">
-        <h2 class="serif">text.</h2>
-        <p>
-            Text&nbsp;blah blah blah.
-        </p>
+        <div class="content-part">
+            <h2 class="serif">Some title.</h2>
+            <p>
+                Text&nbsp;blah blah blah.
+            </p>
+        </div>
     </div>
     <div class="content-section">
-        <div class="content-slideThru">
+        <section id="tba" class="content-part content-slideThru">
             <div class="content-slideThru-text">
-                <h3 class="serif">???</h3>
+                <h3 class="serif">More titles</h3>
                 <p>
-                    short text
+                    More text
                 </p>
             </div>
-        </div>
+        </section>
     </div>
     <br>
 </div>
-<div class="tiles" id="cases">
+<section class="tiles" id="cases">
     <div style="width:100%; padding:0 2.5%">
         <h2 class="serif">All Design Projects</h2>
     </div>
-    {% for case in collections.cases | getRole('Designer') %}
+    {% for case in collections['Case Study'] | getRole('Designer') | exclude %}
     <a class="tile" href="{{ case.url | url }}"
         style="background-color:#111144;background-image:url('{{ case.data.imageHero | url }}')">
         <div class="tile-overlay">
@@ -70,4 +74,5 @@ title: Designer
         </div>
     </a>
     {% endfor %}
-</div>
+    {% include "gotoallcases.html" %}
+</section>

@@ -1,3 +1,4 @@
 {
-  "layout": "case.html"
+  "layout": "case.html",
+  "doIgnore": false
 }

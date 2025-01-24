@@ -20,6 +20,12 @@ module.exports = function (eleventyConfig) {
         }
         return arr.filter(item => item.data.roles.includes(role))
     });
+    eleventyConfig.addFilter('exclude', function (arr) {
+        if (!arr || !Array.isArray(arr)) {
+            return [];
+        }
+        return arr.filter(item => !item.data['doIgnore'])
+    });
 
     // Return Object
     return {

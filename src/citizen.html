@@ -2,7 +2,7 @@
 layout: base.html
 title: Citizen
 ---
-<div class="slide slide5 yokoso" id="pgtop">
+<section class="slide slide5 yokoso" id="pgtop">
     <h1 class="serif" style="font-size:5em">
         K&eacute;ita the citizen transcends boundaries to democratize tomorrow.
     </h1>
@@ -11,23 +11,29 @@ title: Citizen
         more engaged, informed, and&nbsp;interested in&nbsp;shaping its own&nbsp;destiny.
     </p>
     {% include "godown.html" %}
-</div>
-<div class="content" id="service" style="padding:10vh 5vw">
+</section>
+<div class="content" id="service">
     <div class="content-section content-sectionSticky">
-        <h2 class="serif">Enable communities that work better.</h2>
-        <p>
-            Text&nbsp;blah blah blah.
-        </p>
+        <div class="content-part">
+            <h2 class="serif">Enable communities that work better.</h2>
+            <p>
+                Text&nbsp;blah blah blah.
+            </p>
+        </div>
     </div>
     <div class="content-section">
-        accordions go here I guess
+        <section id=tba" class="content-part content-slideThru">
+            <div class="content-slideThru-text">
+                accordions go here I guess
+            </div>
+        </section>
     </div>
 </div>
-<div class="tiles" id="cases">
+<section class="tiles" id="cases">
     <div style="width:100%; padding:0 2.5%">
         <h2 class="serif">All Civic Projects</h2>
     </div>
-    {% for case in collections.cases | getRole('Citizen') %}
+    {% for case in collections['Case Study'] | getRole('Citizen') | exclude %}
     <a class="tile" href="{{ case.url | url }}"
         style="background-color:#111144;background-image:url('{{ case.data.imageHero | url }}')">
         <div class="tile-overlay">
@@ -36,4 +42,5 @@ title: Citizen
         </div>
     </a>
     {% endfor %}
-</div>
+    {% include "gotoallcases.html" %}
+</section>
