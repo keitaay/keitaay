@@ -101,21 +101,14 @@ p {
 
 /* UI: cross-component definitions */
 .UIbutton {
-  display: inline-block;
-  position: fixed;
   cursor: pointer;
   height: 1.6em;
   width: 1.6em;
-  left: calc(100vw - 2 * 1.4em);
-  /* "left" used to avoid shift due to scroll bar */
   border-radius: 0.8em;
   font-size: 1.6em;
   line-height: 1.6em;
   text-align: center;
   text-decoration: none;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
-  background-color: rgba(238, 238, 238, 0.5);
-  color: rgba(36, 42, 52, 0.5);
   transition: background-color 500ms ease, color 500ms ease;
 }
 .UIbutton:hover, .UIbutton:focus {
@@ -182,6 +175,17 @@ p {
   height: calc(100% - navHeightBgn - 2.5em);
 }
 
+.navButton,
+.returnToPgtop {
+  position: fixed;
+  display: inline-block;
+  /* "left" used to avoid shift due to scroll bar */
+  left: calc(100vw - 2 * 1.4em);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+  background-color: rgba(238, 238, 238, 0.5);
+  color: rgba(36, 42, 52, 0.5);
+}
+
 .navButton {
   top: 1.4em;
   z-index: 900;
@@ -194,21 +198,32 @@ p {
 }
 
 /* UI: menu toggled off; based on workaround by Morgan Feeney, via codepen.io/morganfeeney/pen/KiBty */
-input[type=checkbox]:not(:checked) ~ .navMenu {
+/*
+Uncomment this block to enable the navbar toggle menu.
+input[type="checkbox"]:not(:checked) ~ .navMenu {
   visibility: hidden;
   opacity: 0;
 }
 
-input[type=checkbox]:checked ~ .navButton .navOpen {
-  display: inline;
-}
-input[type=checkbox]:checked ~ .navButton .navClosed {
-  display: none;
-}
+input[type="checkbox"]:checked ~ .navButton {
+  .navOpen {
+    display: inline;
+  }
 
+  .navClosed {
+    display: none;
+  }
+}
+*/
 /* UI: return to top of page */
 .returnToPgtop {
-  top: calc(2 * 1.4em + 1.6em);
+  /* 
+    Replace "top" with this definition if the navbar is being used; this will
+    ensure that the "return to top" button is below the navbar toggle.
+    top: calc(2 * 1.4em + 1.6em);
+  */
+  top: 1.4em;
+  left: calc(100vw - 2 * 1.4em);
   z-index: 600;
 }
 
@@ -328,35 +343,10 @@ ol {
   color: #eeeeee;
 }
 
-.slide1 {
-  background-color: rgb(255, 168, 34);
-  color: rgb(36, 42, 52);
-}
-
-.slide2 {
-  background-color: rgb(37, 77, 108);
-  color: #eeeeee;
-}
-
-.slide3 {
-  background-color: rgb(101, 180, 149);
-  color: rgb(36, 42, 52);
-}
-
-.slide4 {
-  background-color: rgb(214, 84, 90);
-  color: #eeeeee;
-}
-
-.slide5 {
-  background-color: rgb(132, 74, 117);
-  color: #eeeeee;
-}
-
-/* Tiles allow for visual previews of portfolio entries and articles */
-.tiles {
+/* Visual previews of portfolio entries and articles */
+.tiles,
+.banners {
   display: flex;
-  padding: 2em 0;
   margin: 0;
   flex-direction: row;
   flex-wrap: wrap;
@@ -364,21 +354,37 @@ ol {
   align-content: space-around;
   align-items: flex-start;
 }
-.tiles .tile {
+
+.tiles {
+  padding: 2em 0;
+}
+
+.tile,
+.banner {
   flex-grow: 0;
   flex-basis: 100vw;
-  margin: 2vw;
-  min-height: 26vw;
   text-decoration: none;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   background: center/cover no-repeat;
   transition: all 300ms ease;
 }
-.tiles .tile:hover, .tiles .tile:focus {
+.tile:hover, .tile:focus,
+.banner:hover,
+.banner:focus {
   transform: scale(1.02, 1.02);
 }
 
-.tile-overlay {
+.tile {
+  min-height: 26vw;
+  margin: 2vw;
+}
+
+.banner {
+  margin: 1vw;
+}
+
+.tile-overlay,
+.banner-overlay {
   margin: 0;
   padding: 2vw;
   color: white;
@@ -404,11 +410,7 @@ ol {
 .buttonGoBack {
   background: rgba(36, 42, 52, 0.5);
   border: 0.5px solid #eeeeee;
-  border-radius: 2em;
-  margin-bottom: 1em;
-  font-size: 2em;
   color: #eeeeee;
-  cursor: pointer;
 }
 
 /* Articles are "full" versions of tiles. It's preceded by "summaries" that render within a "slide". */

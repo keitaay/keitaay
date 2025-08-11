@@ -1,9 +1,5 @@
 ---
 layout: base.html
-subject: Personal project.
-roles: Designer
-taskList:
-techList:
 ---
 <div class="slide yokoso" id="pgtop" style="background-image:url('{{ imageHero | url }}')">
     <div class="article-summary">
@@ -13,7 +9,7 @@ techList:
         <p>{{ summary }}</p>
         <div class="article-summary-tags">
             {% for tag in tags | limit(8) %}
-            <div class="article-summary-tag">{{ tag }}</div>
+            <a class="article-summary-tag" href="/tags/{{ tag }}">{{ tag }}</a>
             {% endfor %}
         </div>
     </div>

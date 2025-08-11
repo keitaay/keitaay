@@ -16,9 +16,6 @@ Take a look at my work, and feel free to reach out if you have any questions!
   <a href="https://orcid.org/0000-0003-4386-8056">
   <img src="https://img.shields.io/badge/papers-here?style=flat&logo=orcid&label=Read%20my&labelColor=gray&color=A6CE39" alt="Read my papers through ORCID"/>
   </a>
-  <a href="https://www.buymeacoffee.com/keita">
-  <img src="https://raw.githubusercontent.com/pachadotdev/buymeacoffee-badges/main/bmc-white.svg" alt="Buy me a coffee?"/>
-  </a>
 </div>
 
 ## My website

@@ -7,8 +7,7 @@ title: Home
         K&eacute;ita Yokoyama<br>engineers solutions.
     </h1>
     <p style="font-size:1.5rem; max-width:700px">
-        I&nbsp;unify&nbsp;people across cultures and&nbsp;professions, drive&nbsp;growth,
-        and&nbsp;solve complex&nbsp;problems in&nbsp;healthcare, business&nbsp;strategy, and&nbsp;design.
+        I&nbsp;bring clarity&nbsp;to complex&nbsp;problems. Whether&nbsp;it's advancing medical&nbsp;technology, guiding strategy, or&nbsp;translating ideas across&nbsp;cultures, I&nbsp;work at the&nbsp;intersections where disciplines&nbsp;meet -&nbsp;and&nbsp;where new&nbsp;possibilities&nbsp;emerge.
     </p>
     <br>
     <a class="bigbutton" href="mailto:hello@keitaay.com">Let's Chat!</a>
@@ -19,67 +18,75 @@ title: Home
         <div class="content-part">
             <h2 class="serif">Who is K&eacute;ita?</h2>
             <p>
-                I'm&nbsp;a&nbsp;creator of&nbsp;businesses, experiences, and&nbsp;solutions that&nbsp;unify
-                communities, disrupt the&nbsp;status&nbsp;quo, and&nbsp;empower people&nbsp;to&nbsp;thrive.
+                At&nbsp;my&nbsp;core, I'm&nbsp;an interpreter -&nbsp;of&nbsp;languages, systems, and&nbsp;ideas.</p>
+            <p>
+                I've&nbsp;lived and&nbsp;worked between cultures for my&nbsp;entire life, moving fluently between technical and&nbsp;non-technical worlds, local and&nbsp;global perspectives, and&nbsp;analytical and&nbsp;creative&nbsp;thinking.
             </p>
             <p>
-                I&nbsp;revel&nbsp;in addressing undermet&nbsp;needs in&nbsp;healthcare and&nbsp;society
-                with thoughtful&nbsp;people across multiple&nbsp;disciplines. I&nbsp;do&nbsp;so
-                by wearing&nbsp;several&nbsp;hats:
+                I&nbsp;thrive on&nbsp;uncovering what's hidden, making&nbsp;it understandable, and&nbsp;turning&nbsp;it into&nbsp;action. My&nbsp;work aims to&nbsp;build
+                connections, challenge the&nbsp;status quo, and&nbsp;empower communities to&nbsp;thrive.
+            </p>
+            <p>
+                I&nbsp;solve these&nbsp;kinds of&nbsp;challenges:
             </p>
         </div>
     </div>
     <div class="content-section">
-        <section id="engineer" class="content-part content-slideThru" style="background-image:url('/cases/img/wwa_massage.jpg');">
+        <section id="bme" class="content-part content-slideThru" style="background-image:url('/cases/img/wwa_massage.jpg');">
             <div class="content-slideThru-text">
-                <h3 class="serif">A versatile bioengineer by training.</h3>
+                <h3 class="serif">See more medical problems, sooner.</h3>
                 <p>
-                    As a PhD candidate in Biomedical Engineering, I develop new technologies to enhance the human condition. I enable clinicians and patients to access new dimensions of information.
+                    As a PhD candidate in Biomedical Engineering, I've developed new ultrasound-based imaging techniques to detect disease earlier and guide better care. I collaborate with physicians, engineers, and scientists to turn abstract research questions into working technology.
                 </p>
-                <p>
-                    <a href="{{ '/engineer' | url }}" style="padding:0 0.25em">
-                        View my engineering work. {% include "goto.html" %}
+                <div class="banners">
+                    {%- set caseBme = collections['Case Study'] | exclude | getOneExample("Case Study") -%}
+                    <a class="banner" href="{{ caseBme.url | url }}"
+                        style="background-color:#111144;background-image:url('{{ caseBme.data.imageHero | url }}')">
+                        <div class="banner-overlay">
+                            <div class="artPrelude">Featured Case</div>
+                            <div class="artTagline">{{ caseBme.data.title }}</div>
+                            <div class="artPrelude">{{ caseBme.data.summary }}</div>
+                        </div>
                     </a>
-                </p>
+                </div>
             </div>
         </section>
-        <section id="strategist" class="content-part content-slideThru">
+        <section id="innovation" class="content-part content-slideThru">
             <div class="content-slideThru-text">
-                <h3 class="serif">A resourceful strategist by calling.</h3>
+                <h3 class="serif">Bring innovations to the people who need them.</h3>
                 <p>
-                    When new technologies are born, I want to ensure they truly reach the people who need them, with every stakeholder on board. I empower organizations with the knowledge and processes to survive and thrive.
+                    Breakthroughs don't matter if they never leave the lab. Through consulting and strategy projects, I help innovators understand their markets, refine their offerings, and create the partnerships needed to scale.
                 </p>
-                <p>
-                    <a href="{{ '/strategist' | url }}" style="padding:0 0.25em">
-                        View my strategy consultant work. {% include "goto.html" %}
+                <div class="banners">
+                    {%- set caseInnov = collections['Case Study'] | exclude | getOneExample("Case Study") -%}
+                    <a class="banner" href="{{ caseInnov.url | url }}"
+                        style="background-color:#111144;background-image:url('{{ caseInnov.data.imageHero | url }}')">
+                        <div class="banner-overlay">
+                            <div class="artPrelude">Featured Case</div>
+                            <div class="artTagline">{{ caseInnov.data.title }}</div>
+                            <div class="artPrelude">{{ caseInnov.data.summary }}</div>
+                        </div>
                     </a>
-                </p>
+                </div>
             </div>
         </section>
-        <section id="designer" class="content-part content-slideThru">
+        <section id="institution" class="content-part content-slideThru">
             <div class="content-slideThru-text">
-                <h3 class="serif">A practical designer by passion.</h3>
+                <h3 class="serif">Make complex ideas clear, engaging, and actionable.</h3>
                 <p>
-                    As a self-taught digital artist, I create interfaces and environments that are accessible and intuitive. I create digital media to help communicate, connect, and impress.
+                    I design institutions and deliver communication strategies that bridge knowledge gaps, align stakeholders, and drive decision-making. This work spans public-facing science communication, civic organizing, and strategic facilitation.
                 </p>
-                <p>
-                    <a href="{{ '/designer' | url }}" style="padding:0 0.25em">
-                        View my designing work. {% include "goto.html" %}
+                <div class="banners">
+                    {%- set caseInst = collections['Case Study'] | exclude | getOneExample("Case Study") -%}
+                    <a class="banner" href="{{ caseInst.url | url }}"
+                        style="background-color:#111144;background-image:url('{{ caseInst.data.imageHero | url }}')">
+                        <div class="banner-overlay">
+                            <div class="artPrelude">Featured Case</div>
+                            <div class="artTagline">{{ caseInst.data.title }}</div>
+                            <div class="artPrelude">{{ caseInst.data.summary }}</div>
+                        </div>
                     </a>
-                </p>
-            </div>
-        </section>
-        <section id="citizen" class="content-part content-slideThru">
-            <div class="content-slideThru-text">
-                <h3 class="serif">A thoughtful citizen by duty.</h3>
-                <p>
-                    It is each of our duties to create the world we want to live in. I adhere to this mission by being involved in a variety of policy issues related to social equity and quality of life.
-                </p>
-                <p>
-                    <a href="{{ '/citizen' | url }}" style="padding:0 0.25em">
-                        View my activism and civic work. {% include "goto.html" %}
-                    </a>
-                </p>
+                </div>
             </div>
         </section>
     </div>
