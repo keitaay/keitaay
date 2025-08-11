@@ -82,8 +82,22 @@ window.addEventListener('scroll', () => {
 
   // Update URL hash based on current section
   if (current !== history.state) {
-    history.pushState(null, null, `#${current}`);
+    history.replaceState(null, null, `#${current}`);
   }
+});
+
+// Emulate the behavior of "has" selectors to dynamically expand
+// the width of "content" in desktop views
+document.addEventListener('DOMContentLoaded', function() {
+    if (!CSS.supports('selector(:has(*))')) {
+        const contents = document.querySelectorAll('.content');
+        contents.forEach(content => {
+        const sections = content.querySelectorAll('.content-section');
+        if (sections.length > 1) {
+            content.classList.add('multiple-sections');
+        }
+        });
+    }
 });
 
 // Re-activate the loading screen after it has retreated following window.onload.

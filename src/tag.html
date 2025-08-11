@@ -1,0 +1,25 @@
+---
+layout: base.html
+title: View Content by Tag
+pagination:
+  data: collections
+  size: 1
+  alias: tag
+permalink: /tags/{{ tag }}/
+---
+<section class="tiles" id="pgtop">
+    <div style="width:100%; padding:0 2.5%">
+        {% include "goback.html" %}
+        <h1 class="serif">Content with Tag: {{ tag }}</h1>
+    </div>
+    {% for case in collections[ tag ] | exclude %}
+    <a class="tile" href="{{ case.url | url }}"
+        style="background-color:#111144;background-image:url('{{ case.data.imageHero | url }}')">
+        <div class="tile-overlay">
+            <div class="artPrelude">{{ case.data.roles[0] }}: {{ case.data.subject }}</div>
+            <div class="artTagline">{{ case.data.title }}</div>
+        </div>
+    </a>
+    {% endfor %}
+    {% include "gotoallcases.html" %}
+</section>

@@ -66,9 +66,11 @@ main {
 a:not(.noFX):not(.tile):not(.navurl):not(.bigbutton):not(.content-slideThru) {
   text-decoration: none;
   color: $color1;
-  background: linear-gradient(to right,
-      transparent 50.05%,
-      rgba($color4, 1) 50.05%);
+  background: linear-gradient(
+    to right,
+    transparent 50.05%,
+    rgba($color4, 1) 50.05%
+  );
   background-size: 201%;
   background-position: 0 0;
   transition: 500ms ease;
@@ -116,17 +118,26 @@ h3,
 }
 
 h1 {
-  font-size: calc(3rem + (#{$h1Ymax} - #{$h1Ymin}) * ((100vw - #{$hXmin * 1px}) / (#{$hXmax} - #{$hXmin})));
+  font-size: calc(
+    3rem + (#{$h1Ymax} - #{$h1Ymin}) *
+      ((100vw - #{$hXmin * 1px}) / (#{$hXmax} - #{$hXmin}))
+  );
 }
 
 h2,
 .hsub {
-  font-size: calc(2rem + (#{$h2Ymax} - #{$h2Ymin}) * ((100vw - #{$hXmin * 1px}) / (#{$hXmax} - #{$hXmin})));
+  font-size: calc(
+    2rem + (#{$h2Ymax} - #{$h2Ymin}) *
+      ((100vw - #{$hXmin * 1px}) / (#{$hXmax} - #{$hXmin}))
+  );
 }
 
 h3,
 .htert {
-  font-size: calc(1.5rem + (#{$h3Ymax} - #{$h3Ymin}) * ((100vw - #{$hXmin * 1px}) / (#{$hXmax} - #{$hXmin})));
+  font-size: calc(
+    1.5rem + (#{$h3Ymax} - #{$h3Ymin}) *
+      ((100vw - #{$hXmin * 1px}) / (#{$hXmax} - #{$hXmin}))
+  );
 }
 
 .hsub:not(.serif),
@@ -336,9 +347,11 @@ ol {
     border-radius: 5px;
     border: 1px solid $colorW;
     color: $colorX;
-    background: linear-gradient(to right,
-        rgba($color1, 1) 50.01%,
-        rgba($color4, 1) 50.01%);
+    background: linear-gradient(
+      to right,
+      rgba($color1, 1) 50.01%,
+      rgba($color4, 1) 50.01%
+    );
     background-size: 201%;
     background-position: 0 0;
     transition: 500ms ease;
@@ -474,26 +487,21 @@ $tilePad: 2vw;
   margin: 0;
   padding: $tilePad;
   color: white;
-  background: linear-gradient(0deg,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0.6) 40%,
-      rgba(0, 0, 0, 0.8) 100%);
+}
+.artPrelude {
+  margin: 0;
+  font-size: 1em;
+  font-weight: 200;
+  font-variant: small-caps;
+}
 
-  .artPrelude {
-    margin: 0;
-    font-size: 1em;
-    font-weight: 200;
-    font-variant: small-caps;
-  }
+.artTagline {
+  margin: 0;
+  font-size: 1.7em;
+}
 
-  .artTagline {
-    margin: 0;
-    font-size: 1.7em;
-  }
-
-  .artAbstract {
-    font-weight: 200;
-  }
+.artAbstract {
+  font-weight: 200;
 }
 
 .buttonGoBack {
@@ -546,15 +554,24 @@ $tilePad: 2vw;
   }
 
   h1 {
-    font-size: calc(1.5em + (#{$h1Ymax} - #{$h1Ymin}) * ((100vw - #{$hXmin * 1px}) / (#{$hXmax} - #{$hXmin})));
+    font-size: calc(
+      1.5em + (#{$h1Ymax} - #{$h1Ymin}) *
+        ((100vw - #{$hXmin * 1px}) / (#{$hXmax} - #{$hXmin}))
+    );
   }
 
   h2 {
-    font-size: calc(1.3em + (#{$h2Ymax} - #{$h2Ymin}) * ((100vw - #{$hXmin * 1px}) / (#{$hXmax} - #{$hXmin})));
+    font-size: calc(
+      1.3em + (#{$h2Ymax} - #{$h2Ymin}) *
+        ((100vw - #{$hXmin * 1px}) / (#{$hXmax} - #{$hXmin}))
+    );
   }
 
   h3 {
-    font-size: calc(1.15em + (#{$h2Ymax} - #{$h2Ymin}) * ((100vw - #{$hXmin * 1px}) / (#{$hXmax} - #{$hXmin})));
+    font-size: calc(
+      1.15em + (#{$h2Ymax} - #{$h2Ymin}) *
+        ((100vw - #{$hXmin * 1px}) / (#{$hXmax} - #{$hXmin}))
+    );
   }
 
   pre {
@@ -662,9 +679,11 @@ form {
     color: $color3;
     cursor: pointer;
     transition: all 300ms ease;
-    background: linear-gradient(to right,
-        transparent 50%,
-        rgba($color3, 1) 50%);
+    background: linear-gradient(
+      to right,
+      transparent 50%,
+      rgba($color3, 1) 50%
+    );
     background-size: 200%;
     background-position: 0 0;
     transition: 500ms ease;
@@ -708,7 +727,12 @@ form {
     max-width: 50vw;
   }
 
-  .content .content-section {
+  .content:has(.content-section + .content-section) .content-section {
+    width: 50vw;
+  }
+
+  /* the "multiple-sections" class is only injected by JavaScript if the "has" selector doesn't work */
+  .content.multiple-sections .content-section {
     width: 50vw;
   }
 
