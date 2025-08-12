@@ -7,39 +7,69 @@ title: Home
         K&eacute;ita Yokoyama<br>engineers solutions.
     </h1>
     <p style="font-size:1.5rem; max-width:700px">
-        I&nbsp;bring clarity&nbsp;to complex&nbsp;problems. Whether&nbsp;it's advancing medical&nbsp;technology, guiding strategy, or&nbsp;translating ideas across&nbsp;cultures, I&nbsp;work at the&nbsp;intersections where disciplines&nbsp;meet -&nbsp;and&nbsp;where new&nbsp;possibilities&nbsp;emerge.
+        Where ideas and&nbsp;cultures converge and&nbsp;collide, I&nbsp;help synthesize new&nbsp;possibilities.
+    </p>
+    <p style="font-size:1.5rem; max-width:700px">
+        As&nbsp;a biomedical engineer, strategist, and community builder, I've&nbsp;turned ultrasound waves into&nbsp;insight, data into&nbsp;strategy, and diverse perspectives into&nbsp;action.
+    </p>
+    <p style="font-size:1.5rem; max-width:700px">
+        Now, I'm&nbsp;focused&nbsp;on applying that&nbsp;approach to strategy consulting for life&nbsp;science businesses and&nbsp;to initiatives that strengthen communities.
     </p>
     <br>
-    <a class="bigbutton" href="mailto:hello@keitaay.com">Let's Chat!</a>
+    <a class="bigbutton" href="#footer">Let's Chat!</a>
+    <button class="bigbutton" id="random-case-btn" type="button">Random Case</button>
+    <script id="case-urls" type="application/json">
+    [
+        {% for case in collections['Case Study'] | exclude %}
+            "{{ case.url | url }}"{% if not loop.last %},{% endif %}
+        {% endfor %}
+    ]
+    </script>
+    <script>
+        // Parse case URLs from JSON script tag
+        const caseUrls = JSON.parse(document.getElementById('case-urls').textContent);
+        document.getElementById('random-case-btn').addEventListener('click', function () {
+            if (caseUrls && caseUrls.length > 0) {
+                const idx = Math.floor(Math.random() * caseUrls.length);
+                window.location.href = caseUrls[idx];
+            }
+        });
+    </script>
+    <script>
+        // Random navigation logic
+        document.getElementById('random-case-btn').addEventListener('click', function () {
+            if (window.caseUrls && window.caseUrls.length > 0) {
+                const idx = Math.floor(Math.random() * window.caseUrls.length);
+                window.location.href = window.caseUrls[idx];
+            }
+        });
+    </script>
     {% include "godown.html" %}
 </section>
 <div id="aboutme" class="content">
     <div class="content-section content-sectionSticky">
         <div class="content-part">
-            <h2 class="serif">Who is K&eacute;ita?</h2>
-            <p>
+            <h2 class="serif" style="padding-top:0">Who is K&eacute;ita?</h2>
+            <p style="padding-top:0">
                 At&nbsp;my&nbsp;core, I'm&nbsp;an interpreter -&nbsp;of&nbsp;languages, systems, and&nbsp;ideas.</p>
-            <p>
+            <p style="padding-top:0">
                 I've&nbsp;lived and&nbsp;worked between cultures for my&nbsp;entire life, moving fluently between technical and&nbsp;non-technical worlds, local and&nbsp;global perspectives, and&nbsp;analytical and&nbsp;creative&nbsp;thinking.
             </p>
-            <p>
-                I&nbsp;thrive on&nbsp;uncovering what's hidden, making&nbsp;it understandable, and&nbsp;turning&nbsp;it into&nbsp;action. My&nbsp;work aims to&nbsp;build
-                connections, challenge the&nbsp;status quo, and&nbsp;empower communities to&nbsp;thrive.
-            </p>
-            <p>
-                I&nbsp;solve these&nbsp;kinds of&nbsp;challenges:
+            <p style="padding-top:0">
+                For&nbsp;over {{ 2015 | yearsSince }}&nbsp;years, I've&nbsp;thrived on&nbsp;uncovering what's hidden, making&nbsp;it understandable, and&nbsp;turning&nbsp;it into&nbsp;action. My&nbsp;work aims to&nbsp;build connections, challenge the&nbsp;status quo, and&nbsp;empower communities to&nbsp;thrive.
             </p>
         </div>
     </div>
     <div class="content-section">
         <section id="bme" class="content-part content-slideThru" style="background-image:url('/cases/img/wwa_massage.jpg');">
             <div class="content-slideThru-text">
-                <h3 class="serif">See more medical problems, sooner.</h3>
+                <h3 class="serif">I help to show more medical problems, sooner.</h3>
                 <p>
                     As a PhD candidate in Biomedical Engineering, I've developed new ultrasound-based imaging techniques to detect disease earlier and guide better care. I collaborate with physicians, engineers, and scientists to turn abstract research questions into working technology.
                 </p>
                 <div class="banners">
-                    {%- set caseBme = collections['Case Study'] | exclude | getOneExample("Case Study") -%}
+                    {%- set caseBme = collections['Case Study'] | exclude | getOneExample("Biomedical Engineering") -%}
+                    {% if caseBme.data %}
                     <a class="banner" href="{{ caseBme.url | url }}"
                         style="background-color:#111144;background-image:url('{{ caseBme.data.imageHero | url }}')">
                         <div class="banner-overlay">
@@ -48,17 +78,19 @@ title: Home
                             <div class="artPrelude">{{ caseBme.data.summary }}</div>
                         </div>
                     </a>
+                    {% endif %}
                 </div>
             </div>
         </section>
-        <section id="innovation" class="content-part content-slideThru">
+        <section id="strategy" class="content-part content-slideThru">
             <div class="content-slideThru-text">
-                <h3 class="serif">Bring innovations to the people who need them.</h3>
+                <h3 class="serif">I bring innovations to the people who need them.</h3>
                 <p>
                     Breakthroughs don't matter if they never leave the lab. Through consulting and strategy projects, I help innovators understand their markets, refine their offerings, and create the partnerships needed to scale.
                 </p>
                 <div class="banners">
-                    {%- set caseInnov = collections['Case Study'] | exclude | getOneExample("Case Study") -%}
+                    {%- set caseInnov = collections['Case Study'] | exclude | getOneExample("Strategy") -%}
+                    {% if caseInnov.data %}
                     <a class="banner" href="{{ caseInnov.url | url }}"
                         style="background-color:#111144;background-image:url('{{ caseInnov.data.imageHero | url }}')">
                         <div class="banner-overlay">
@@ -67,25 +99,28 @@ title: Home
                             <div class="artPrelude">{{ caseInnov.data.summary }}</div>
                         </div>
                     </a>
+                    {% endif %}
                 </div>
             </div>
         </section>
-        <section id="institution" class="content-part content-slideThru">
+        <section id="connections" class="content-part content-slideThru">
             <div class="content-slideThru-text">
-                <h3 class="serif">Make complex ideas clear, engaging, and actionable.</h3>
+                <h3 class="serif">I make complex ideas clear, engaging, and actionable.</h3>
                 <p>
                     I design institutions and deliver communication strategies that bridge knowledge gaps, align stakeholders, and drive decision-making. This work spans public-facing science communication, civic organizing, and strategic facilitation.
                 </p>
                 <div class="banners">
-                    {%- set caseInst = collections['Case Study'] | exclude | getOneExample("Case Study") -%}
-                    <a class="banner" href="{{ caseInst.url | url }}"
-                        style="background-color:#111144;background-image:url('{{ caseInst.data.imageHero | url }}')">
+                    {%- set caseConx = collections['Case Study'] | exclude | getOneExample("Connections") -%}
+                    {% if caseConx.data %}
+                    <a class="banner" href="{{ caseConx.url | url }}"
+                        style="background-color:#111144;background-image:url('{{ caseConx.data.imageHero | url }}')">
                         <div class="banner-overlay">
                             <div class="artPrelude">Featured Case</div>
-                            <div class="artTagline">{{ caseInst.data.title }}</div>
-                            <div class="artPrelude">{{ caseInst.data.summary }}</div>
+                            <div class="artTagline">{{ caseConx.data.title }}</div>
+                            <div class="artPrelude">{{ caseConx.data.summary }}</div>
                         </div>
                     </a>
+                    {% endif %}
                 </div>
             </div>
         </section>

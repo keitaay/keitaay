@@ -14,6 +14,13 @@ module.exports = function (eleventyConfig) {
         const d = new Date(date);
         return d.getFullYear();
     });
+    eleventyConfig.addFilter("yearsSince", function (startYear) {
+        /*
+        Given a start year, return the number of years from that year to the current year.
+        */
+        const now = new Date();
+        return now.getFullYear() - parseInt(startYear, 10);
+    });
     eleventyConfig.addFilter("intersect", function(arr1, arr2) {
         /*
         Given two arrays, return a new array containing only the elements that are present in both arrays.
