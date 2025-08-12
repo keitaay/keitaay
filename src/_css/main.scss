@@ -34,7 +34,6 @@ $fontserif: "Noto Serif Display", serif;
 :not(.serif) {
   font-family: $fontnames;
   font-weight: 300;
-  font-variation-settings: "wght" 300;
 }
 
 .serif {
@@ -167,7 +166,11 @@ $btnDiamtr: 2 * $btnRadius;
   width: $btnDiamtr;
   border-radius: $btnRadius;
   font-size: $btnDiamtr;
-  line-height: $btnDiamtr;
+  position: relative;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   text-decoration: none;
   transition: background-color 500ms ease, color 500ms ease;
@@ -394,12 +397,15 @@ ol {
 
     .content-part {
       padding: 5% 2.5%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
   }
 
   .content-sectionSticky {
     z-index: 600;
-    position: sticky;
     top: 0;
     align-self: flex-start;
     background-color: $colorW;
@@ -510,6 +516,7 @@ $tilePad: 2vw;
   background: $colorXt;
   border: 0.5px solid $colorW;
   color: $colorW;
+  margin-bottom: 1.5em;
 }
 
 /* Articles are "full" versions of tiles. It's preceded by "summaries" that render within a "slide". */
@@ -523,21 +530,6 @@ $tilePad: 2vw;
   p {
     padding: 0;
     font-size: 1.5em;
-  }
-
-  .article-summary-tags {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    padding-top: 3vh;
-
-    .article-summary-tag {
-      margin: 0.5em;
-      padding: 0.5em;
-      border-radius: 7px;
-      border: 1px solid $colorWt;
-      color: $colorWt;
-    }
   }
 }
 
@@ -726,6 +718,10 @@ form {
 
   .content:has(.content-section + .content-section) .content-section {
     width: 50vw;
+  }
+
+  .content-sectionSticky {
+    position: sticky;
   }
 
   /* the "multiple-sections" class is only injected by JavaScript if the "has" selector doesn't work */

@@ -10,7 +10,9 @@ permalink: /tags/{{ tag }}/
 <section class="tiles" id="pgtop">
     <div style="width:100%; padding:0 2.5%">
         {% include "goback.html" %}
-        <h1 class="serif">Content with Tag: {{ tag }}</h1>
+        <h1 class="serif">Content with Tag: {{ tag }}</h1><p>
+            The following content is tagged with "{{ tag }}". Click on a tile to view more.
+        </p>
     </div>
     {% for case in collections[ tag ] | exclude %}
     <a class="tile" href="{{ case.url | url }}"

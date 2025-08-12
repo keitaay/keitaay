@@ -4,40 +4,41 @@ layout: base.html
 <div class="slide yokoso" id="pgtop" style="background-image:url('{{ imageHero | url }}')">
     <div class="article-summary">
         {% include "goback.html" %}
-        <h1 class="serif">{{ title }}</h1>
+        <p style="margin-bottom:0.6em;"><i style="font-weight:200; letter-spacing:0.1em">{{ dateProj }}{% if location %} - {{ location }}{% endif %}</i></p>
+        <h1 class="serif" style="margin-bottom:0.3em">{{ subject }}</h1>
         <hr>
         <p>{{ summary }}</p>
-        <div class="article-summary-tags">
-            {% for tag in tags | limit(8) %}
-            <a class="article-summary-tag" href="/tags/{{ tag }}">{{ tag }}</a>
-            {% endfor %}
-        </div>
     </div>
     {% include "godown.html" %}
 </div>
 <div class="content" id="service" style="padding:10vh 5vw">
     <div id="summary" class="content-section" style="max-width:700px">
-        <h2 class="serif">{{ subject }}</h2>
+        <h2 class="serif">{{ title }}</h2>
         <p>{{ brief }}</p>
         <br><!--this break is needed for mobile rendering-->
     </div>
     <div class="content-section" style="max-width:400px">
-        <h3 style="font-weight:bolder; font-size:1.4em">About the Project</h3>
-        <ul>
-            <li>Category: <ul>{% for role in roles %}<li>{{ role }}</li>{% endfor %}</ul></li>
-            <li>Timespan: {{ dateProj }}</li>
-        </ul>
-        <h3 style="font-weight:bolder; font-size:1.4em">My Roles</h3>
+        {% if taskList %}
+        <h3 style="font-weight:bolder; font-size:1.4em">My Responsibilities</h3>
         <ul>
             {% for task in taskList %}
             <li>{{ task }}</li>
             {% endfor %}
         </ul>
+        {% endif %}
         {% if techList %}
         <h3 style="font-weight:bolder; font-size:1.4em">Tools Used</h3>
         <ul>
             {% for tech in techList %}
             <li>{{ tech }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% if accoladeList %}
+        <h3 style="font-weight:bolder; font-size:1.4em">Accolades</h3>
+        <ul>
+            {% for accolade in accoladeList %}
+            <li>{{ accolade }}</li>
             {% endfor %}
         </ul>
         {% endif %}
@@ -51,4 +52,24 @@ layout: base.html
 </div>
 <div class="article">
     {{ content | safe }}
+</div>
+<div class="tiles" id="more">
+    <div style="width:100%; padding:0 2.5%">
+        <h2 class="serif" style="font-weight:bolder">See Related Cases</h2>
+        <p>
+            Curious about how I approach similar challenges? Here are some other case studies with overlapping themes, skills,
+            or tools.
+        </p>
+    </div>
+    {% set relatedCases = collections['Case Study'] | exclude | relatedCases(page.url, tags, 5) %}
+    {% for case in relatedCases %}
+    <a class="tile" href="{{ case.url | url }}"
+        style="background-color:#111144;background-image:url('{{ case.data.imageHero | url }}')">
+        <div class="tile-overlay">
+            <div class="artPrelude">{{ case.data.roles[0] }}: {{ case.data.subject }}</div>
+            <div class="artTagline">{{ case.data.title }}</div>
+        </div>
+    </a>
+    {% endfor %}
+    {% include "gotoallcases.html" %}
 </div>

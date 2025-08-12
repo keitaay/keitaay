@@ -122,8 +122,46 @@ function navAway(e) {
     return destination;
 };
 
-// Reactivate the loading screen's animation, then go back one page in the browser history
+// Store the current page in sessionStorage history stack
+(function manageHistoryStack() {
+    const stackKey = 'visitedPagesStack';
+    let stack = JSON.parse(sessionStorage.getItem(stackKey)) || [];
+    const currentUrl = window.location.href;
+
+    // Only push if not the same as the last entry
+    if (stack.length === 0 || stack[stack.length - 1] !== currentUrl) {
+        stack.push(currentUrl);
+        sessionStorage.setItem(stackKey, JSON.stringify(stack));
+    }
+})();
+
+// Reactivate the loading screen's animation, then go back to the first previous page that is not the current page
 function pauseGoBack() {
     reviveLoader();
-    setTimeout(function () { history.back(); }, transit);
+    setTimeout(function () {
+        const stackKey = 'visitedPagesStack';
+        let stack = JSON.parse(sessionStorage.getItem(stackKey)) || [];
+        const currentUrl = window.location.href;
+
+        // Remove current page from the top of the stack
+        while (stack.length > 0 && stack[stack.length - 1] === currentUrl) {
+            stack.pop();
+        }
+
+        // Find the first previous page that is not the current page
+        let targetUrl = null;
+        while (stack.length > 0) {
+            targetUrl = stack.pop();
+            if (targetUrl !== currentUrl) break;
+        }
+
+        // Save the updated stack
+        sessionStorage.setItem(stackKey, JSON.stringify(stack));
+        if (targetUrl && targetUrl !== currentUrl) {
+            window.location.href = targetUrl;
+        } else {
+            // Fallback: just go back one step if no other page found
+            history.back();
+        }
+    }, transit);
 }
