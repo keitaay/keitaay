@@ -3,7 +3,7 @@ layout: base.html
 title: Home
 ---
 <section class="slide slide0 yokoso" id="pgtop">
-    <h1 class="serif" style="font-size:5em">
+    <h1 style="font-size:5em">
         K&eacute;ita Yokoyama<br>engineers solutions.
     </h1>
     <p style="font-size:1.5rem; max-width:700px">
@@ -17,39 +17,12 @@ title: Home
     </p>
     <br>
     <a class="bigbutton" href="#footer">Let's Chat!</a>
-    <button class="bigbutton" id="random-case-btn" type="button">Random Case</button>
-    <script id="case-urls" type="application/json">
-    [
-        {% for case in collections['Case Study'] | exclude %}
-            "{{ case.url | url }}"{% if not loop.last %},{% endif %}
-        {% endfor %}
-    ]
-    </script>
-    <script>
-        // Parse case URLs from JSON script tag
-        const caseUrls = JSON.parse(document.getElementById('case-urls').textContent);
-        document.getElementById('random-case-btn').addEventListener('click', function () {
-            if (caseUrls && caseUrls.length > 0) {
-                const idx = Math.floor(Math.random() * caseUrls.length);
-                window.location.href = caseUrls[idx];
-            }
-        });
-    </script>
-    <script>
-        // Random navigation logic
-        document.getElementById('random-case-btn').addEventListener('click', function () {
-            if (window.caseUrls && window.caseUrls.length > 0) {
-                const idx = Math.floor(Math.random() * window.caseUrls.length);
-                window.location.href = window.caseUrls[idx];
-            }
-        });
-    </script>
     {% include "godown.html" %}
 </section>
 <div id="aboutme" class="content">
     <div class="content-section content-sectionSticky">
         <div class="content-part">
-            <h2 class="serif" style="padding-top:0">Who is K&eacute;ita?</h2>
+            <h2 style="padding-top:0">Who is K&eacute;ita?</h2>
             <p style="padding-top:0">
                 At&nbsp;my&nbsp;core, I'm&nbsp;an interpreter -&nbsp;of&nbsp;languages, systems, and&nbsp;ideas.</p>
             <p style="padding-top:0">
@@ -63,7 +36,7 @@ title: Home
     <div class="content-section">
         <section id="bme" class="content-part content-slideThru" style="background-image:url('/cases/img/wwa_massage.jpg');">
             <div class="content-slideThru-text">
-                <h3 class="serif">I help to show more medical problems, sooner.</h3>
+                <h3>I help to show more medical problems, sooner.</h3>
                 <p>
                     As a PhD candidate in Biomedical Engineering, I've developed new ultrasound-based imaging techniques to detect disease earlier and guide better care. I collaborate with physicians, engineers, and scientists to turn abstract research questions into working technology.
                 </p>
@@ -84,7 +57,7 @@ title: Home
         </section>
         <section id="strategy" class="content-part content-slideThru">
             <div class="content-slideThru-text">
-                <h3 class="serif">I bring innovations to the people who need them.</h3>
+                <h3>I bring innovations to the people who need them.</h3>
                 <p>
                     Breakthroughs don't matter if they never leave the lab. Through consulting and strategy projects, I help innovators understand their markets, refine their offerings, and create the partnerships needed to scale.
                 </p>
@@ -105,7 +78,7 @@ title: Home
         </section>
         <section id="connections" class="content-part content-slideThru">
             <div class="content-slideThru-text">
-                <h3 class="serif">I make complex ideas clear, engaging, and actionable.</h3>
+                <h3>I make complex ideas clear, engaging, and actionable.</h3>
                 <p>
                     I design institutions and deliver communication strategies that bridge knowledge gaps, align stakeholders, and drive decision-making. This work spans public-facing science communication, civic organizing, and strategic facilitation.
                 </p>
@@ -128,13 +101,13 @@ title: Home
 </div>
 <section class="tiles" id="featured">
     <div style="width:100%; padding:0 2.5%">
-        <h2 class="serif">Featured Work</h2>
+        <h2>Featured Work</h2>
     </div>
     {% for case in collections.Featured | exclude | limit(8) %}
     <a class="tile" href="{{ case.url | url }}"
         style="background-color:#111144;background-image:url('{{ case.data.imageHero | url }}')">
         <div class="tile-overlay">
-            <div class="artPrelude">{{ case.data.roles[0] }}: {{ case.data.subject }}</div>
+            <div class="artPrelude">{{ case.data.subject }}</div>
             <div class="artTagline">{{ case.data.title }}</div>
         </div>
     </a>

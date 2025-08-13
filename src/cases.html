@@ -14,9 +14,36 @@ title: All Cases
     <a class="tile" href="{{ case.url | url }}"
         style="background-color:#111144;background-image:url('{{ case.data.imageHero | url }}')">
         <div class="tile-overlay">
-            <div class="artPrelude">{{ case.data.roles[0] }}: {{ case.data.subject }}</div>
+            <div class="artPrelude">{{ case.data.subject }}</div>
             <div class="artTagline">{{ case.data.title }}</div>
         </div>
     </a>
     {% endfor %}
+    <a class="tile" id="random-case-btn" href="#"
+        style="background-color:#111144; background-image:url('/cases/img/pexels-cottonbro-8369524.jpg')">
+        <div class="tile-overlay">
+            <div class="artPrelude">Not&nbsp;sure where&nbsp;to&nbsp;go?</div>
+            <div class="artTagline">Go&nbsp;to a random case&nbsp;study</div>
+        </div>
+    </a>
+    <script id="case-urls" type="application/json">
+        [
+            {% for case in collections['Case Study'] | exclude %}
+                "{{ case.url | url }}"{% if not loop.last %},{% endif %}
+            {% endfor %}
+        ]
+    </script>
+    <script>
+        // Parse case URLs from JSON script tag
+        const caseUrls = JSON.parse(document.getElementById('case-urls').textContent);
+        // Random navigation logic
+        document.getElementById('random-case-btn').addEventListener('click', function (e) {
+            if (caseUrls && caseUrls.length > 0) {
+                e.preventDefault();
+                const idx = Math.floor(Math.random() * caseUrls.length);
+                e.randomCaseHref = caseUrls[idx]; // Custom property
+                navAway(e);
+            }
+        });
+    </script>
 </section>

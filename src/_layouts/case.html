@@ -5,7 +5,7 @@ layout: base.html
     <div class="article-summary">
         {% include "goback.html" %}
         <p style="margin-bottom:0.6em;"><i style="font-weight:200; letter-spacing:0.1em">{{ dateProj }}{% if location %} - {{ location }}{% endif %}</i></p>
-        <h1 class="serif" style="margin-bottom:0.3em">{{ subject }}</h1>
+        <h1 style="margin-bottom:0.3em">{{ subject }}</h1>
         <hr>
         <p>{{ summary }}</p>
     </div>
@@ -13,13 +13,13 @@ layout: base.html
 </div>
 <div class="content" id="service" style="padding:10vh 5vw">
     <div id="summary" class="content-section" style="max-width:700px">
-        <h2 class="serif">{{ title }}</h2>
+        <h2>{{ title }}</h2>
         <p>{{ brief }}</p>
         <br><!--this break is needed for mobile rendering-->
     </div>
     <div class="content-section" style="max-width:400px">
         {% if taskList %}
-        <h3 style="font-weight:bolder; font-size:1.4em">My Responsibilities</h3>
+        <h3 class="sansserif" style="font-weight:bolder; font-size:1.4em">My Responsibilities</h3>
         <ul>
             {% for task in taskList %}
             <li>{{ task }}</li>
@@ -27,7 +27,7 @@ layout: base.html
         </ul>
         {% endif %}
         {% if techList %}
-        <h3 style="font-weight:bolder; font-size:1.4em">Tools Used</h3>
+        <h3 class="sansserif" style="font-weight:bolder; font-size:1.4em">Tools Used</h3>
         <ul>
             {% for tech in techList %}
             <li>{{ tech }}</li>
@@ -35,7 +35,7 @@ layout: base.html
         </ul>
         {% endif %}
         {% if accoladeList %}
-        <h3 style="font-weight:bolder; font-size:1.4em">Accolades</h3>
+        <h3 class="sansserif" style="font-weight:bolder; font-size:1.4em">Accolades</h3>
         <ul>
             {% for accolade in accoladeList %}
             <li>{{ accolade }}</li>
@@ -55,7 +55,7 @@ layout: base.html
 </div>
 <div class="tiles" id="more">
     <div style="width:100%; padding:0 2.5%">
-        <h2 class="serif" style="font-weight:bolder">See Related Cases</h2>
+        <h2 style="font-weight:bolder">See Related Cases</h2>
         <p>
             Curious about how I approach similar challenges? Here are some other case studies with overlapping themes, skills,
             or tools.
@@ -66,7 +66,7 @@ layout: base.html
     <a class="tile" href="{{ case.url | url }}"
         style="background-color:#111144;background-image:url('{{ case.data.imageHero | url }}')">
         <div class="tile-overlay">
-            <div class="artPrelude">{{ case.data.roles[0] }}: {{ case.data.subject }}</div>
+            <div class="artPrelude">{{ case.data.subject }}</div>
             <div class="artTagline">{{ case.data.title }}</div>
         </div>
     </a>

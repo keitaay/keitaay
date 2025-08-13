@@ -1,6 +1,5 @@
 // Define relevant elements and variables
 let transit = 500; // transition duration in milliseconds
-var anchors = document.querySelectorAll('a:not(.noFX)');
 var UIload = document.querySelector(".UIload");
 
 // Toggle screen changes and event listeners when the page is fully loaded.
@@ -9,26 +8,6 @@ document.onreadystatechange = function () {
     if (document.readyState !== "complete") {
         UIload.style.visibility = "visible";
         document.querySelector("main,footer").style.visibility = "hidden";
-    }
-
-    // For every anchor, add a listener for click events. Only clicks on
-    // internal links and submit buttons will trigger the navAway event.
-    // External links and in-page anchors, on the other hand, will be exempt
-    // from this behavior, and will follow the browser's default behavior.
-    if (document.readyState === "interactive") {
-        anchors.forEach(function (a) {
-            a.addEventListener('click', e => {
-                var hrefDest = e.currentTarget.href;
-                if (
-                    !hrefDest ||
-                    hrefDest == window.location.href ||
-                    e.currentTarget.host != window.location.host
-                ) {
-                    return;
-                }
-                navAway(e);
-            });
-        });
     }
 };
 
@@ -60,7 +39,7 @@ window.onpageshow = function () {
 function scrollFreeze() {
     var chkbox = document.querySelector("#showMenu"); // get checkbox to toggle navbar
     var cntnt_body = document.querySelector("body");
-    if (chkbox.checked) {
+    if (chkbox && chkbox.checked) {
         cntnt_body.style.overflow = "hidden";
     } else {
         cntnt_body.style.overflow = "visible";
@@ -108,15 +87,18 @@ function reviveLoader(e) {
 };
 
 // Reactivate the loading screen's animation, then navigate to the next page
-function navAway(e) {
-    const destination = e.currentTarget.href;
+function navAway(e, linkElement) {
+    // Support custom destination for random case button
+    const destination = e.randomCaseHref || (linkElement && linkElement.href) || (e.currentTarget && e.currentTarget.href);
+    console.log('navAway triggered', destination);
     // Ensure menubar is retracted and scrolling is enabled
-    document.querySelector("#showMenu").checked = false;
+    const menuCheckbox = document.querySelector("#showMenu");
+    if (menuCheckbox) menuCheckbox.checked = false;
     scrollFreeze();
     // Bring back loading screen animation to begin the transition effect
     reviveLoader();
     // Prevent default behavior (i.e. immediately loading next page)
-    e.preventDefault();
+    e.preventDefault && e.preventDefault();
     // After the loading screen is visible, load the next page
     setTimeout(function () { window.location.href = destination; }, transit);
     return destination;
@@ -178,3 +160,34 @@ function pauseGoBack() {
         }
     }, transit);
 }
+
+// Handle clicks on links to trigger the navAway animation
+document.addEventListener('click', function(e) {
+    // Only handle left-clicks, not modified clicks (new tab, etc)
+    if (
+        e.defaultPrevented ||
+        e.button !== 0 || // Only left click
+        e.metaKey ||
+        e.ctrlKey || 
+        e.shiftKey || 
+        e.altKey
+    ) return;
+
+    // Find the closest <a> ancestor
+    let a = e.target.closest('a:not(.noFX)');
+    if (!a) return;
+
+    // Ignore anchor links and external links
+    var hrefDest = a.href;
+    if (
+        !hrefDest ||
+        hrefDest === window.location.href ||
+        a.host !== window.location.host ||
+        a.hash && a.pathname === window.location.pathname // in-page anchor
+    ) {
+        return;
+    }
+
+    // For appropriate links, trigger the navAway animation
+    navAway(e, a);
+});
