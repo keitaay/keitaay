@@ -690,6 +690,12 @@ form {
   }
 }
 
+/* email address obfuscation; see https://spencermortensen.com/articles/email-obfuscation/#text-display */
+.email > span:nth-child(3),
+.email > span:nth-child(5) {
+  display: none;
+}
+
 /* responsive to variable screen sizes */
 @media (orientation: landscape) and (min-width: $min_tablet) {
   .navOverlay .navMenu .navWindow {

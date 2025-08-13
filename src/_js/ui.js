@@ -135,6 +135,19 @@ function navAway(e) {
     }
 })();
 
+// Obfuscate email address to deter bots
+// see https://spencermortensen.com/articles/email-obfuscation
+document.addEventListener('DOMContentLoaded', function ()
+{
+    const a = document.getElementById('conversion');
+    a.setAttribute('href', a.getAttribute('href')
+        .replace('now', '@keitaay.com')
+        .replace('email-', 'hello')
+        .replace('to-', 'mailto:')
+        .replaceAll('keita-', '+website')
+    );
+});
+
 // Reactivate the loading screen's animation, then go back to the first previous page that is not the current page
 function pauseGoBack() {
     reviveLoader();
