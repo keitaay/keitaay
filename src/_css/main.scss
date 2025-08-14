@@ -411,7 +411,7 @@ ol {
     width: 100%;
 
     .content-part {
-      padding: 0 2.5%;
+      padding: 0 5vw;
       height: 100vh;
       display: flex;
       flex-direction: column;
@@ -535,7 +535,6 @@ $tilePad: 2vw;
   background: $colorXt;
   border: 0.5px solid $colorW;
   color: $colorW;
-  margin-bottom: 1.5em;
 }
 
 /* Articles are "full" versions of tiles. It's preceded by "summaries" that render within a "slide". */
@@ -586,6 +585,18 @@ $tilePad: 2vw;
   pre {
     padding: 1em;
     background-color: #e0e0e0;
+  }
+}
+
+.tag {
+  padding: 0.3em;
+  margin: 3vh 0;
+  border-radius: 5px;
+  border: 1px solid $colorX;
+  color: $colorX !important;
+  &:hover,
+  &:focus {
+    color: $colorW !important;
   }
 }
 

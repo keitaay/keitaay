@@ -68,40 +68,49 @@ window.addEventListener('scroll', () => {
 // Emulate the behavior of "has" selectors to dynamically expand
 // the width of "content" in desktop views
 document.addEventListener('DOMContentLoaded', function() {
+
+    // Emulate :has selector for desktop views
     if (!CSS.supports('selector(:has(*))')) {
         const contents = document.querySelectorAll('.content');
         contents.forEach(content => {
-        const sections = content.querySelectorAll('.content-section');
-        if (sections.length > 1) {
-            content.classList.add('multiple-sections');
-        }
+            const sections = content.querySelectorAll('.content-section');
+            if (sections.length > 1) {
+                content.classList.add('multiple-sections');
+            }
         });
+    }
+
+    // Conditionally render "go back" button
+    document.body.setAttribute('data-has-prev-page', hasPrevPage());
+    window.hasPrevPage = hasPrevPage;
+    var goBackContainer = document.getElementById('goBackContainer');
+    if (goBackContainer) {
+        if (hasPrevPage()) {
+            goBackContainer.innerHTML =
+                '<button onclick="pauseGoBack()" class="UIbutton buttonGoBack" title="Return to Previous Page">&#8617;</button>';
+        } else {
+            goBackContainer.innerHTML = '';
+        }
+    }
+
+    // Obfuscate email address
+    // see https://spencermortensen.com/articles/email-obfuscation
+    const a = document.getElementById('conversion');
+    if (a) {
+        a.setAttribute('href', a.getAttribute('href')
+            .replace('now', '@keitaay.com')
+            .replace('email-', 'hello')
+            .replace('to-', 'mailto:')
+            .replaceAll('keita-', '+website')
+        );
     }
 });
 
-// Re-activate the loading screen after it has retreated following window.onload.
+// Re-activate loading screen after it has retreated following window.onload.
 function reviveLoader(e) {
     UIload.style.transform = "scaleX(1)";
     UIload.style.visibility = "visible";
     setTimeout(function () { UIload.style.transformOrigin = "left"; }, transit);
-};
-
-// Reactivate the loading screen's animation, then navigate to the next page
-function navAway(e, linkElement) {
-    // Support custom destination for random case button
-    const destination = e.randomCaseHref || (linkElement && linkElement.href) || (e.currentTarget && e.currentTarget.href);
-    console.log('navAway triggered', destination);
-    // Ensure menubar is retracted and scrolling is enabled
-    const menuCheckbox = document.querySelector("#showMenu");
-    if (menuCheckbox) menuCheckbox.checked = false;
-    scrollFreeze();
-    // Bring back loading screen animation to begin the transition effect
-    reviveLoader();
-    // Prevent default behavior (i.e. immediately loading next page)
-    e.preventDefault && e.preventDefault();
-    // After the loading screen is visible, load the next page
-    setTimeout(function () { window.location.href = destination; }, transit);
-    return destination;
 };
 
 // Store the current page in sessionStorage history stack
@@ -117,18 +126,44 @@ function navAway(e, linkElement) {
     }
 })();
 
-// Obfuscate email address to deter bots
-// see https://spencermortensen.com/articles/email-obfuscation
-document.addEventListener('DOMContentLoaded', function ()
-{
-    const a = document.getElementById('conversion');
-    a.setAttribute('href', a.getAttribute('href')
-        .replace('now', '@keitaay.com')
-        .replace('email-', 'hello')
-        .replace('to-', 'mailto:')
-        .replaceAll('keita-', '+website')
-    );
-});
+// Reactivate the loading screen's animation, then navigate to the next page
+function navAway(e, linkElement) {
+    const stackKey = 'visitedPagesStack';
+    let stack = JSON.parse(sessionStorage.getItem(stackKey)) || [];
+    const destination = e.randomCaseHref || (linkElement && linkElement.href) || (e.currentTarget && e.currentTarget.href);
+
+    // Push destination to stack before navigating
+    if (stack.length === 0 || stack[stack.length - 1] !== destination) {
+        stack.push(destination);
+        sessionStorage.setItem(stackKey, JSON.stringify(stack));
+    }
+
+    // Ensure menubar is retracted and scrolling is enabled
+    const menuCheckbox = document.querySelector("#showMenu");
+    if (menuCheckbox) menuCheckbox.checked = false;
+    scrollFreeze();
+    reviveLoader();
+    e.preventDefault && e.preventDefault();
+    setTimeout(
+        function () { 
+            if (destination && destination.startsWith(window.location.origin)) {
+                window.location.href = destination;
+            }
+        }, 
+        transit);
+    return destination;
+};
+
+// Determine if there is a previous page in the custom history stack
+function hasPrevPage() {
+    const stackKey = 'visitedPagesStack';
+    let stack = JSON.parse(sessionStorage.getItem(stackKey)) || [];
+    const currentUrl = window.location.href;
+    // Remove current page from the top of the stack
+    let idx = stack.length - 1;
+    while (idx >= 0 && stack[idx] === currentUrl) idx--;
+    return idx >= 0;
+}
 
 // Reactivate the loading screen's animation, then go back to the first previous page that is not the current page
 function pauseGoBack() {
@@ -153,6 +188,7 @@ function pauseGoBack() {
         // Save the updated stack
         sessionStorage.setItem(stackKey, JSON.stringify(stack));
         if (targetUrl && targetUrl !== currentUrl) {
+            // If non-self target URL is defined, go to that page
             window.location.href = targetUrl;
         } else {
             // Fallback: just go back one step if no other page found

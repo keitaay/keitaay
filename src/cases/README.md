@@ -52,6 +52,7 @@ The following table describes each field:
 | **location**  | Location of project or client      | Optional, used for filtering or context                      |
 | **roles**     | Professional capacities            | Choose from: `Engineer`, `Strategist`, `Designer`, `Citizen` |
 | **dateProj**  | When project occurred              | Free text (`Spring 2024`, `2021–2022`)                       |
+| **datePub**   | When case study was published      | Optional, date when case study, piece etc. was published     |
 | **imageHero** | Path to hero image                 | Relative to `/cases/img`                                     |
 | **linkLive**  | External link to live project/demo | Optional                                                     |
 | **summary**   | One-line summary of project        | One brief phrase or sentence about project                   |

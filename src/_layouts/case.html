@@ -3,8 +3,8 @@ layout: base.html
 ---
 <div class="slide yokoso" id="pgtop" style="background-image:url('{{ imageHero | url }}')">
     <div class="article-summary">
-        {% include "goback.html" %}
-        <p style="margin-bottom:0.6em;"><i style="font-weight:200; letter-spacing:0.1em">{{ dateProj }}{% if location %} - {{ location }}{% endif %}</i></p>
+        <div>{% include "goback.html" %}</div>
+        <p style="margin-top:1.5em; margin-bottom:0.6em;"><i style="font-weight:200; letter-spacing:0.1em">{{ dateProj }}{% if location %} - {{ location }}{% endif %}</i></p>
         <h1 style="margin-bottom:0.3em">{{ subject }}</h1>
         <hr>
         <p>{{ summary }}</p>
@@ -52,6 +52,21 @@ layout: base.html
 </div>
 <div class="article">
     {{ content | safe }}
+    <div style="margin:7em 0;">
+        {% if datePub %}
+        <p style="font-size:0.9em">
+            <b>Published:</b> {{ datePub }}
+        </p>
+        {% endif %}
+        {% if tags %}
+        <p style="font-size:0.9em">
+            <b>Tags: </b>
+            {% for tag in tags %}
+            <a href="/tags/{{ tag }}" class="tag">{{ tag }}</a>
+            {% endfor %}
+        </p>
+        {% endif %}
+    </div>
 </div>
 <div class="tiles" id="more">
     <div style="width:100%; padding:0 2.5%">
