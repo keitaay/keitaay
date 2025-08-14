@@ -21,7 +21,7 @@ main {
   color: rgb(36, 42, 52);
 }
 
-a:not(.noFX):not(.tile):not(.navurl):not(.bigbutton):not(.content-slideThru) {
+a:not(.noFX):not(.tile):not(.navurl):not(.bigbutton):not(.returnToHome):not(.content-slideThru) {
   text-decoration: none;
   color: rgb(255, 168, 34);
   background: linear-gradient(to right, transparent 50.05%, #d6545a 50.05%);
@@ -29,9 +29,10 @@ a:not(.noFX):not(.tile):not(.navurl):not(.bigbutton):not(.content-slideThru) {
   background-position: 0 0;
   transition: 500ms ease;
 }
-a:not(.noFX):not(.tile):not(.navurl):not(.bigbutton):not(.content-slideThru):hover, a:not(.noFX):not(.tile):not(.navurl):not(.bigbutton):not(.content-slideThru):focus {
+a:not(.noFX):not(.tile):not(.navurl):not(.bigbutton):not(.returnToHome):not(.content-slideThru):hover, a:not(.noFX):not(.tile):not(.navurl):not(.bigbutton):not(.returnToHome):not(.content-slideThru):focus {
   background-position: -99% 0;
   color: #eeeeee;
+  cursor: pointer;
 }
 
 a.navurl {
@@ -178,7 +179,8 @@ p {
 }
 
 .navButton,
-.returnToPgtop {
+.returnToPgtop,
+.returnToHome {
   position: fixed;
   display: inline-block;
   /* "left" used to avoid shift due to scroll bar */
@@ -229,6 +231,14 @@ input[type="checkbox"]:checked ~ .navButton {
   z-index: 600;
   line-height: 1.6em;
   transform: rotate(-90deg); /* Correct orientation of rightward-facing arrow */
+}
+
+/* UI: return to home page */
+.returnToHome {
+  top: calc(2 * 1.4em + 1.6em);
+  left: calc(100vw - 2 * 1.4em);
+  z-index: 600;
+  line-height: 1.6em;
 }
 
 /* regular content: slideshow-like (keep values unitless since vanilla CSS cannot do dimensional analysis) */

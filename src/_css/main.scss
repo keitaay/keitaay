@@ -52,7 +52,9 @@ main {
   color: $colorX;
 }
 
-a:not(.noFX):not(.tile):not(.navurl):not(.bigbutton):not(.content-slideThru) {
+a:not(.noFX):not(.tile):not(.navurl):not(.bigbutton):not(.returnToHome):not(
+    .content-slideThru
+  ) {
   text-decoration: none;
   color: $color1;
   background: linear-gradient(
@@ -68,6 +70,7 @@ a:not(.noFX):not(.tile):not(.navurl):not(.bigbutton):not(.content-slideThru) {
   &:focus {
     background-position: -99% 0;
     color: $colorW;
+    cursor: pointer;
   }
 }
 
@@ -254,7 +257,8 @@ $navHeightExt: 2.5em;
 }
 
 .navButton,
-.returnToPgtop {
+.returnToPgtop,
+.returnToHome {
   position: fixed;
   display: inline-block;
   /* "left" used to avoid shift due to scroll bar */
@@ -308,6 +312,14 @@ input[type="checkbox"]:checked ~ .navButton {
   z-index: 600;
   line-height: $btnDiamtr;
   transform: rotate(-90deg); /* Correct orientation of rightward-facing arrow */
+}
+
+/* UI: return to home page */
+.returnToHome {
+  top: calc(2 * #{$btnOffset} + #{$btnDiamtr});
+  left: calc(100vw - 2 * #{$btnOffset});
+  z-index: 600;
+  line-height: $btnDiamtr;
 }
 
 /* regular content: slideshow-like (keep values unitless since vanilla CSS cannot do dimensional analysis) */
