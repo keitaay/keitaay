@@ -482,17 +482,31 @@ $tilePad: 2vw;
 }
 .tile,
 .banner {
+  position: relative;
+  overflow: hidden;
   flex-grow: 0;
   flex-basis: 100vw;
   text-decoration: none;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  background: center/cover no-repeat;
-  transition: all 300ms ease;
+  background: center/100% no-repeat;
+  background-size: 100%;
+  background-position: center;
+  transition: background-size 300ms ease;
   text-align: left;
 
-  &:hover,
-  &:focus {
-    transform: scale(1.02, 1.02);
+  .bg-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 400ms ease;
+    z-index: 0;
+  }
+
+  &:hover .bg-img,
+  &:focus .bg-img {
+    transform: scale(1.1);
   }
 }
 .tile {
@@ -505,6 +519,8 @@ $tilePad: 2vw;
 
 .tile-overlay,
 .banner-overlay {
+  position: relative;
+  z-index: 1;
   margin: 0;
   padding: $tilePad;
   color: white;

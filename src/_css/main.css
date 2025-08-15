@@ -383,18 +383,33 @@ ol {
 
 .tile,
 .banner {
+  position: relative;
+  overflow: hidden;
   flex-grow: 0;
   flex-basis: 100vw;
   text-decoration: none;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  background: center/cover no-repeat;
-  transition: all 300ms ease;
+  background: center/100% no-repeat;
+  background-size: 100%;
+  background-position: center;
+  transition: background-size 300ms ease;
   text-align: left;
 }
-.tile:hover, .tile:focus,
-.banner:hover,
-.banner:focus {
-  transform: scale(1.02, 1.02);
+.tile .bg-img,
+.banner .bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: transform 400ms ease;
+  z-index: 0;
+}
+.tile:hover .bg-img, .tile:focus .bg-img,
+.banner:hover .bg-img,
+.banner:focus .bg-img {
+  transform: scale(1.1);
 }
 
 .tile {
@@ -408,6 +423,8 @@ ol {
 
 .tile-overlay,
 .banner-overlay {
+  position: relative;
+  z-index: 1;
   margin: 0;
   padding: 2vw;
   color: white;

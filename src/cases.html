@@ -19,11 +19,12 @@ title: All Cases
         </div>
     </a>
     {% endfor %}
-    <a class="tile" id="random-case-btn" href="#"
-        style="background-color:#111144; background-image:url('/cases/img/pexels-cottonbro-8369524.jpg')">
+    <a class="tile" href="{{ case.url | url }}"
+        style="background-color:#111144;background-image:url('{{ case.data.imageHero | url }}')">
+        <img src="{{ case.data.imageHero | url }}" class="bg-img" alt="" />
         <div class="tile-overlay">
-            <div class="artPrelude">Not&nbsp;sure where&nbsp;to&nbsp;go?</div>
-            <div class="artTagline">Go&nbsp;to a random case&nbsp;study</div>
+            <div class="artPrelude">{{ case.data.subject }}</div>
+            <div class="artTagline">{{ case.data.title }}</div>
         </div>
     </a>
     <script id="case-urls" type="application/json">

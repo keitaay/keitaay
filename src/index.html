@@ -106,6 +106,7 @@ title: Home
     {% for case in collections.Featured | exclude | limit(8) %}
     <a class="tile" href="{{ case.url | url }}"
         style="background-color:#111144;background-image:url('{{ case.data.imageHero | url }}')">
+        <img src="{{ case.data.imageHero | url }}" class="bg-img" alt="" />
         <div class="tile-overlay">
             <div class="artPrelude">{{ case.data.subject }}</div>
             <div class="artTagline">{{ case.data.title }}</div>
