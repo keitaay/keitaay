@@ -1,10 +1,15 @@
 module.exports = function (eleventyConfig) {
     const Nunjucks = require('nunjucks');
+    const pathOut = "_public";
 
     // Copy additional files to the output folder
     eleventyConfig.addPassthroughCopy("src/_css/*.css");
     eleventyConfig.addPassthroughCopy("src/_js");
     eleventyConfig.addPassthroughCopy("src/cases/img");
+
+    // Call tool to generate favicons and related files
+    const faviconsPlugin = require("eleventy-plugin-gen-favicons");
+    eleventyConfig.addPlugin(faviconsPlugin, {"outputDir": pathOut});
 
     // Create filters for some common tasks
     eleventyConfig.addFilter("getYear", function (date) {
@@ -91,7 +96,7 @@ module.exports = function (eleventyConfig) {
     return {
         dir: { // all paths except for input/output are relative to the input directory
             input: "src",
-            output: "_public",
+            output: pathOut,
             data: "data",
             includes: "_include",
             layouts: "_layouts",

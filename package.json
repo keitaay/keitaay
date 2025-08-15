@@ -15,5 +15,8 @@
   "license": "MIT",
   "dependencies": {
     "@11ty/eleventy": "^3.0.0"
+  },
+  "devDependencies": {
+    "eleventy-plugin-gen-favicons": "^1.1.3"
   }
 }
