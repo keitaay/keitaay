@@ -12,19 +12,19 @@ title: All Cases
     </div>
     {% for case in collections['Case Study'] | exclude %}
     <a class="tile" href="{{ case.url | url }}"
-        style="background-color:#111144;background-image:url('{{ case.data.imageHero | url }}')">
+        style="background-color:#111144">
+        <img src="{{ case.data.imageHero | url }}" class="bg-img" alt="" />
         <div class="tile-overlay">
             <div class="artPrelude">{{ case.data.subject }}</div>
             <div class="artTagline">{{ case.data.title }}</div>
         </div>
     </a>
     {% endfor %}
-    <a class="tile" href="{{ case.url | url }}"
-        style="background-color:#111144;background-image:url('{{ case.data.imageHero | url }}')">
-        <img src="{{ case.data.imageHero | url }}" class="bg-img" alt="" />
+    <a class="tile" id="random-case-btn" href="#" style="background-color:#111144">
+        <img src="/cases/img/pexels-cottonbro-8369524.jpg" class="bg-img" alt="" />
         <div class="tile-overlay">
-            <div class="artPrelude">{{ case.data.subject }}</div>
-            <div class="artTagline">{{ case.data.title }}</div>
+            <div class="artPrelude">But&nbsp;wait, there's&nbsp;more!</div>
+            <div class="artTagline">Click&nbsp;here to&nbsp;view a random case&nbsp;study.</div>
         </div>
     </a>
     <script id="case-urls" type="application/json">
@@ -42,8 +42,8 @@ title: All Cases
             if (caseUrls && caseUrls.length > 0) {
                 e.preventDefault();
                 const idx = Math.floor(Math.random() * caseUrls.length);
-                e.randomCaseHref = caseUrls[idx]; // Custom property
-                navAway(e);
+                const randomUrl = new URL(caseUrls[idx], window.location.origin).href;
+                navAway(e, { href: randomUrl });
             }
         });
     </script>

@@ -65,8 +65,25 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// Emulate the behavior of "has" selectors to dynamically expand
-// the width of "content" in desktop views
+// Attach listeners to "mark" elements; conditionally animate highlighting
+const markElements = document.querySelectorAll('mark');
+const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.15 // threshold for animating higlighting
+};
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.backgroundPositionX = '0%';
+        } else {
+            entry.target.style.backgroundPositionX = '100%';
+        }
+    });
+}, observerOptions);
+markElements.forEach(el => observer.observe(el));
+
+// Add nice-to-have visual elements once the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', function() {
 
     // Emulate :has selector for desktop views
@@ -130,7 +147,7 @@ function reviveLoader(e) {
 function navAway(e, linkElement) {
     const stackKey = 'visitedPagesStack';
     let stack = JSON.parse(sessionStorage.getItem(stackKey)) || [];
-    const destination = e.randomCaseHref || (linkElement && linkElement.href) || (e.currentTarget && e.currentTarget.href);
+    const destination = (linkElement && linkElement.href) || (e.currentTarget && e.currentTarget.href);
 
     // Push destination to stack before navigating
     if (stack.length === 0 || stack[stack.length - 1] !== destination) {

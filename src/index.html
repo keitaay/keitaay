@@ -2,6 +2,11 @@
 layout: base.html
 title: Home
 ---
+<style>
+    .returnToHome {
+        display: none;
+    }
+</style>
 <section class="slide slide0 yokoso" id="pgtop">
     <h1 style="font-size:5em">
         K&eacute;ita Yokoyama<br>engineers solutions.
@@ -24,7 +29,7 @@ title: Home
         <div class="content-part">
             <h2 style="padding-top:0">Who is K&eacute;ita?</h2>
             <p style="padding-top:0">
-                At&nbsp;my&nbsp;core, I'm&nbsp;an interpreter -&nbsp;of&nbsp;languages, systems, and&nbsp;ideas.</p>
+                At&nbsp;my&nbsp;core, I'm&nbsp;an <mark>interpreter -&nbsp;of&nbsp;languages, systems, and&nbsp;ideas.</mark></p>
             <p style="padding-top:0">
                 I've&nbsp;lived and&nbsp;worked between cultures for my&nbsp;entire life, moving fluently between technical and&nbsp;non-technical worlds, local and&nbsp;global perspectives, and&nbsp;analytical and&nbsp;creative&nbsp;thinking.
             </p>
@@ -44,7 +49,8 @@ title: Home
                     {%- set caseBme = collections['Case Study'] | exclude | getOneExample("Biomedical Engineering") -%}
                     {% if caseBme.data %}
                     <a class="banner" href="{{ caseBme.url | url }}"
-                        style="background-color:#111144;background-image:url('{{ caseBme.data.imageHero | url }}')">
+                        style="background-color:#111144">
+                        <img src="{{ caseBme.data.imageHero | url }}" class="bg-img" alt="" />
                         <div class="banner-overlay">
                             <div class="artPrelude">Featured Case</div>
                             <div class="artTagline">{{ caseBme.data.title }}</div>
@@ -65,7 +71,8 @@ title: Home
                     {%- set caseInnov = collections['Case Study'] | exclude | getOneExample("Strategy") -%}
                     {% if caseInnov.data %}
                     <a class="banner" href="{{ caseInnov.url | url }}"
-                        style="background-color:#111144;background-image:url('{{ caseInnov.data.imageHero | url }}')">
+                        style="background-color:#111144">
+                        <img src="{{ caseInnov.data.imageHero | url }}" class="bg-img" alt="" />
                         <div class="banner-overlay">
                             <div class="artPrelude">Featured Case</div>
                             <div class="artTagline">{{ caseInnov.data.title }}</div>
@@ -86,7 +93,8 @@ title: Home
                     {%- set caseConx = collections['Case Study'] | exclude | getOneExample("Connections") -%}
                     {% if caseConx.data %}
                     <a class="banner" href="{{ caseConx.url | url }}"
-                        style="background-color:#111144;background-image:url('{{ caseConx.data.imageHero | url }}')">
+                        style="background-color:#111144">
+                        <img src="{{ caseConx.data.imageHero | url }}" class="bg-img" alt="" />
                         <div class="banner-overlay">
                             <div class="artPrelude">Featured Case</div>
                             <div class="artTagline">{{ caseConx.data.title }}</div>

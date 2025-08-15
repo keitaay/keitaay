@@ -48,6 +48,15 @@ a.navurl:hover, a.navurl:focus {
   color: rgb(36, 42, 52);
 }
 
+mark {
+  text-decoration: none;
+  background: linear-gradient(to right, #ffa822 50.05%, transparent 50.05%);
+  background-position: 0% 0;
+  background-size: 201%;
+  transition: 500ms ease;
+  padding: 0 0.1em;
+}
+
 /* text sizes */
 h1,
 h2,
