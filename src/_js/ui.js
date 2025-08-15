@@ -173,23 +173,64 @@ function pauseGoBack() {
         let stack = JSON.parse(sessionStorage.getItem(stackKey)) || [];
         const currentUrl = window.location.href;
 
-        // Remove current page from the top of the stack
-        while (stack.length > 0 && stack[stack.length - 1] === currentUrl) {
+        // Define current base URL (ignoring hash)
+        let currentBase;
+        try {
+            const url = new URL(currentUrl);
+            currentBase = url.origin + url.pathname + url.search;
+        } catch {
+            currentBase = currentUrl.split('#')[0];
+        }
+
+        // Remove current page (ignoring hash) from top of the stack
+        while (
+            stack.length > 0 &&
+            (function() {
+                try {
+                    const url = new URL(stack[stack.length - 1]);
+                    return (url.origin + url.pathname + url.search) === currentBase;
+                } catch {
+                    return stack[stack.length - 1].split('#')[0] === currentBase;
+                }
+            })()
+        ) {
             stack.pop();
         }
 
-        // Find the first previous page that is not the current page
+        // Find first previous page that is not current page (ignoring hash)
         let targetUrl = null;
         while (stack.length > 0) {
-            targetUrl = stack.pop();
-            if (targetUrl !== currentUrl) break;
+            try {
+                const url = new URL(stack[stack.length - 1]);
+                if ((url.origin + url.pathname + url.search) !== currentBase) {
+                    targetUrl = stack.pop();
+                    break;
+                } else {
+                    stack.pop();
+                }
+            } catch {
+                if (stack[stack.length - 1].split('#')[0] !== currentBase) {
+                    targetUrl = stack.pop();
+                    break;
+                } else {
+                    stack.pop();
+                }
+            }
         }
 
         // Save the updated stack
         sessionStorage.setItem(stackKey, JSON.stringify(stack));
         if (targetUrl && targetUrl !== currentUrl) {
             // If non-self target URL is defined, go to that page
-            window.location.href = targetUrl;
+            if (
+                targetUrl &&
+                targetUrl !== currentUrl &&
+                targetUrl.startsWith(window.location.origin)
+            ) {
+                window.location.href = targetUrl;
+            } else {
+                history.back();
+            }
         } else {
             // Fallback: just go back one step if no other page found
             history.back();
