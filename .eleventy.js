@@ -6,6 +6,7 @@ module.exports = function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy("src/_css/*.css");
     eleventyConfig.addPassthroughCopy("src/_js");
     eleventyConfig.addPassthroughCopy("src/cases/img");
+    eleventyConfig.addPassthroughCopy("src/llms.txt");
 
     // Call tool to generate favicons and related files
     const faviconsPlugin = require("eleventy-plugin-gen-favicons");

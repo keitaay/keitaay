@@ -9,7 +9,6 @@ roles:
   - Strategist
 dateProj: Fall 2022
 imageHero: /cases/img/wwa_massage.jpg
-linkLive: https://www.warewithallmassage.com
 summary: A new website for a massage therapy business with personality.
 brief: Text blah blah blah.
 taskList:

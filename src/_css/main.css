@@ -6,6 +6,7 @@ html {
   font-family: "Noto Sans", "Verdana", "Arial", sans-serif;
   font-weight: 300;
   font-variation-settings: "wght" 300;
+  overflow-x: hidden;
 }
 
 body {
@@ -365,11 +366,6 @@ ol {
   margin-top: 2em;
   margin-bottom: 2em;
   text-align: center;
-}
-
-.slide0 {
-  background-color: #132736;
-  color: #eeeeee;
 }
 
 /* Visual previews of portfolio entries and articles */
