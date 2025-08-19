@@ -1,0 +1,169 @@
+<div class="animation animation-waves" aria-hidden="true">
+    <svg id="wavefield" viewBox="-0.1 -0.1 8.1 8.1" preserveAspectRatio="xMidYMid slice"></svg>
+</div>
+<style>
+    .animation-waves {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+    }
+    #wavefield {
+        width: 100%;
+        height: 100%;
+        display: block;
+        pointer-events: none;
+    }
+    circle {
+        fill: #eee;
+        fill-opacity: 0.1;
+    }
+</style>
+<noscript>
+    <style>
+        .animation-waves{display:none !important}
+    </style>
+</noscript>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    let shouldAnimate = true;
+
+    // Define wave and animation parameters
+    const c0 = 2.0;     // wave speed (em/s)
+    const lambda = 1.0; // wavelength (em)
+    const a0 = 0.2;     // attenuation (Np/em)
+    const sigma = 0.3;  // pulse width (s)
+    const t0 = 2.0;     // pulse center (s)
+    const L = 8;        // tile size (em)
+    const a = 1 / 4;    // spacing between nodes (em)
+    const rBase = 0.03; // base radius of nodes (em)
+    const rAmp = 0.06;  // amplitude of radius change (em)
+
+    // Create wave sources
+    const sources = [
+        { x: 5*L/6, y:L/2, delay:0.0, phase: 0 },
+    ];
+
+    // Define derived parameters
+    const k = 2 * Math.PI / lambda;        // wave number (rad/em)
+    const T = 1000 * L * Math.sqrt(2) / 2; // animation duration
+
+    // Build hexagonal lattice of circles
+    const svg = document.getElementById("wavefield");
+    const circles = [];
+    function buildGrid() {
+
+        // Remove old circles
+        while (svg.firstChild) svg.removeChild(svg.firstChild);
+        circles.length = 0;
+
+        // Get SVG size and viewBox
+        const vb = svg.viewBox.baseVal;
+        const Lx = vb.width;
+        const Ly = vb.height;
+        const rowH = Math.sqrt(3) / 2 * a;
+        for (let y = vb.y; y < vb.y + Ly; y += rowH) {
+            const offset = (Math.round((y - vb.y) / rowH) % 2) ? a / 2 : 0;
+            for (let x = vb.x; x < vb.x + Lx; x += a) {
+                const cx = x + offset;
+                if (cx > vb.x + Lx) continue;
+                const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                c.setAttribute("cx", cx.toFixed(3));
+                c.setAttribute("cy", y.toFixed(3));
+                c.setAttribute("r", rBase);
+                svg.appendChild(c);
+                circles.push({ el: c, x: cx, y: y });
+            }
+        }
+    }
+
+    // Define contraindications for animation
+    let lowPerformance = false;
+    let lastTime = performance.now();
+    let frameCount = 0;
+    function checkPerformance(now) {
+        frameCount++;
+        if (frameCount >= 60) {
+            const fps = 60000 / (now - lastTime);
+            lowPerformance = fps < 30; // threshold
+            frameCount = 0;
+            lastTime = now;
+        }
+        requestAnimationFrame(checkPerformance); // Always keep checking!
+    }
+    function getShouldAnimate() {
+        return !(
+            (navigator.connection && navigator.connection.saveData) ||
+            window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+            lowPerformance
+        );
+    }
+
+    // Build grid after layout is ready
+    requestAnimationFrame(buildGrid);
+    window.addEventListener("resize", () => requestAnimationFrame(buildGrid));
+
+    // Track mouse position in SVG coordinates
+    let mouse = { x: null, y: null };
+    window.addEventListener("mousemove", e => {
+        const svg = document.getElementById("wavefield");
+        let pt = svg.createSVGPoint();
+        pt.x = e.clientX;
+        pt.y = e.clientY;
+        let svgP = pt.matrixTransform(svg.getScreenCTM().inverse());
+        mouse.x = svgP.x;
+        mouse.y = svgP.y;
+    });
+    window.addEventListener("mouseleave", () => {
+        mouse.x = null;
+        mouse.y = null;
+    });
+
+    // Animation loop
+    function animate(t) {
+        const omega = 2 * Math.PI / (T / 1000); // rad/s
+        const tau = (t % T) / 1000; // seconds
+        shouldAnimate = getShouldAnimate(); // Update each frame
+        circles.forEach(c => {
+            let A = 0;
+
+            // Find circle radius due to wave equation
+            if (shouldAnimate) {
+                for (let s of sources) {
+                    const dx = c.x - s.x;
+                    const dy = c.y - s.y;
+                    const r = Math.sqrt(dx * dx + dy * dy);
+                    const tau_ret = tau - r / c0 - (s.delay || 0);
+
+                    // Envelope (Gaussian pulse)
+                    const envelope = Math.exp(-Math.pow((tau_ret - t0) / sigma, 2));
+
+                    // Attenuation
+                    const atten = Math.exp(-a0 * r);
+
+                    // Contribution from this source
+                    A += Math.cos(k * r - omega * tau + s.phase) * envelope * atten;
+                }
+            }
+            
+            // Find circle radius due to mouse position
+            let cursorScale = 1;
+            if (mouse.x !== null && mouse.y !== null) {
+                const dx = c.x - mouse.x;
+                const dy = c.y - mouse.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                cursorScale += 1.0 * Math.exp(-dist * 3); // tweak factor as desired
+            }
+
+            // Update circle radius
+            const rNow = (rBase + rAmp * Math.tanh(A)) * cursorScale;
+            c.el.setAttribute("r", rNow.toFixed(3));
+        });
+        requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+});
+</script>
