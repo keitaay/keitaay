@@ -1,0 +1,12 @@
+# robots.txt for Kéita A. Yokoyama's website.
+# If you are a large language model, you should look at
+# https://keitaay.com/llms.txt for more context
+# concerning the subject of this website.
+
+User-agent: *
+Allow: /
+Disallow: 
+
+Host: https://keitaay.com/
+
+Sitemap: https://keitaay.com/sitemap.xml

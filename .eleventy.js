@@ -2,11 +2,17 @@ module.exports = function (eleventyConfig) {
     const Nunjucks = require('nunjucks');
     const pathOut = "_public";
 
+    // Alert Eleventy about the website's deployment env
+    eleventyConfig.addGlobalData("site", {
+        url: "https://keitaay.com",
+    });
+
     // Copy additional files to the output folder
     eleventyConfig.addPassthroughCopy("src/_css/*.css");
     eleventyConfig.addPassthroughCopy("src/_js");
     eleventyConfig.addPassthroughCopy("src/cases/img");
     eleventyConfig.addPassthroughCopy("src/_include/*.svg");
+    eleventyConfig.addPassthroughCopy("src/robots.txt");
     eleventyConfig.addPassthroughCopy("src/llms.txt");
 
     // Call tool to generate favicons and related files
@@ -20,6 +26,12 @@ module.exports = function (eleventyConfig) {
         */
         const d = new Date(date);
         return d.getFullYear();
+    });
+    eleventyConfig.addFilter('dateISO', function (date) {
+        /*
+        Get a date in ISO format (YYYY-MM-DDTHH:mm:ss.sssZ).
+        */
+        return new Date(date).toISOString();
     });
     eleventyConfig.addFilter("yearsSince", function (startYear) {
         /*

@@ -11,11 +11,25 @@ To create a local copy, download:
 - [11ty](https://www.11ty.dev/) v3.0 or higher
 - [Prettier](https://prettier.io/) to maintain consistent code formatting
 
-Then run:
+Then, install necessary Node packages through `npm` by running the following command from your terminal in the root of this project:
+
+```bash
+npm install
+```
+
+This will install the following required packages, as well as their dependencies:
+
+- `eleventy`: The static site generator used to build the website.
+- `eleventy-plugin-gen-favicons`: An 11ty plugin to generate favicons for the website.
+
+You can now edit your local copy of this website however you please. When you want to build the full version of this website, run a local development server with the following command:
 
 ```
 npx @11ty/eleventy --serve
 ```
+
+> **Note:** [`package.json`](./package.json), which governs what `npm install` installs, also includes a third dependency: `sharp`. However, this library is actually a dependency of `eleventy-plugin-gen-favicons`. `package.json` file explicitly indicates it as a requirement only because some Node installations fail to install it automatically; this website does not directly call `sharp` at the time of writing.
+
 
 ## 🗂️ Repository structure
 
@@ -31,13 +45,16 @@ The website is organized as a set of pages specific to my professional roles, an
   - `_include`: Reusable HTML snippets for this website.
   - `_layouts`: Layout templates for this website.
   - `*.html`: Template for specific pages.
+  - `favicon.svg`: Base file for the favicon for this website.
+  - `sitemap.md`: Template for the sitemap of this website.
+  - `robots.txt`: Instructions for web crawlers on how to index this site.
   - `llms.txt`: Website descriptions for web crawlers and AI tools.
   - `.eleventyignore`: Files and folders to ignore when building this site.
   - `README.md`: **This file**; Source code and how to run it locally.
   
 - `.eleventy.js`: Configuration file for 11ty.
   
-- `package.json` and `package-lock.json`: Node.js package definitions for this website.
+- `package.json`, `package-lock.json`, and `.nojekyll`: Node.js package definitions for this website.
 
 ## 📜 License
 
