@@ -1,21 +1,26 @@
 ---
-title: A Helping Hand for Future Helpers
+title: Partnerships for a Pioneer
 tags:
   - Case Study
   - Featured
-subject: CGsquared
+subject: Drug Development Startup
 roles:
   - Strategist
-dateProj: Fall 2022
-imageHero: /cases/img/cg2.jpg
-summary:
+  - Designer
+dateProj: Fall 2024 - Spring 2025
+imageHero: /cases/img/wwa_massage.jpg
+summary: Identifying growth opportunities for a potential blockbuster drug.
 brief: Text blah blah blah.
 taskList:
   - Commercial Due Diligence
-  - Business Transformation
-  - Organization Culture Change
-  - Go-to-Market Strategy
+  - Market Identification
   - Competitive Analysis
+  - Regulatory Analysis
+  - Portfolio Strategy
+techList:
+  - Excel
+  - PowerPoint
+  - Clinical Data
 ---
 
 ## Problem

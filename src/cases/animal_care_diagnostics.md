@@ -1,25 +1,22 @@
 ---
-title: A New Refuge for Wellness
+title: Fast Solutions for Furry Friends
 tags:
   - Case Study
   - Featured
   - Strategy
-  - Digital Design
-subject: Warewithall Massage Co.
+subject: Animal Care Diagnostics
 roles:
-  - Designer
   - Strategist
-dateProj: Fall 2022
+dateProj: Spring 2022
 imageHero: /cases/img/wwa_massage.jpg
-summary: A new website for a massage therapy business with personality.
+summary: Validating a new business idea for a veterinary diagnostics company.
 brief: Text blah blah blah.
 taskList:
-  - Web Design
-  - Business Formation
   - Go-to-Market Strategy
 techList:
-  - Webflow
-  - Google Ads and Analytics
+  - SharePoint
+  - Excel
+  - PowerPoint
 ---
 
 ## Problem

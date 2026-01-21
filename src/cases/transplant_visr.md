@@ -1,25 +1,24 @@
 ---
-title: A New Refuge for Wellness
+title: "???"
 tags:
   - Case Study
   - Featured
-  - Strategy
-  - Digital Design
-subject: Warewithall Massage Co.
+subject: VisR Imaging for Renal Transplant Monitoring
 roles:
-  - Designer
-  - Strategist
-dateProj: Fall 2022
+  - Engineer
+dateProj: Fall 2018 - Fall 2025
 imageHero: /cases/img/wwa_massage.jpg
-summary: A new website for a massage therapy business with personality.
+summary: Deploying a new imaging system to noninvasively detect kidney transplant rejections.
 brief: Text blah blah blah.
 taskList:
   - Web Design
   - Business Formation
   - Go-to-Market Strategy
 techList:
-  - Webflow
-  - Google Ads and Analytics
+  - Matlab
+  - Python
+  - Clinical Data
+  - Excel
 ---
 
 ## Problem

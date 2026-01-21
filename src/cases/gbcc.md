@@ -1,25 +1,31 @@
 ---
-title: A New Refuge for Wellness
+title: A Helping Hand for Future Helpers
 tags:
   - Case Study
   - Featured
   - Strategy
-  - Digital Design
-subject: Warewithall Massage Co.
+  - Connections
+subject: Graduate Business Careers Club at UNC-Chapel Hill
 roles:
-  - Designer
   - Strategist
-dateProj: Fall 2022
-imageHero: /cases/img/wwa_massage.jpg
-summary: A new website for a massage therapy business with personality.
+dateProj: Fall 2022 - Summer 2025
+imageHero: /cases/img/cg2.jpg
+summary:
 brief: Text blah blah blah.
 taskList:
-  - Web Design
-  - Business Formation
+  - Commercial Due Diligence
+  - Business Transformation
+  - Organization Culture Change
   - Go-to-Market Strategy
+  - Competitive Analysis
 techList:
-  - Webflow
-  - Google Ads and Analytics
+  - SharePoint
+  - Power App
+  - Power Automate
+  - Excel
+  - PowerPoint
+  - Google Analytics
+  - Wordpress
 ---
 
 ## Problem

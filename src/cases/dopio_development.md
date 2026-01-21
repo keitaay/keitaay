@@ -1,25 +1,30 @@
 ---
-title: A New Refuge for Wellness
+title: Creating a New Imaging Modality
 tags:
   - Case Study
   - Featured
-  - Strategy
-  - Digital Design
-subject: Warewithall Massage Co.
+  - Biomedical Engineering
+subject: Double-Profile Intersection (DoPIo) Development
 roles:
-  - Designer
-  - Strategist
-dateProj: Fall 2022
+  - Engineer
+dateProj: Fall 2015 - Present
 imageHero: /cases/img/wwa_massage.jpg
-summary: A new website for a massage therapy business with personality.
+summary: Developing a new, noninvasive technique for imaging the human body.
 brief: Text blah blah blah.
 taskList:
-  - Web Design
-  - Business Formation
-  - Go-to-Market Strategy
+  - Computational Simulation
+  - Software Development
+  - Data Governance
+  - Experimental Design
+  - Data Analysis
+  - In Vivo Testing
+  - Technical Communication
 techList:
-  - Webflow
-  - Google Ads and Analytics
+  - Matlab
+  - LS-DYNA
+  - Python
+  - C++
+  - PowerPoint
 ---
 
 ## Problem
