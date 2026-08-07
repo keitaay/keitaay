@@ -1,6 +1,6 @@
 # Kéita's personal portfolio
 
-This folder contains the source code for my personal website, hosted on GitHub Pages. The website is built using the static site generator 11ty, custom-written HTML, CSS, and JavaScript to be simple, easy to navigate, and responsive across a variety of devices.
+This folder contains the source code for my personal website, deployed as a static site. The website is built using the static site generator 11ty, custom-written HTML, CSS, and JavaScript to be simple, easy to navigate, and responsive across a variety of devices.
 
 ## Getting Started
 
