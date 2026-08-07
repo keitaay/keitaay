@@ -4,7 +4,7 @@ Case studies document selected projects I’ve worked on, highlighting problems 
 
 Eleventy (11ty) automatically generates a page for each case study based on its Markdown file and YAML front matter.
 
-## 📝 File Structure
+## File Structure
 
 Each case study file contains:
 
@@ -12,7 +12,7 @@ Each case study file contains:
 
 - Markdown body: the full narrative of the case.
 
-### 🗣️ YAML Front Matter
+### YAML Front Matter
 
 For example:
 
@@ -63,7 +63,7 @@ The following table describes each field:
 
 Note that the the one-line summary (i.e. the `summary` field) is distinct from the project brief (i.e. the `brief` field). On one hand, the former provides a brief summary of "what is this project?" under the title of this case's page. On the other hand, the latter item provides a short overview of the problem, solution, and results of the case study. It should be concise and engaging, setting the stage for the detailed content that follows.
 
-### 🎯 Markdown Body
+### Markdown Body
 
 The Markdown content should be structured into three main sections:
 
@@ -89,7 +89,7 @@ The Markdown content should be structured into three main sections:
 3. **Results**
   Summarizes outcomes — metrics, next steps, lessons learned, and how the work contributed to project and career growth.
 
-## 💡 Authoring Tips
+## Authoring Tips
 
 The following are key principles that I've kept in mind when authoring case studies:
 
