@@ -8,7 +8,7 @@ subject: Animal Care Diagnostics
 roles:
   - Strategist
 dateProj: Spring 2022
-imageHero: /cases/img/wwa_massage.jpg
+imageHero: /cases/img/placeholder-hero.svg
 summary: Validating a new business idea for a veterinary diagnostics company.
 brief: Text blah blah blah.
 taskList:

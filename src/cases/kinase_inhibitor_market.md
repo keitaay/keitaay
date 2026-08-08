@@ -8,7 +8,7 @@ roles:
   - Strategist
   - Designer
 dateProj: Fall 2024 - Spring 2025
-imageHero: /cases/img/wwa_massage.jpg
+imageHero: /cases/img/placeholder-hero.svg
 summary: Identifying growth opportunities for a potential blockbuster drug.
 brief: Text blah blah blah.
 taskList:

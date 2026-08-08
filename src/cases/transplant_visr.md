@@ -1,5 +1,5 @@
 ---
-title: "???"
+title: Catching Transplant Rejection, Sooner
 tags:
   - Case Study
   - Featured
@@ -7,7 +7,7 @@ subject: VisR Imaging for Renal Transplant Monitoring
 roles:
   - Engineer
 dateProj: Fall 2018 - Fall 2025
-imageHero: /cases/img/wwa_massage.jpg
+imageHero: /cases/img/placeholder-hero.svg
 summary: Deploying a new imaging system to noninvasively detect kidney transplant rejections.
 brief: Text blah blah blah.
 taskList:

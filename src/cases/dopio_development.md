@@ -8,7 +8,7 @@ subject: Double-Profile Intersection (DoPIo) Development
 roles:
   - Engineer
 dateProj: Fall 2015 - Present
-imageHero: /cases/img/wwa_massage.jpg
+imageHero: /cases/img/placeholder-hero.svg
 summary: Developing a new, noninvasive technique for imaging the human body.
 brief: Text blah blah blah.
 taskList:
