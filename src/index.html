@@ -2,11 +2,6 @@
 layout: base.html
 title: Home
 ---
-<style>
-    .returnToHome {
-        display: none;
-    }
-</style>
 <section class="slide yokoso" id="pgtop" style="background-color: #132736; color:#eee; position:relative;">
     {% include "waves.html" %}
     <h1>
@@ -23,12 +18,12 @@ title: Home
     <div class="content-section content-sectionSticky">
         <div class="content-part">
             <h2 style="padding-top:0">Who is K&eacute;ita?</h2>
-            <p style="padding-top:0">
+            <p style="margin-bottom:0">
                 At&nbsp;my&nbsp;core, I'm&nbsp;an <mark>interpreter -&nbsp;of&nbsp;languages, systems, and&nbsp;ideas.</mark></p>
-            <p style="padding-top:0">
+            <p style="margin:0">
                 I've&nbsp;lived and&nbsp;worked between cultures for my&nbsp;entire life, moving fluently between technical and&nbsp;non-technical worlds, local and&nbsp;global perspectives, and&nbsp;analytical and&nbsp;creative&nbsp;thinking.
             </p>
-            <p style="padding-top:0">
+            <p style="margin:0">
                 For&nbsp;over {{ 2015 | yearsSince }}&nbsp;years, I've&nbsp;thrived on&nbsp;uncovering what's hidden, making&nbsp;it understandable, and&nbsp;turning&nbsp;it into&nbsp;action. My&nbsp;work aims to&nbsp;build connections, challenge the&nbsp;status quo, and&nbsp;empower communities to&nbsp;thrive.
             </p>
         </div>
@@ -38,8 +33,14 @@ title: Home
             <div class="content-slideThru-text">
                 <h3>I help to show more medical problems, sooner.</h3>
                 <p>
-                    As a PhD candidate in Biomedical Engineering, I've developed new ultrasound-based imaging techniques to detect disease earlier and guide better care. I collaborate with physicians, engineers, and scientists to turn abstract research questions into working technology.
+                    With my PhD in Biomedical Engineering, I've developed new ultrasound-based imaging techniques to detect disease earlier and guide better care. I've collaborated with physicians, engineers, and scientists to turn abstract research questions into working technologies.
                 </p>
+                <!--
+                NOTE: commented out since my BME work is, as of now, more of a background and source of legitimacy than an active career focus.
+                <div class="sectionCta">
+                    <a class="bigbutton" href="#footer">Learn&nbsp;more&nbsp;&rarr;</a>
+                </div>
+                -->
                 <div class="banners">
                     {%- set caseBme = collections['Case Study'] | exclude | getOneExample("Biomedical Engineering") -%}
                     {% if caseBme.data %}
@@ -62,6 +63,9 @@ title: Home
                 <p>
                     Breakthroughs don't matter if they never leave the lab. Through consulting and strategy projects, I help innovators understand their markets, refine their offerings, and create the partnerships needed to scale.
                 </p>
+                <div class="sectionCta">
+                    <a class="bigbutton" href="#footer">Discuss&nbsp;your&nbsp;challenges&nbsp;&rarr;</a>
+                </div>
                 <div class="banners">
                     {%- set caseInnov = collections['Case Study'] | exclude | getOneExample("Strategy") -%}
                     {% if caseInnov.data %}
@@ -84,6 +88,9 @@ title: Home
                 <p>
                     I design institutions and deliver communication strategies that bridge knowledge gaps, align stakeholders, and drive decision-making. This work spans public-facing science communication, civic organizing, and strategic facilitation.
                 </p>
+                <div class="sectionCta">
+                    <a class="bigbutton" href="#footer">Let's&nbsp;discuss&nbsp;&rarr;</a>
+                </div>
                 <div class="banners">
                     {%- set caseConx = collections['Case Study'] | exclude | getOneExample("Connections") -%}
                     {% if caseConx.data %}

@@ -4,6 +4,7 @@ $max_mobile: 599.99px;
 $min_tablet: 600px;
 $max_tablet: 999.99px;
 $min_desktop: 1000px;
+$topnavHeight: 4em;
 $alpha: 0.5;
 $angGolden: 35.4deg;
 $angGoRvrs: -1 * $angGolden;
@@ -34,9 +35,10 @@ $fontserif: "Noto Serif Display", serif;
 /* global */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: $topnavHeight;
   font-family: $fontnames;
-  font-weight: 300;
-  font-variation-settings: "wght" 300;
+  font-weight: 200;
+  font-variation-settings: "wght" 200;
   overflow-x: hidden;
 }
 
@@ -53,9 +55,7 @@ main {
   color: $colorX;
 }
 
-a:not(.noFX):not(.tile):not(.navurl):not(.bigbutton):not(.returnToHome):not(
-    .content-slideThru
-  ) {
+a:not(.noFX):not(.tile):not(.bigbutton):not(.content-slideThru) {
   text-decoration: none;
   color: $color1;
   background: linear-gradient(
@@ -72,21 +72,6 @@ a:not(.noFX):not(.tile):not(.navurl):not(.bigbutton):not(.returnToHome):not(
     background-position: -99% 0;
     color: $colorW;
     cursor: pointer;
-  }
-}
-
-a.navurl {
-  text-decoration: none;
-  color: $colorW;
-  background: linear-gradient(to right, transparent 50%, $colorW 50%);
-  background-size: 200%;
-  background-position: 0 0;
-  transition: 500ms ease;
-
-  &:hover,
-  &:focus {
-    background-position: -100% 0;
-    color: $colorX;
   }
 }
 
@@ -173,11 +158,12 @@ h3,
 
 .sansserif {
   font-family: $fontnames;
-  font-weight: 350;
-  font-variation-settings: "wght" 350;
+  font-weight: 200;
+  font-variation-settings: "wght" 200;
 }
 
-p {
+p,
+li {
   font-size: 1.3em;
 }
 
@@ -206,7 +192,9 @@ $btnDiamtr: 2 * $btnRadius;
   justify-content: center;
   text-align: center;
   text-decoration: none;
-  transition: background-color 500ms ease, color 500ms ease;
+  transition:
+    background-color 500ms ease,
+    color 500ms ease;
 
   &:hover,
   &:focus {
@@ -401,7 +389,9 @@ ol {
 
   .bigbutton {
     text-decoration: none;
-    font-size: 2em;
+    font-weight: 300;
+    font-variation-settings: "wght" 300;
+    font-size: 1.5rem;
     padding: 0.3em;
     margin: 3vh 0;
     border-radius: 5px;
@@ -425,12 +415,18 @@ ol {
   }
 
   p {
-    padding-top: 2vh;
+    padding-bottom: 2vh;
   }
 
   .hero-lead {
     font-size: $fs-lead;
     max-width: 700px;
+    margin-top: 1em;
+  }
+
+  .sectionCta {
+    font-size: 1.5rem;
+    margin: 5vh 0;
   }
 }
 
@@ -457,7 +453,7 @@ ol {
 
   .content-sectionSticky {
     z-index: 600;
-    top: 0;
+    top: $topnavHeight;
     align-self: flex-start;
     background-color: $colorW;
   }
@@ -471,12 +467,16 @@ ol {
     background-attachment: fixed;
 
     .content-slideThru-text {
-      padding: 1em;
+      padding: 2em;
       margin-top: 20vh;
       margin-bottom: 20vh;
       width: 80%;
       backdrop-filter: blur(5px) brightness(0.3);
-      border-radius: 0.5em;
+      border-radius: 1em;
+
+      .banner {
+        margin: 0;
+      }
     }
   }
 

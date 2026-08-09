@@ -33,7 +33,7 @@ npx @11ty/eleventy --serve
 
 ## Repository structure
 
-The website is organized as a set of pages specific to my professional roles, and a larger set of case studies that highlight my previous work.
+The website is a single-page, scroll-based homepage covering my main areas of work, plus a set of pages specific to my professional roles, and a larger set of case studies that highlight my previous work.
 
 - `src/`: **This folder**; Source files for content on this website.
   - `cases/`: Case studies of my previous work, described in more detail in [its corresponding readme](./cases/README.md).
@@ -54,6 +54,13 @@ The website is organized as a set of pages specific to my professional roles, an
 - `.eleventy.js`: Configuration file for 11ty.
   
 - `package.json`, `package-lock.json`, and `.nojekyll`: Node.js package definitions for this website.
+
+## Content backlog
+
+A couple of content items are deliberately deferred, not forgotten:
+
+- **Case-study writing.** All of `src/cases/*.md` currently use the Problem/Solution/Results scaffold from [`cases/README.md`](./cases/README.md) but still have placeholder body text. Write the flagship first (`dopio_development.md` or `transplant_visr.md`) rather than filling in all of them shallowly.
+- **A real headshot photo.** None exists yet for the "Who is Kéita?" section (`index.html`). Case-study hero images were cleaned up to a neutral placeholder (`cases/img/placeholder-hero.svg`) in the meantime rather than left pointing at an unrelated photo, but that's a stand-in, not a substitute for real photography.
 
 ## License
 
