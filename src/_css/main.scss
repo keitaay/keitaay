@@ -203,142 +203,165 @@ $btnDiamtr: 2 * $btnRadius;
   }
 }
 
-/* UI: navbar */
-$navMargin: 2vw;
-$navPadTop: $btnOffset + 2 * $btnRadius;
-$navHeightBgn: 3em;
-$navHeightExt: 2.5em;
+/* UI: persistent top navigation. Sticky at every breakpoint (mobile included)
+   so the brand link always provides a way home - this supersedes the old
+   floating "return to top"/"return to home" buttons, which have been removed
+   rather than just hidden. A future "priority+" overflow ("More" menu) hook
+   would go here if a 5th top-level item is ever added; not built now since
+   only 4 items exist and growth is meant to happen inside "Services". */
+.topnav {
+  position: sticky;
+  top: 0;
+  z-index: 950;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: $topnavHeight;
+  padding: 0 5vw;
+  background-color: $colorXt;
+  backdrop-filter: blur(5px);
+  color: $colorW;
 
-.navOverlay {
-  transition: all 1s;
-
-  input[type="checkbox"] {
-    display: none;
+  .topnav-brand {
+    font-family: $fontserif;
+    font-weight: 450;
+    font-size: 1.2em;
+    text-decoration: none;
+    color: $colorW;
+    white-space: nowrap;
   }
 
-  .navMenu {
-    /* .navMenu contains the entire overlay screen for the nav menu */
-    display: block;
-    position: fixed;
-    right: 0;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 700;
-    opacity: 1;
-    transition: visibility 200ms ease, opacity 200ms ease;
-    background-color: $colorXt;
-    backdrop-filter: blur(5px);
+  .topnav-link {
+    text-decoration: none;
+    color: $colorW;
+    white-space: nowrap;
+    background: linear-gradient(to right, transparent 50%, $colorW 50%);
+    background-size: 200%;
+    background-position: 0 0;
+    transition: 500ms ease;
 
-    .navWindow {
-      /* .navWindows contains the actual navigation sidebar */
-      display: block;
-      position: fixed;
-      right: 0;
-      padding: $navPadTop $navMargin $navMargin $navMargin;
-      height: calc(100vh - #{$navPadTop});
-      width: calc(80vw - 2 * #{$navMargin});
-      overflow-x: hidden;
+    &:hover,
+    &:focus {
+      background-position: -100% 0;
+      color: $colorX;
+    }
+  }
+
+  .topnav-links {
+    display: none;
+    flex-direction: column;
+    gap: $space-2;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: $space-2 5vw;
+    background-color: $colorX;
+    border-top: 1px solid rgba($colorW, 0.15);
+    box-shadow:
+      0 4px 8px 0 rgba(0, 0, 0, 0.6),
+      0 6px 20px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .topnav-dropdown {
+    position: relative;
+
+    .topnav-dropdown-toggle {
+      font: inherit;
+      font-size: $fs-base;
+      display: flex;
+      align-items: center;
+      gap: 0.3em;
+      background: linear-gradient(to right, transparent 50%, $colorW 50%);
+      background-size: 200%;
+      background-position: 0 0;
+      border: none;
+      cursor: pointer;
+      color: $colorW;
+      padding: 0;
+      transition: 500ms ease;
+
+      &:hover,
+      &:focus {
+        background-position: -100% 0;
+        color: $colorX;
+      }
+
+      .topnav-caret {
+        display: inline-block;
+        font-size: 0.7em;
+        transition: transform 300ms ease;
+      }
+
+      &[aria-expanded="true"] .topnav-caret {
+        transform: rotate(180deg);
+      }
+    }
+
+    .topnav-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 1;
+      margin: #{$space-1} 0 0 0;
+      padding: $space-1;
+      min-width: 10em;
       background-color: $colorX;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6),
+      border: 1px solid rgba($colorW, 0.15);
+      border-radius: 0.5em;
+      list-style: none;
+      box-shadow:
+        0 4px 8px 0 rgba(0, 0, 0, 0.6),
         0 6px 20px 0 rgba(0, 0, 0, 0.2);
 
-      .opt,
-      .navExt {
-        padding: 0;
-        width: 100%;
-        text-decoration: none;
-      }
-
-      .opt {
-        /* .opt denotes navigation options */
+      &.is-open {
         display: block;
-        margin: 1vh 0;
-        font-size: 1.5em;
       }
 
-      .navHead,
-      .navMain,
-      .navExt {
-        width: calc(100% - 3 * #{$navMargin});
+      li {
+        font-size: $fs-base;
       }
 
-      .navHead {
-        min-height: $navHeightBgn;
+      li + li {
+        margin-top: $space-1;
       }
 
-      .navMain {
-        overflow-y: auto;
-        height: calc(100% - #{$navHeightBgn} - #{$navHeightExt});
+      .topnav-link {
+        display: block;
       }
     }
   }
-}
 
-.navButton,
-.returnToPgtop,
-.returnToHome {
-  position: fixed;
-  display: inline-block;
-  /* "left" used to avoid shift due to scroll bar */
-  left: calc(100vw - 2 * #{$btnOffset});
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
-  background-color: $colorWt;
-  color: $colorXt;
-}
+  .topnav-toggle {
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: $colorW;
+    font-size: 1.5em;
 
-.navButton {
-  top: $btnOffset;
-  z-index: 900;
+    .navOpen {
+      display: none;
+    }
+  }
 
-  .navOpen {
+  input[type="checkbox"] {
     display: none;
+
+    &:checked ~ .topnav-links {
+      display: flex;
+    }
+
+    &:checked ~ .topnav-toggle {
+      .navOpen {
+        display: inline;
+      }
+
+      .navClosed {
+        display: none;
+      }
+    }
   }
-
-  .navClosed {
-    display: inline-block;
-  }
-}
-
-/* UI: menu toggled off; based on workaround by Morgan Feeney, via codepen.io/morganfeeney/pen/KiBty */
-/*
-Uncomment this block to enable the navbar toggle menu.
-input[type="checkbox"]:not(:checked) ~ .navMenu {
-  visibility: hidden;
-  opacity: 0;
-}
-
-input[type="checkbox"]:checked ~ .navButton {
-  .navOpen {
-    display: inline;
-  }
-
-  .navClosed {
-    display: none;
-  }
-}
-*/
-
-/* UI: return to top of page */
-.returnToPgtop {
-  /* 
-    Replace "top" with this definition if the navbar is being used; this will
-    ensure that the "return to top" button is below the navbar toggle.
-    top: calc(2 * #{$btnOffset} + #{$btnDiamtr});
-  */
-  top: $btnOffset;
-  left: calc(100vw - 2 * #{$btnOffset});
-  z-index: 600;
-  line-height: $btnDiamtr;
-  transform: rotate(-90deg); /* Correct orientation of rightward-facing arrow */
-}
-
-/* UI: return to home page */
-.returnToHome {
-  top: calc(2 * #{$btnOffset} + #{$btnDiamtr});
-  left: calc(100vw - 2 * #{$btnOffset});
-  z-index: 600;
-  line-height: $btnDiamtr;
 }
 
 /* regular content: slideshow-like (keep values unitless since vanilla CSS cannot do dimensional analysis) */
@@ -771,10 +794,6 @@ form {
 
 /* responsive to variable screen sizes */
 @media (orientation: landscape) and (min-width: $min_tablet) {
-  .navOverlay .navMenu .navWindow {
-    width: calc(400px - 2 * #{$navMargin});
-  }
-
   .tiles .tile {
     flex-basis: $tileSize;
   }
@@ -790,9 +809,34 @@ form {
 }
 
 @media (orientation: landscape) and (min-width: $min_desktop) {
-  .opt {
-    padding: 3vw 5vw;
-    font-size: medium;
+  .topnav {
+    .topnav-links {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: $space-3;
+      position: static;
+      padding: 0;
+      background: none;
+      box-shadow: none;
+      border-top: 0;
+    }
+
+    .topnav-toggle {
+      display: none;
+    }
+
+    .topnav-dropdown {
+      .topnav-dropdown-toggle {
+        padding: 0.3em 0.6em;
+        border-radius: 0.4em;
+      }
+
+      .topnav-dropdown-menu {
+        left: auto;
+        right: 0;
+      }
+    }
   }
 
   .yokoso p :not(.article-summary) {

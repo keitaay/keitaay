@@ -83,6 +83,53 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 markElements.forEach(el => observer.observe(el));
 
+// Close the mobile nav panel if the viewport grows into desktop width
+// mid-interaction (e.g. hamburger opened, then window resized wider) - this
+// query must match the desktop breakpoint in main.scss ($min_desktop: 1000px).
+const desktopNavQuery = window.matchMedia('(orientation: landscape) and (min-width: 1000px)');
+function closeMobileNavOnDesktop(e) {
+    if (!e.matches) return;
+    const menuCheckbox = document.querySelector('#showMenu');
+    if (menuCheckbox) menuCheckbox.checked = false;
+}
+desktopNavQuery.addEventListener('change', closeMobileNavOnDesktop);
+
+// Wire up the top nav's dropdown menus (e.g. "What I Do", "Services").
+// Click toggles open/closed; outside-click and Escape close it. Shared by
+// every ".topnav-dropdown-toggle" button so a future addition doesn't need
+// new wiring.
+document.querySelectorAll('.topnav-dropdown-toggle').forEach(function (toggle) {
+    const menu = toggle.nextElementSibling;
+    if (!menu) return;
+
+    function closeDropdown() {
+        toggle.setAttribute('aria-expanded', 'false');
+        menu.classList.remove('is-open');
+    }
+
+    toggle.addEventListener('click', function (e) {
+        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+        // Close any other open dropdowns before opening this one.
+        document.querySelectorAll('.topnav-dropdown-toggle').forEach(function (other) {
+            if (other !== toggle) {
+                other.setAttribute('aria-expanded', 'false');
+                if (other.nextElementSibling) other.nextElementSibling.classList.remove('is-open');
+            }
+        });
+        toggle.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+        menu.classList.toggle('is-open', !isOpen);
+        e.stopPropagation();
+    });
+
+    document.addEventListener('click', function (e) {
+        if (!toggle.contains(e.target) && !menu.contains(e.target)) closeDropdown();
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeDropdown();
+    });
+});
+
 // Add nice-to-have visual elements once the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', function() {
 

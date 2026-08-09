@@ -14,13 +14,7 @@ pathJs: '/_js/ui.js'
 
 <body>
     {% include "loading.html" %}
-    <!--
-        Remove spaces between curly braces and percent signs,
-        then uncomment the line below to re-enable the navbar.
-        { % include "navbar.html" % }
-    -->
-    {% include "gototop.html" %}
-    {% include "gotohome.html" %}
+    {% include "navbar.html" %}
     <main>
         {{ content | safe }}
         <div id="footer"><!--dummy element to allow navigation skip--></div>

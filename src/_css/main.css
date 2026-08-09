@@ -3,9 +3,10 @@
 /* global */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 4em;
   font-family: "Noto Sans", "Verdana", "Arial", sans-serif;
-  font-weight: 300;
-  font-variation-settings: "wght" 300;
+  font-weight: 200;
+  font-variation-settings: "wght" 200;
   overflow-x: hidden;
 }
 
@@ -22,7 +23,7 @@ main {
   color: rgb(36, 42, 52);
 }
 
-a:not(.noFX):not(.tile):not(.navurl):not(.bigbutton):not(.returnToHome):not(.content-slideThru) {
+a:not(.noFX):not(.tile):not(.bigbutton):not(.content-slideThru) {
   text-decoration: none;
   color: rgb(255, 168, 34);
   background: linear-gradient(to right, transparent 50.05%, #d6545a 50.05%);
@@ -30,23 +31,10 @@ a:not(.noFX):not(.tile):not(.navurl):not(.bigbutton):not(.returnToHome):not(.con
   background-position: 0 0;
   transition: 500ms ease;
 }
-a:not(.noFX):not(.tile):not(.navurl):not(.bigbutton):not(.returnToHome):not(.content-slideThru):hover, a:not(.noFX):not(.tile):not(.navurl):not(.bigbutton):not(.returnToHome):not(.content-slideThru):focus {
+a:not(.noFX):not(.tile):not(.bigbutton):not(.content-slideThru):hover, a:not(.noFX):not(.tile):not(.bigbutton):not(.content-slideThru):focus {
   background-position: -99% 0;
   color: #eeeeee;
   cursor: pointer;
-}
-
-a.navurl {
-  text-decoration: none;
-  color: #eeeeee;
-  background: linear-gradient(to right, transparent 50%, #eeeeee 50%);
-  background-size: 200%;
-  background-position: 0 0;
-  transition: 500ms ease;
-}
-a.navurl:hover, a.navurl:focus {
-  background-position: -100% 0;
-  color: rgb(36, 42, 52);
 }
 
 mark {
@@ -98,11 +86,12 @@ h3,
 
 .sansserif {
   font-family: "Noto Sans", "Verdana", "Arial", sans-serif;
-  font-weight: 350;
-  font-variation-settings: "wght" 350;
+  font-weight: 200;
+  font-variation-settings: "wght" 200;
 }
 
-p {
+p,
+li {
   font-size: 1.3em;
 }
 
@@ -134,125 +123,137 @@ p {
   color: white;
 }
 
-/* UI: navbar */
-.navOverlay {
-  transition: all 1s;
-}
-.navOverlay input[type=checkbox] {
-  display: none;
-}
-.navOverlay .navMenu {
-  /* .navMenu contains the entire overlay screen for the nav menu */
-  display: block;
-  position: fixed;
-  right: 0;
+/* UI: persistent top navigation. Sticky at every breakpoint (mobile included)
+   so the brand link always provides a way home - this supersedes the old
+   floating "return to top"/"return to home" buttons, which have been removed
+   rather than just hidden. A future "priority+" overflow ("More" menu) hook
+   would go here if a 5th top-level item is ever added; not built now since
+   only 4 items exist and growth is meant to happen inside "Services". */
+.topnav {
+  position: sticky;
   top: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 700;
-  opacity: 1;
-  transition: visibility 200ms ease, opacity 200ms ease;
+  z-index: 950;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4em;
+  padding: 0 5vw;
   background-color: rgba(36, 42, 52, 0.5);
   backdrop-filter: blur(5px);
+  color: #eeeeee;
 }
-.navOverlay .navMenu .navWindow {
-  /* .navWindows contains the actual navigation sidebar */
-  display: block;
-  position: fixed;
+.topnav .topnav-brand {
+  font-family: "Noto Serif Display", serif;
+  font-weight: 450;
+  font-size: 1.2em;
+  text-decoration: none;
+  color: #eeeeee;
+  white-space: nowrap;
+}
+.topnav .topnav-link {
+  text-decoration: none;
+  color: #eeeeee;
+  white-space: nowrap;
+  background: linear-gradient(to right, transparent 50%, #eeeeee 50%);
+  background-size: 200%;
+  background-position: 0 0;
+  transition: 500ms ease;
+}
+.topnav .topnav-link:hover, .topnav .topnav-link:focus {
+  background-position: -100% 0;
+  color: rgb(36, 42, 52);
+}
+.topnav .topnav-links {
+  display: none;
+  flex-direction: column;
+  gap: 1rem;
+  position: absolute;
+  top: 100%;
+  left: 0;
   right: 0;
-  padding: 3em 2vw 2vw 2vw;
-  height: calc(100vh - 3em);
-  width: calc(80vw - 2 * 2vw);
-  overflow-x: hidden;
+  padding: 1rem 5vw;
   background-color: rgb(36, 42, 52);
+  border-top: 1px solid rgba(238, 238, 238, 0.15);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
 }
-.navOverlay .navMenu .navWindow .opt,
-.navOverlay .navMenu .navWindow .navExt {
-  padding: 0;
-  width: 100%;
-  text-decoration: none;
+.topnav .topnav-dropdown {
+  position: relative;
 }
-.navOverlay .navMenu .navWindow .opt {
-  /* .opt denotes navigation options */
+.topnav .topnav-dropdown .topnav-dropdown-toggle {
+  font: inherit;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+  background: linear-gradient(to right, transparent 50%, #eeeeee 50%);
+  background-size: 200%;
+  background-position: 0 0;
+  border: none;
+  cursor: pointer;
+  color: #eeeeee;
+  padding: 0;
+  transition: 500ms ease;
+}
+.topnav .topnav-dropdown .topnav-dropdown-toggle:hover, .topnav .topnav-dropdown .topnav-dropdown-toggle:focus {
+  background-position: -100% 0;
+  color: rgb(36, 42, 52);
+}
+.topnav .topnav-dropdown .topnav-dropdown-toggle .topnav-caret {
+  display: inline-block;
+  font-size: 0.7em;
+  transition: transform 300ms ease;
+}
+.topnav .topnav-dropdown .topnav-dropdown-toggle[aria-expanded=true] .topnav-caret {
+  transform: rotate(180deg);
+}
+.topnav .topnav-dropdown .topnav-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+  margin: 0.5rem 0 0 0;
+  padding: 0.5rem;
+  min-width: 10em;
+  background-color: rgb(36, 42, 52);
+  border: 1px solid rgba(238, 238, 238, 0.15);
+  border-radius: 0.5em;
+  list-style: none;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+.topnav .topnav-dropdown .topnav-dropdown-menu.is-open {
   display: block;
-  margin: 1vh 0;
+}
+.topnav .topnav-dropdown .topnav-dropdown-menu li {
+  font-size: 1rem;
+}
+.topnav .topnav-dropdown .topnav-dropdown-menu li + li {
+  margin-top: 0.5rem;
+}
+.topnav .topnav-dropdown .topnav-dropdown-menu .topnav-link {
+  display: block;
+}
+.topnav .topnav-toggle {
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #eeeeee;
   font-size: 1.5em;
 }
-.navOverlay .navMenu .navWindow .navHead,
-.navOverlay .navMenu .navWindow .navMain,
-.navOverlay .navMenu .navWindow .navExt {
-  width: calc(100% - 3 * 2vw);
-}
-.navOverlay .navMenu .navWindow .navHead {
-  min-height: 3em;
-}
-.navOverlay .navMenu .navWindow .navMain {
-  overflow-y: auto;
-  height: calc(100% - 3em - 2.5em);
-}
-
-.navButton,
-.returnToPgtop,
-.returnToHome {
-  position: fixed;
-  display: inline-block;
-  /* "left" used to avoid shift due to scroll bar */
-  left: calc(100vw - 2 * 1.4em);
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
-  background-color: rgba(238, 238, 238, 0.5);
-  color: rgba(36, 42, 52, 0.5);
-}
-
-.navButton {
-  top: 1.4em;
-  z-index: 900;
-}
-.navButton .navOpen {
+.topnav .topnav-toggle .navOpen {
   display: none;
 }
-.navButton .navClosed {
-  display: inline-block;
+.topnav input[type=checkbox] {
+  display: none;
 }
-
-/* UI: menu toggled off; based on workaround by Morgan Feeney, via codepen.io/morganfeeney/pen/KiBty */
-/*
-Uncomment this block to enable the navbar toggle menu.
-input[type="checkbox"]:not(:checked) ~ .navMenu {
-  visibility: hidden;
-  opacity: 0;
+.topnav input[type=checkbox]:checked ~ .topnav-links {
+  display: flex;
 }
-
-input[type="checkbox"]:checked ~ .navButton {
-  .navOpen {
-    display: inline;
-  }
-
-  .navClosed {
-    display: none;
-  }
+.topnav input[type=checkbox]:checked ~ .topnav-toggle .navOpen {
+  display: inline;
 }
-*/
-/* UI: return to top of page */
-.returnToPgtop {
-  /* 
-    Replace "top" with this definition if the navbar is being used; this will
-    ensure that the "return to top" button is below the navbar toggle.
-    top: calc(2 * 1.4em + 1.6em);
-  */
-  top: 1.4em;
-  left: calc(100vw - 2 * 1.4em);
-  z-index: 600;
-  line-height: 1.6em;
-  transform: rotate(-90deg); /* Correct orientation of rightward-facing arrow */
-}
-
-/* UI: return to home page */
-.returnToHome {
-  top: calc(2 * 1.4em + 1.6em);
-  left: calc(100vw - 2 * 1.4em);
-  z-index: 600;
-  line-height: 1.6em;
+.topnav input[type=checkbox]:checked ~ .topnav-toggle .navClosed {
+  display: none;
 }
 
 /* regular content: slideshow-like (keep values unitless since vanilla CSS cannot do dimensional analysis) */
@@ -297,7 +298,9 @@ ol {
 .slide .bigbutton,
 .content .bigbutton {
   text-decoration: none;
-  font-size: 2em;
+  font-weight: 300;
+  font-variation-settings: "wght" 300;
+  font-size: 1.5rem;
   padding: 0.3em;
   margin: 3vh 0;
   border-radius: 5px;
@@ -317,12 +320,18 @@ ol {
 }
 .slide p,
 .content p {
-  padding-top: 2vh;
+  padding-bottom: 2vh;
 }
 .slide .hero-lead,
 .content .hero-lead {
   font-size: 1.5rem;
   max-width: 700px;
+  margin-top: 1em;
+}
+.slide .sectionCta,
+.content .sectionCta {
+  font-size: 1.5rem;
+  margin: 5vh 0;
 }
 
 .content {
@@ -346,7 +355,7 @@ ol {
 }
 .content .content-sectionSticky {
   z-index: 600;
-  top: 0;
+  top: 4em;
   align-self: flex-start;
   background-color: #eeeeee;
 }
@@ -359,12 +368,15 @@ ol {
   background-attachment: fixed;
 }
 .content .content-slideThru .content-slideThru-text {
-  padding: 1em;
+  padding: 2em;
   margin-top: 20vh;
   margin-bottom: 20vh;
   width: 80%;
   backdrop-filter: blur(5px) brightness(0.3);
-  border-radius: 0.5em;
+  border-radius: 1em;
+}
+.content .content-slideThru .content-slideThru-text .banner {
+  margin: 0;
 }
 .content .content-sectionNoPadMobile {
   padding: 0;
@@ -618,9 +630,6 @@ form button:hover, form button:focus {
 
 /* responsive to variable screen sizes */
 @media (orientation: landscape) and (min-width: 600px) {
-  .navOverlay .navMenu .navWindow {
-    width: calc(400px - 2 * 2vw);
-  }
   .tiles .tile {
     flex-basis: 26vw;
   }
@@ -633,9 +642,27 @@ form button:hover, form button:focus {
   }
 }
 @media (orientation: landscape) and (min-width: 1000px) {
-  .opt {
-    padding: 3vw 5vw;
-    font-size: medium;
+  .topnav .topnav-links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+    position: static;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+    border-top: 0;
+  }
+  .topnav .topnav-toggle {
+    display: none;
+  }
+  .topnav .topnav-dropdown .topnav-dropdown-toggle {
+    padding: 0.3em 0.6em;
+    border-radius: 0.4em;
+  }
+  .topnav .topnav-dropdown .topnav-dropdown-menu {
+    left: auto;
+    right: 0;
   }
   .yokoso p :not(.article-summary) {
     max-width: 50vw;

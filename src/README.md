@@ -33,7 +33,7 @@ npx @11ty/eleventy --serve
 
 ## Repository structure
 
-The website is a single-page, scroll-based homepage covering my main areas of work, plus a set of pages specific to my professional roles, and a larger set of case studies that highlight my previous work.
+The website is a single-page, scroll-based homepage covering my main areas of work, plus a couple of standalone pages (a case-study index and a job search help service page) and a larger set of case studies that highlight my previous work.
 
 - `src/`: **This folder**; Source files for content on this website.
   - `cases/`: Case studies of my previous work, described in more detail in [its corresponding readme](./cases/README.md).
@@ -57,10 +57,22 @@ The website is a single-page, scroll-based homepage covering my main areas of wo
 
 ## Content backlog
 
-A couple of content items are deliberately deferred, not forgotten:
+A number of content items are deliberately deferred, not forgotten. Content/asset work only I can do:
 
 - **Case-study writing.** All of `src/cases/*.md` currently use the Problem/Solution/Results scaffold from [`cases/README.md`](./cases/README.md) but still have placeholder body text. Write the flagship first (`dopio_development.md` or `transplant_visr.md`) rather than filling in all of them shallowly.
 - **A real headshot photo.** None exists yet for the "Who is Kéita?" section (`index.html`). Case-study hero images were cleaned up to a neutral placeholder (`cases/img/placeholder-hero.svg`) in the meantime rather than left pointing at an unrelated photo, but that's a stand-in, not a substitute for real photography.
+- **`job-search-help.html`'s "Why Work With Me" section** still has placeholder credibility copy (marked with an HTML comment in the file) - needs my actual relevant experience before this page is really ready to publish.
+
+Waiting on decisions outside the site itself:
+
+- **`#connections` section copy/positioning** (`index.html`) is still unsettled - its nav label was deliberately left as a neutral "Connections" for this reason. Revisit once its actual audience/positioning is decided.
+- **`#connections`'s CTA destination** currently points at the generic email footer. The intent is to route it to a real scicomm channel (Substack, LinkedIn, etc.) once one exists - nothing to change until then.
+
+Optional polish, whenever:
+
+- **Testimonials** on `job-search-help.html` - reserved as a commented-out block in the file, ready to uncomment once real ones exist.
+- Other `job-search-help.html` additions worth considering: an FAQ (pricing/format/turnaround), a "who this is for" section, or a before/after resume sample.
+- **Dark mode.** Feasible, but not a drop-in addition: the color system in `_css/main.scss` is all compile-time SCSS `$variables`, not runtime CSS custom properties, and a proper implementation (e.g. `light-dark()` + `color-scheme`, as in [this approach](https://fedknu.com/blog/adding-dark-mode-to-11ty-blog/)) needs runtime-switchable values. That means migrating the whole `$color*` system to CSS custom properties first - a real refactor, not a toggle bolted on top. It's also a genuine design question, not just technical: the site already deliberately mixes dark (hero/nav) and light (article/case-study) sections as part of its identity, rather than being uniformly "light" with a dark alternative - "dark mode" would need its own definition here, not just an inverted palette. Low urgency; worth doing only if/when the color system gets revisited for other reasons.
 
 ## License
 

@@ -3,6 +3,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {% favicons 'src/favicon.svg' %}
 
+<!--
+    Person schema (JSON-LD), site-wide, for search/AI-citation authority signals.
+    Note: no "image" property yet - add one once a real headshot exists (see
+    Content backlog in src/README.md), rather than pointing it at a placeholder.
+-->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Kéita A. Yokoyama",
+    "url": "{{ site.url }}",
+    "sameAs": [
+        "https://linkedin.com/in/KeitaAY/",
+        "https://orcid.org/0000-0003-4386-8056",
+        "https://github.com/KeitaAY"
+    ],
+    "jobTitle": "Biomedical Engineer & Strategy Consultant",
+    "description": "Biomedical engineer and strategy consultant helping life-science companies turn early-stage science into scalable strategy."
+}
+</script>
+
 <!--font-->
 <link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100..800&display=swap&family=Noto+Serif+Display:wght@100..800&display=swap">
