@@ -5,6 +5,8 @@ module.exports = function (eleventyConfig) {
     // Alert Eleventy about the website's deployment env
     eleventyConfig.addGlobalData("site", {
         url: "https://keitaay.com",
+        name: "Kéita A. Yokoyama, PhD",
+        defaultDescription: "Kéita Yokoyama helps life science companies turn early-stage science into scalable strategies, and translates technical complexity into ideas and insights people can act on.",
     });
 
     // Copy additional files to the output folder

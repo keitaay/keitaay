@@ -42,7 +42,7 @@ The website is a single-page, scroll-based homepage covering my main areas of wo
     - `**/*.md`: Individual case studies, written in Markdown with frontmatter metadata.
   - `_css/`: Stylesheets for this website.
   - `_js/`: JavaScript files for this website.
-  - `_include`: Reusable HTML snippets for this website.
+  - `_include`: Reusable HTML snippets and metadata partials for this website.
   - `_layouts`: Layout templates for this website.
   - `*.html`: Template for specific pages.
   - `favicon.svg`: Base file for the favicon for this website.
@@ -54,6 +54,10 @@ The website is a single-page, scroll-based homepage covering my main areas of wo
 - `.eleventy.js`: Configuration file for 11ty.
   
 - `package.json`, `package-lock.json`, and `.nojekyll`: Node.js package definitions for this website.
+
+## Page metadata
+
+Every page can set `title:` and `description:` in its front matter. Together with `imageHero:` (already used by case studies), these automatically populate the page's `<title>`, meta description, canonical URL, and Open Graph/Twitter preview tags via `_include/header.html` - no per-page template edits needed. Pages that don't set `description:` fall back to a case study's own `summary:`, then to `site.defaultDescription` (`.eleventy.js`), so no page ever ships an empty description - but a real, page-specific one reads much better in search results and shared links. Site-wide identity fields (`site.name`, `site.url`) live in `.eleventy.js`; the Person schema (JSON-LD) they feed into is in `_include/person.json`.
 
 ## Content backlog
 
