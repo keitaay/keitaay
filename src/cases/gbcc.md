@@ -1,5 +1,6 @@
 ---
 title: A Helping Hand for Future Helpers
+doIgnore: true
 tags:
   - Case Study
   - Featured

@@ -1,5 +1,6 @@
 ---
 title: Fast Solutions for Furry Friends
+doIgnore: true
 tags:
   - Case Study
   - Featured

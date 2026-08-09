@@ -1,5 +1,6 @@
 ---
 title: A New Refuge for Wellness
+doIgnore: true
 tags:
   - Case Study
   - Featured

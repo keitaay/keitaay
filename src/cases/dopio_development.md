@@ -1,5 +1,6 @@
 ---
 title: Creating a New Imaging Modality
+doIgnore: true
 tags:
   - Case Study
   - Featured

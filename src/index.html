@@ -1,7 +1,6 @@
 ---
 layout: base.html
 title: Home
-description: I help life science companies turn early-stage science into scalable strategy, and translate technical complexity into ideas people can act on.
 ---
 <section class="slide yokoso" id="pgtop" style="background-color: #132736; color:#eee; position:relative;">
     {% include "waves.html" %}
@@ -111,10 +110,12 @@ description: I help life science companies turn early-stage science into scalabl
     </div>
 </div>
 <section class="tiles" id="featured">
+    {%- set featuredCases = collections.Featured | exclude -%}
+    {% if featuredCases.length > 0 %}
     <div style="width:100%; padding:0 2.5%">
         <h2>Featured Work</h2>
     </div>
-    {% for case in collections.Featured | exclude | limit(8) %}
+    {% for case in featuredCases | limit(8) %}
     <a class="tile" href="{{ case.url | url }}"
         style="background-color:#111144;background-image:url('{{ case.data.imageHero | url }}')">
         <img src="{{ case.data.imageHero | url }}" class="bg-img" alt="" />
@@ -124,5 +125,6 @@ description: I help life science companies turn early-stage science into scalabl
         </div>
     </a>
     {% endfor %}
+    {% endif %}
     {% include "gotoallcases.html" %}
 </section>

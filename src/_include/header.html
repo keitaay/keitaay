@@ -67,17 +67,20 @@
 
     .yokoso h1 {
         margin: 0;
-        font-size: calc(2.0em + (1.5 * (100vw - 25px) / 75))
+        /* Flat approximation of fluid formula in _css/main.scss */
+        font-size: 3.5rem;
     }
 
     .yokoso h2 {
         margin: 0;
-        font-size: calc(1.3em + (0.7 * (100vw - 25px) / 75))
+        /* Flat approximation of fluid formula in _css/main.scss */
+        font-size: 2.25rem;
     }
 
     .yokoso p {
         margin: 0;
-        font-size: 1.2em;
+        /* Keep in sync with .hero-lead's font-size ($fs-lead) in _css/main.scss - the only <p> that actually appears in a .yokoso hero today. */
+        font-size: 1.5rem;
     }
 
     .yokoso .hsub {

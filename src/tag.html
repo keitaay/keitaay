@@ -8,13 +8,18 @@ pagination:
 permalink: /tags/{{ tag }}/
 ---
 <section class="tiles" id="pgtop">
+    {%- set visibleItems = collections[ tag ] | exclude -%}
     <div style="width:100%; padding:0 2.5%">
         {% include "goback.html" %}
         <h1 class="serif">Content with Tag: {{ tag }}</h1><p>
+            {% if visibleItems.length > 0 %}
             The following content is tagged with "{{ tag }}". Click on a tile to view more.
+            {% else %}
+            Nothing is currently published under "{{ tag }}" - check back soon.
+            {% endif %}
         </p>
     </div>
-    {% for case in collections[ tag ] | exclude %}
+    {% for case in visibleItems %}
     <a class="tile" href="{{ case.url | url }}"
         style="background-color:#111144">
         <img src="{{ case.data.imageHero | url }}" class="bg-img" alt="" />

@@ -10,5 +10,5 @@
         "https://github.com/KeitaAY"
     ],
     "jobTitle": "Biomedical Engineer & Strategy Consultant",
-    "description": "Biomedical engineer and strategy consultant helping life-science companies turn early-stage science into scalable strategy."
+    "description": "{{ site.defaultDescription }}"
 }

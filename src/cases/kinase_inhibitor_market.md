@@ -1,5 +1,6 @@
 ---
 title: Partnerships for a Pioneer
+doIgnore: true
 tags:
   - Case Study
   - Featured
