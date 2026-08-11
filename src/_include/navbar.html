@@ -2,12 +2,14 @@
     <a class="topnav-brand noFX" href="{{ '/' | url }}#pgtop">K&eacute;ita A. Y.</a>
     <input type="checkbox" id="showMenu" aria-label="Toggle navigation menu" aria-controls="topnavLinks">
     <label class="topnav-toggle" for="showMenu" title="Toggle menu">
-        <span class="navClosed">&equiv;</span><span class="navOpen">&#10005;</span>
+        <span class="bar bar1" aria-hidden="true"></span>
+        <span class="bar bar2" aria-hidden="true"></span>
+        <span class="bar bar3" aria-hidden="true"></span>
     </label>
     <div class="topnav-links" id="topnavLinks">
         <div class="topnav-dropdown">
-            <button class="topnav-dropdown-toggle" id="showWork" aria-haspopup="true" aria-expanded="false" aria-controls="workMenu">
-                What I Do <span class="topnav-caret" aria-hidden="true">&#9662;</span>
+            <button class="topnav-item topnav-dropdown-toggle" id="showWork" aria-haspopup="true" aria-expanded="false" aria-controls="workMenu">
+                Expertise <span class="topnav-caret" aria-hidden="true">&#9662;</span>
             </button>
             <ul class="topnav-dropdown-menu" id="workMenu" aria-labelledby="showWork">
                 <li><a class="topnav-link" href="{{ '/' | url }}#bme">Engineering</a></li>
@@ -15,8 +17,9 @@
                 <li><a class="topnav-link" href="{{ '/' | url }}#connections">Connections</a></li>
             </ul>
         </div>
+        <a class="topnav-item" href="{{ '/cases' | url }}">Cases</a>
         <div class="topnav-dropdown">
-            <button class="topnav-dropdown-toggle" id="showServices" aria-haspopup="true" aria-expanded="false" aria-controls="servicesMenu">
+            <button class="topnav-item topnav-dropdown-toggle" id="showServices" aria-haspopup="true" aria-expanded="false" aria-controls="servicesMenu">
                 Services <span class="topnav-caret" aria-hidden="true">&#9662;</span>
             </button>
             <ul class="topnav-dropdown-menu" id="servicesMenu" aria-labelledby="showServices">

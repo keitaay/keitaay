@@ -55,21 +55,19 @@ main {
   color: $colorX;
 }
 
-a:not(.noFX):not(.tile):not(.bigbutton):not(.content-slideThru) {
+a:not(.noFX):not(.tile):not(.bigbutton):not(.content-slideThru):not(
+    .topnav-item
+  ) {
   text-decoration: none;
   color: $color1;
-  background: linear-gradient(
-    to right,
-    transparent 50.05%,
-    rgba($color4, 1) 50.05%
-  );
+  background: linear-gradient(to right, transparent 50%, rgba($color4, 1) 50%);
   background-size: 201%;
   background-position: 0 0;
   transition: 500ms ease;
 
   &:hover,
   &:focus {
-    background-position: -99% 0;
+    background-position: -100% 0;
     color: $colorW;
     cursor: pointer;
   }
@@ -77,11 +75,7 @@ a:not(.noFX):not(.tile):not(.bigbutton):not(.content-slideThru) {
 
 mark {
   text-decoration: none;
-  background: linear-gradient(
-    to right,
-    rgba($color1t, 1) 50.05%,
-    transparent 50.05%
-  );
+  background: linear-gradient(to right, rgba($color1t, 1) 50%, transparent 50%);
   background-position: 0% 0;
   background-size: 201%;
   transition: 500ms ease;
@@ -236,7 +230,7 @@ $btnDiamtr: 2 * $btnRadius;
     color: $colorW;
     white-space: nowrap;
     background: linear-gradient(to right, transparent 50%, $colorW 50%);
-    background-size: 200%;
+    background-size: 201%;
     background-position: 0 0;
     transition: 500ms ease;
 
@@ -250,12 +244,13 @@ $btnDiamtr: 2 * $btnRadius;
   .topnav-links {
     display: none;
     flex-direction: column;
+    align-items: flex-start;
     gap: $space-2;
     position: absolute;
     top: 100%;
-    left: 0;
-    right: 0;
-    padding: $space-2 5vw;
+    right: 2em;
+    width: auto;
+    padding: $space-2 2em;
     background-color: $colorX;
     border-top: 1px solid rgba($colorW, 0.15);
     box-shadow:
@@ -263,29 +258,41 @@ $btnDiamtr: 2 * $btnRadius;
       0 6px 20px 0 rgba(0, 0, 0, 0.2);
   }
 
+  /* Shared base for any top-level nav item styled like the dropdown
+     triggers - the triggers themselves, and any plain (non-dropdown) link
+     that should look the same minus the caret (e.g. a direct link to
+     /cases). Apply alongside a more specific class for anything extra
+     (.topnav-dropdown-toggle adds the flex/gap/caret bits below). */
+  .topnav-item {
+    font: inherit;
+    font-size: $fs-base;
+    text-decoration: none;
+    white-space: nowrap;
+    background: linear-gradient(to right, transparent 50%, $colorW 50%);
+    background-size: 201%;
+    background-position: 0 0;
+    border: none;
+    cursor: pointer;
+    color: $colorW;
+    min-width: calc(100% - 1rem);
+    padding: 0.3em 0.6em;
+    border-radius: 0.4em;
+    transition: 500ms ease;
+
+    &:hover,
+    &:focus {
+      background-position: -100% 0;
+      color: $colorX;
+    }
+  }
+
   .topnav-dropdown {
     position: relative;
 
     .topnav-dropdown-toggle {
-      font: inherit;
-      font-size: $fs-base;
       display: flex;
       align-items: center;
       gap: 0.3em;
-      background: linear-gradient(to right, transparent 50%, $colorW 50%);
-      background-size: 200%;
-      background-position: 0 0;
-      border: none;
-      cursor: pointer;
-      color: $colorW;
-      padding: 0;
-      transition: 500ms ease;
-
-      &:hover,
-      &:focus {
-        background-position: -100% 0;
-        color: $colorX;
-      }
 
       .topnav-caret {
         display: inline-block;
@@ -299,10 +306,10 @@ $btnDiamtr: 2 * $btnRadius;
     }
 
     .topnav-dropdown-menu {
-      display: none;
+      display: block;
       position: absolute;
       top: 100%;
-      left: 0;
+      right: 0;
       z-index: 1;
       margin: #{$space-1} 0 0 0;
       padding: $space-1;
@@ -315,8 +322,32 @@ $btnDiamtr: 2 * $btnRadius;
         0 4px 8px 0 rgba(0, 0, 0, 0.6),
         0 6px 20px 0 rgba(0, 0, 0, 0.2);
 
+      /* Closed state: opacity/transform drive the fade, visibility is
+         delayed so the menu leaves the a11y tree/tab order only once fully
+         invisible. Known limitation: during the ~200ms close fade the menu
+         is pointer-events:none (unclickable) but still visibility:visible,
+         so a keyboard user tabbing at that exact moment can still land
+         focus inside a closing menu. Accepted trade-off, not fixed here -
+         still better than the old instant display:none, which yanked focus
+         with zero transition. */
+      opacity: 0;
+      transform: translateY(-8px);
+      visibility: hidden;
+      pointer-events: none;
+      transition:
+        opacity 200ms ease,
+        transform 200ms ease,
+        visibility 0s linear 200ms;
+
       &.is-open {
-        display: block;
+        opacity: 1;
+        transform: translateY(0);
+        visibility: visible;
+        pointer-events: auto;
+        transition:
+          opacity 200ms ease,
+          transform 200ms ease,
+          visibility 0s linear;
       }
 
       li {
@@ -335,13 +366,34 @@ $btnDiamtr: 2 * $btnRadius;
 
   .topnav-toggle {
     cursor: pointer;
-    background: none;
-    border: none;
-    color: $colorW;
-    font-size: 1.5em;
+    position: relative;
+    display: inline-block;
+    width: 1.5em;
+    height: 1.5em;
 
-    .navOpen {
-      display: none;
+    .bar {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: $colorW;
+      border-radius: 1px;
+      transition:
+        top 300ms ease,
+        transform 300ms ease,
+        opacity 300ms ease;
+    }
+
+    .bar1 {
+      top: 30%;
+    }
+
+    .bar2 {
+      top: 50%;
+    }
+
+    .bar3 {
+      top: 70%;
     }
   }
 
@@ -353,12 +405,18 @@ $btnDiamtr: 2 * $btnRadius;
     }
 
     &:checked ~ .topnav-toggle {
-      .navOpen {
-        display: inline;
+      .bar1 {
+        top: 50%;
+        transform: rotate(45deg);
       }
 
-      .navClosed {
-        display: none;
+      .bar2 {
+        opacity: 0;
+      }
+
+      .bar3 {
+        top: 50%;
+        transform: rotate(-45deg);
       }
     }
   }
@@ -515,6 +573,24 @@ ol {
   }
 }
 
+/* Generic scroll-reveal utility. The "js-reveal" class is only added to
+   <html> by ui.js once IntersectionObserver support and
+   !prefers-reduced-motion are both confirmed, so a ".reveal" element with
+   no JS (or with reduced motion set) is never hidden in the first place -
+   no separate noscript override needed. */
+.js-reveal .reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 550ms ease,
+    transform 550ms ease;
+}
+
+.js-reveal .reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Visual previews of portfolio entries and articles */
 $tileSize: 26vw;
 $tilePad: 2vw;
@@ -664,6 +740,7 @@ $tilePad: 2vw;
   border-radius: 5px;
   border: 1px solid $colorX;
   color: $colorX !important;
+  transition: color 500ms ease;
   &:hover,
   &:focus {
     color: $colorW !important;
@@ -810,6 +887,10 @@ form {
 
 @media (orientation: landscape) and (min-width: $min_desktop) {
   .topnav {
+    .topnav-item {
+      min-width: fit-content;
+    }
+
     .topnav-links {
       display: flex;
       flex-direction: row;
@@ -820,22 +901,12 @@ form {
       background: none;
       box-shadow: none;
       border-top: 0;
+      left: 0;
+      width: auto;
     }
 
     .topnav-toggle {
       display: none;
-    }
-
-    .topnav-dropdown {
-      .topnav-dropdown-toggle {
-        padding: 0.3em 0.6em;
-        border-radius: 0.4em;
-      }
-
-      .topnav-dropdown-menu {
-        left: auto;
-        right: 0;
-      }
     }
   }
 

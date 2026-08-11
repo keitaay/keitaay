@@ -8,7 +8,7 @@ title: Home
         K&eacute;ita Yokoyama<br>engineers solutions.
     </h1>
     <p class="hero-lead">
-        I&nbsp;help life&#8209;science companies turn early&#8209;stage science into&nbsp;scalable strategy, and&nbsp;turn technical complexity into&nbsp;ideas people can act&nbsp;on.
+        I&nbsp;help life science companies turn early-stage science into&nbsp;scalable strategy, and&nbsp;turn technical complexity into&nbsp;ideas people can act&nbsp;on.
     </p>
     <br>
     <a class="bigbutton" href="#footer">Let's Chat!</a>
@@ -30,7 +30,7 @@ title: Home
     </div>
     <div class="content-section">
         <section id="bme" class="content-part content-slideThru">
-            <div class="content-slideThru-text">
+            <div class="content-slideThru-text reveal">
                 <h3>I help to show more medical problems, sooner.</h3>
                 <p>
                     With my PhD in Biomedical Engineering, I've developed new ultrasound-based imaging techniques to detect disease earlier and guide better care. I've collaborated with physicians, engineers, and scientists to turn abstract research questions into working technologies.
@@ -58,7 +58,7 @@ title: Home
             </div>
         </section>
         <section id="strategy" class="content-part content-slideThru">
-            <div class="content-slideThru-text">
+            <div class="content-slideThru-text reveal">
                 <h3>I bring innovations to the people who need them.</h3>
                 <p>
                     Breakthroughs don't matter if they never leave the lab. Through consulting and strategy projects, I help innovators understand their markets, refine their offerings, and create the partnerships needed to scale.
@@ -83,7 +83,7 @@ title: Home
             </div>
         </section>
         <section id="connections" class="content-part content-slideThru">
-            <div class="content-slideThru-text">
+            <div class="content-slideThru-text reveal">
                 <h3>I make complex ideas clear, engaging, and actionable.</h3>
                 <p>
                     I design institutions and deliver communication strategies that bridge knowledge gaps, align stakeholders, and drive decision-making. This work spans public-facing science communication, civic organizing, and strategic facilitation.
@@ -125,6 +125,9 @@ title: Home
         </div>
     </a>
     {% endfor %}
+    {% else %}<div style="width:100%; padding:0 2.5%">
+        <h2>Case Studies</h2>
+    </div>
     {% endif %}
     {% include "gotoallcases.html" %}
 </section>

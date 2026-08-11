@@ -23,23 +23,23 @@ main {
   color: rgb(36, 42, 52);
 }
 
-a:not(.noFX):not(.tile):not(.bigbutton):not(.content-slideThru) {
+a:not(.noFX):not(.tile):not(.bigbutton):not(.content-slideThru):not(.topnav-item) {
   text-decoration: none;
   color: rgb(255, 168, 34);
-  background: linear-gradient(to right, transparent 50.05%, #d6545a 50.05%);
+  background: linear-gradient(to right, transparent 50%, #d6545a 50%);
   background-size: 201%;
   background-position: 0 0;
   transition: 500ms ease;
 }
-a:not(.noFX):not(.tile):not(.bigbutton):not(.content-slideThru):hover, a:not(.noFX):not(.tile):not(.bigbutton):not(.content-slideThru):focus {
-  background-position: -99% 0;
+a:not(.noFX):not(.tile):not(.bigbutton):not(.content-slideThru):not(.topnav-item):hover, a:not(.noFX):not(.tile):not(.bigbutton):not(.content-slideThru):not(.topnav-item):focus {
+  background-position: -100% 0;
   color: #eeeeee;
   cursor: pointer;
 }
 
 mark {
   text-decoration: none;
-  background: linear-gradient(to right, #ffa822 50.05%, transparent 50.05%);
+  background: linear-gradient(to right, #ffa822 50%, transparent 50%);
   background-position: 0% 0;
   background-size: 201%;
   transition: 500ms ease;
@@ -155,7 +155,7 @@ li {
   color: #eeeeee;
   white-space: nowrap;
   background: linear-gradient(to right, transparent 50%, #eeeeee 50%);
-  background-size: 200%;
+  background-size: 201%;
   background-position: 0 0;
   transition: 500ms ease;
 }
@@ -166,37 +166,51 @@ li {
 .topnav .topnav-links {
   display: none;
   flex-direction: column;
+  align-items: flex-start;
   gap: 1rem;
   position: absolute;
   top: 100%;
-  left: 0;
-  right: 0;
-  padding: 1rem 5vw;
+  right: 2em;
+  width: auto;
+  padding: 1rem 2em;
   background-color: rgb(36, 42, 52);
   border-top: 1px solid rgba(238, 238, 238, 0.15);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+.topnav {
+  /* Shared base for any top-level nav item styled like the dropdown
+     triggers - the triggers themselves, and any plain (non-dropdown) link
+     that should look the same minus the caret (e.g. a direct link to
+     /cases). Apply alongside a more specific class for anything extra
+     (.topnav-dropdown-toggle adds the flex/gap/caret bits below). */
+}
+.topnav .topnav-item {
+  font: inherit;
+  font-size: 1rem;
+  text-decoration: none;
+  white-space: nowrap;
+  background: linear-gradient(to right, transparent 50%, #eeeeee 50%);
+  background-size: 201%;
+  background-position: 0 0;
+  border: none;
+  cursor: pointer;
+  color: #eeeeee;
+  min-width: calc(100% - 1rem);
+  padding: 0.3em 0.6em;
+  border-radius: 0.4em;
+  transition: 500ms ease;
+}
+.topnav .topnav-item:hover, .topnav .topnav-item:focus {
+  background-position: -100% 0;
+  color: rgb(36, 42, 52);
 }
 .topnav .topnav-dropdown {
   position: relative;
 }
 .topnav .topnav-dropdown .topnav-dropdown-toggle {
-  font: inherit;
-  font-size: 1rem;
   display: flex;
   align-items: center;
   gap: 0.3em;
-  background: linear-gradient(to right, transparent 50%, #eeeeee 50%);
-  background-size: 200%;
-  background-position: 0 0;
-  border: none;
-  cursor: pointer;
-  color: #eeeeee;
-  padding: 0;
-  transition: 500ms ease;
-}
-.topnav .topnav-dropdown .topnav-dropdown-toggle:hover, .topnav .topnav-dropdown .topnav-dropdown-toggle:focus {
-  background-position: -100% 0;
-  color: rgb(36, 42, 52);
 }
 .topnav .topnav-dropdown .topnav-dropdown-toggle .topnav-caret {
   display: inline-block;
@@ -207,10 +221,10 @@ li {
   transform: rotate(180deg);
 }
 .topnav .topnav-dropdown .topnav-dropdown-menu {
-  display: none;
+  display: block;
   position: absolute;
   top: 100%;
-  left: 0;
+  right: 0;
   z-index: 1;
   margin: 0.5rem 0 0 0;
   padding: 0.5rem;
@@ -220,9 +234,26 @@ li {
   border-radius: 0.5em;
   list-style: none;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+  /* Closed state: opacity/transform drive the fade, visibility is
+     delayed so the menu leaves the a11y tree/tab order only once fully
+     invisible. Known limitation: during the ~200ms close fade the menu
+     is pointer-events:none (unclickable) but still visibility:visible,
+     so a keyboard user tabbing at that exact moment can still land
+     focus inside a closing menu. Accepted trade-off, not fixed here -
+     still better than the old instant display:none, which yanked focus
+     with zero transition. */
+  opacity: 0;
+  transform: translateY(-8px);
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 200ms ease, transform 200ms ease, visibility 0s linear 200ms;
 }
 .topnav .topnav-dropdown .topnav-dropdown-menu.is-open {
-  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity 200ms ease, transform 200ms ease, visibility 0s linear;
 }
 .topnav .topnav-dropdown .topnav-dropdown-menu li {
   font-size: 1rem;
@@ -235,13 +266,28 @@ li {
 }
 .topnav .topnav-toggle {
   cursor: pointer;
-  background: none;
-  border: none;
-  color: #eeeeee;
-  font-size: 1.5em;
+  position: relative;
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
 }
-.topnav .topnav-toggle .navOpen {
-  display: none;
+.topnav .topnav-toggle .bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #eeeeee;
+  border-radius: 1px;
+  transition: top 300ms ease, transform 300ms ease, opacity 300ms ease;
+}
+.topnav .topnav-toggle .bar1 {
+  top: 30%;
+}
+.topnav .topnav-toggle .bar2 {
+  top: 50%;
+}
+.topnav .topnav-toggle .bar3 {
+  top: 70%;
 }
 .topnav input[type=checkbox] {
   display: none;
@@ -249,11 +295,16 @@ li {
 .topnav input[type=checkbox]:checked ~ .topnav-links {
   display: flex;
 }
-.topnav input[type=checkbox]:checked ~ .topnav-toggle .navOpen {
-  display: inline;
+.topnav input[type=checkbox]:checked ~ .topnav-toggle .bar1 {
+  top: 50%;
+  transform: rotate(45deg);
 }
-.topnav input[type=checkbox]:checked ~ .topnav-toggle .navClosed {
-  display: none;
+.topnav input[type=checkbox]:checked ~ .topnav-toggle .bar2 {
+  opacity: 0;
+}
+.topnav input[type=checkbox]:checked ~ .topnav-toggle .bar3 {
+  top: 50%;
+  transform: rotate(-45deg);
 }
 
 /* regular content: slideshow-like (keep values unitless since vanilla CSS cannot do dimensional analysis) */
@@ -388,6 +439,22 @@ ol {
   text-align: center;
 }
 
+/* Generic scroll-reveal utility. The "js-reveal" class is only added to
+   <html> by ui.js once IntersectionObserver support and
+   !prefers-reduced-motion are both confirmed, so a ".reveal" element with
+   no JS (or with reduced motion set) is never hidden in the first place -
+   no separate noscript override needed. */
+.js-reveal .reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 550ms ease, transform 550ms ease;
+}
+
+.js-reveal .reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Visual previews of portfolio entries and articles */
 .tiles,
 .banners {
@@ -426,7 +493,8 @@ ol {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   transition: transform 400ms ease;
   z-index: 0;
 }
@@ -519,6 +587,7 @@ ol {
   border-radius: 5px;
   border: 1px solid rgb(36, 42, 52);
   color: rgb(36, 42, 52) !important;
+  transition: color 500ms ease;
 }
 .tag:hover, .tag:focus {
   color: #eeeeee !important;
@@ -642,6 +711,10 @@ form button:hover, form button:focus {
   }
 }
 @media (orientation: landscape) and (min-width: 1000px) {
+  .topnav .topnav-item {
+    min-width: -moz-fit-content;
+    min-width: fit-content;
+  }
   .topnav .topnav-links {
     display: flex;
     flex-direction: row;
@@ -652,17 +725,11 @@ form button:hover, form button:focus {
     background: none;
     box-shadow: none;
     border-top: 0;
+    left: 0;
+    width: auto;
   }
   .topnav .topnav-toggle {
     display: none;
-  }
-  .topnav .topnav-dropdown .topnav-dropdown-toggle {
-    padding: 0.3em 0.6em;
-    border-radius: 0.4em;
-  }
-  .topnav .topnav-dropdown .topnav-dropdown-menu {
-    left: auto;
-    right: 0;
   }
   .yokoso p :not(.article-summary) {
     max-width: 50vw;
@@ -680,4 +747,4 @@ form button:hover, form button:focus {
   .content-section.content-sectionNoPadMobile {
     padding: inherit;
   }
-}
+}/*# sourceMappingURL=main.css.map */

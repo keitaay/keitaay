@@ -46,23 +46,45 @@ function scrollFreeze() {
     }
 };
 
-// Update the URL to the current page based on where the user is scrolling
+// Update the URL to the current page based on where the user is scrolling.
+// Throttled via requestAnimationFrame, and only touches history when the
+// current section actually changes - history.replaceState(null, null, ...)
+// always sets history.state to null, so comparing "current !== history.state"
+// was true on nearly every scroll tick regardless of whether the section had
+// changed, which could exhaust the browser's history-mutation rate limit
+// (Chrome: ~100 calls/10s) during a single scroll gesture and leave the hash
+// stuck at whatever value was last applied before hitting it.
+//
+// Uses getBoundingClientRect() rather than offsetTop: offsetTop is relative
+// to the section's offsetParent (here, <main>, since it's position:relative),
+// not the true document top - and <main> itself is pushed down by the sticky
+// <nav>, which occupies real space above it in normal flow. That mismatch
+// between offsetTop's coordinate space and window.scrollY's meant the
+// comparison below was never quite right. getBoundingClientRect().top is
+// always viewport-relative, sidestepping the offsetParent chain entirely.
 const sections = document.querySelectorAll('section');
+let lastSectionId = null;
+let scrollSpyTicking = false;
 window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(section => {
-    const sectionTop = section.offsetTop;
+  if (scrollSpyTicking) return;
+  scrollSpyTicking = true;
+  requestAnimationFrame(() => {
+    let current = 'pgtop';
+    sections.forEach(section => {
+      const id = section.getAttribute('id');
+      if (!id) return; // nothing meaningful to link to
+      const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+      if (window.scrollY >= sectionTop) {
+        current = id;
+      }
+    });
 
-    // Get ID of the section that is currently in view
-    if (window.scrollY >= sectionTop) {
-      current = section.getAttribute('id');
+    if (current !== lastSectionId) {
+      lastSectionId = current;
+      history.replaceState(null, null, `#${current}`);
     }
+    scrollSpyTicking = false;
   });
-
-  // Update URL hash based on current section
-  if (current !== history.state) {
-    history.replaceState(null, null, `#${current}`);
-  }
 });
 
 // Attach listeners to "mark" elements; conditionally animate highlighting
@@ -82,6 +104,29 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 markElements.forEach(el => observer.observe(el));
+
+// Fade+rise ".reveal" elements into view once, the first time they scroll
+// into the viewport (unlike the "mark" observer above, which toggles both
+// directions for a repeatable highlight - a one-shot entrance reads as
+// considered, a repeatedly toggling one reads as a gimmick). The hidden
+// state itself only ever applies via the "js-reveal" class below, which is
+// added here and only here - so content with no JS, no IntersectionObserver
+// support, or prefers-reduced-motion set stays fully visible by default,
+// with no flash and no separate noscript override needed.
+if ('IntersectionObserver' in window &&
+    !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('js-reveal');
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
+    revealElements.forEach(el => revealObserver.observe(el));
+}
 
 // Close the mobile nav panel if the viewport grows into desktop width
 // mid-interaction (e.g. hamburger opened, then window resized wider) - this
