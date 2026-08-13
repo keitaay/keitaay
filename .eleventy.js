@@ -1,3 +1,7 @@
+// Loads .env into process.env for local builds (a no-op if .env doesn't
+// exist, e.g. in CI/Cloudflare Pages, which injects real env vars directly).
+require('dotenv').config();
+
 module.exports = function (eleventyConfig) {
     const Nunjucks = require('nunjucks');
     const pathOut = "_public";
@@ -7,6 +11,11 @@ module.exports = function (eleventyConfig) {
         url: "https://keitaay.com",
         name: "Kéita A. Yokoyama, PhD",
         defaultDescription: "Kéita Yokoyama helps life science companies turn early-stage science into scalable strategies, and translates technical complexity into ideas and insights people can act on.",
+        // Populated from the CF_BEACON_TOKEN env var (.env locally, Cloudflare
+        // Pages project settings in production) - never hardcoded, since this
+        // repo is public. Empty string if unset, so footer.html can omit the
+        // beacon entirely rather than shipping a broken/placeholder token.
+        cfBeaconToken: process.env.CF_BEACON_TOKEN || "",
     });
 
     // Copy additional files to the output folder
@@ -18,7 +27,17 @@ module.exports = function (eleventyConfig) {
 
     // Call tool to generate favicons and related files
     const faviconsPlugin = require("eleventy-plugin-gen-favicons");
-    eleventyConfig.addPlugin(faviconsPlugin, {"outputDir": pathOut});
+    eleventyConfig.addPlugin(faviconsPlugin, {
+        "outputDir": pathOut,
+        "manifestData": {
+            "name": "Kéita A. Yokoyama, PhD",
+            "short_name": "Kéita Yokoyama",
+            "start_url": "/",
+            "display": "standalone",
+            "theme_color": "#132736",
+            "background_color": "#132736",
+        },
+    });
 
     // Create filters for some common tasks
     eleventyConfig.addFilter("getYear", function (date) {

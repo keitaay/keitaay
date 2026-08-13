@@ -1,6 +1,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#132736">
 {% favicons 'src/favicon.svg' %}
 
 <!--
@@ -33,13 +34,13 @@
 {% include "person.json" %}
 </script>
 
-<!--font-->
+<!--
+    Deliberately loading fonts from Google Fonts rather than self-hosted -
+    not vendoring commonly-available font files into this repo.
+-->
 <link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100..800&display=swap&family=Noto+Serif+Display:wght@100..800&display=swap">
-<!--also see for sans serif: Leon Sans (fontsarena.com/leon-sans-by-jongmin-kim/)-->
-<!--for serif fonts: consider: Petrona, EB Garamond, Lora-->
-
-<!--set active page for navbar modification-->
+<!--Also see for sans serif: Leon Sans (fontsarena.com/leon-sans-by-jongmin-kim/). For serif fonts: consider: Petrona, EB Garamond, Lora-->
 
 <!--define style for pre-loaded content; used while rest of page is being loaded-->
 <style type="text/css">
@@ -130,7 +131,20 @@
     }
 </style>
 
-<!--if JavaScript is allowed, asynchronously load rest of CSS + QoL scripts-->
+<!--
+    if JavaScript is allowed, asynchronously load rest of CSS + QoL scripts.
+    onload="" must stay an attribute on this exact tag, not a separate
+    <script> block (inline or external): the attribute is wired atomically
+    with this element's own creation, in the same parser step that triggers
+    its fetch, so there's no gap for anything to race. A sibling <script> -
+    even inline - requires the parser to finish this element and reach a new
+    token first, and if the HTML response arrives in more than one network
+    chunk (common even on localhost), the browser can run other pending
+    tasks in between - including this resource's own 'load' event, if it
+    finished faster than the rest of the page streamed in. Verified this
+    the hard way: the sibling-<script> version silently never activated the
+    stylesheet, in both Chromium and Firefox.
+-->
 <link rel="preload" as="style" href="{{ pathCss | url }}" onload="this.onload=null; this.rel='stylesheet'">
 
 <!--if JavaScript is disabled, omit loading screen + fetch the CSS file-->

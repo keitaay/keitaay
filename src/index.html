@@ -46,7 +46,7 @@ title: Home
                     {% if caseBme.data %}
                     <a class="banner" href="{{ caseBme.url | url }}"
                         style="background-color:#111144">
-                        <img src="{{ caseBme.data.imageHero | url }}" class="bg-img" alt="" />
+                        <img src="{{ caseBme.data.imageHero | url }}" class="bg-img" alt="" loading="lazy" />
                         <div class="banner-overlay">
                             <div class="artPrelude">Featured Case</div>
                             <div class="artTagline">{{ caseBme.data.title }}</div>
@@ -71,7 +71,7 @@ title: Home
                     {% if caseInnov.data %}
                     <a class="banner" href="{{ caseInnov.url | url }}"
                         style="background-color:#111144">
-                        <img src="{{ caseInnov.data.imageHero | url }}" class="bg-img" alt="" />
+                        <img src="{{ caseInnov.data.imageHero | url }}" class="bg-img" alt="" loading="lazy" />
                         <div class="banner-overlay">
                             <div class="artPrelude">Featured Case</div>
                             <div class="artTagline">{{ caseInnov.data.title }}</div>
@@ -96,7 +96,7 @@ title: Home
                     {% if caseConx.data %}
                     <a class="banner" href="{{ caseConx.url | url }}"
                         style="background-color:#111144">
-                        <img src="{{ caseConx.data.imageHero | url }}" class="bg-img" alt="" />
+                        <img src="{{ caseConx.data.imageHero | url }}" class="bg-img" alt="" loading="lazy" />
                         <div class="banner-overlay">
                             <div class="artPrelude">Featured Case</div>
                             <div class="artTagline">{{ caseConx.data.title }}</div>
@@ -118,7 +118,7 @@ title: Home
     {% for case in featuredCases | limit(8) %}
     <a class="tile" href="{{ case.url | url }}"
         style="background-color:#111144;background-image:url('{{ case.data.imageHero | url }}')">
-        <img src="{{ case.data.imageHero | url }}" class="bg-img" alt="" />
+        <img src="{{ case.data.imageHero | url }}" class="bg-img" alt="" loading="lazy" />
         <div class="tile-overlay">
             <div class="artPrelude">{{ case.data.subject }}</div>
             <div class="artTagline">{{ case.data.title }}</div>

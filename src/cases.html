@@ -18,7 +18,7 @@ description: Case studies from Kéita Yokoyama's work across biomedical engineer
     {% for case in visibleCases %}
     <a class="tile" href="{{ case.url | url }}"
         style="background-color:#111144">
-        <img src="{{ case.data.imageHero | url }}" class="bg-img" alt="" />
+        <img src="{{ case.data.imageHero | url }}" class="bg-img" alt="" loading="lazy" />
         <div class="tile-overlay">
             <div class="artPrelude">{{ case.data.subject }}</div>
             <div class="artTagline">{{ case.data.title }}</div>
@@ -27,7 +27,7 @@ description: Case studies from Kéita Yokoyama's work across biomedical engineer
     {% endfor %}
     {% if visibleCases.length > 0 %}
     <a class="tile" id="random-case-btn" href="#" style="background-color:#111144">
-        <img src="/cases/img/placeholder-hero.svg" class="bg-img" alt="" />
+        <img src="/cases/img/placeholder-hero.svg" class="bg-img" alt="" loading="lazy" />
         <div class="tile-overlay">
             <div class="artPrelude">But&nbsp;wait, there's&nbsp;more!</div>
             <div class="artTagline">Click&nbsp;here to&nbsp;view a random case&nbsp;study.</div>
@@ -40,18 +40,6 @@ description: Case studies from Kéita Yokoyama's work across biomedical engineer
             {% endfor %}
         ]
     </script>
-    <script>
-        // Parse case URLs from JSON script tag
-        const caseUrls = JSON.parse(document.getElementById('case-urls').textContent);
-        // Random navigation logic
-        document.getElementById('random-case-btn').addEventListener('click', function (e) {
-            if (caseUrls && caseUrls.length > 0) {
-                e.preventDefault();
-                const idx = Math.floor(Math.random() * caseUrls.length);
-                const randomUrl = new URL(caseUrls[idx], window.location.origin).href;
-                navAway(e, { href: randomUrl });
-            }
-        });
-    </script>
+    <script src="/_js/random-case.js"></script>
     {% endif %}
 </section>

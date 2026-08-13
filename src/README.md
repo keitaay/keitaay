@@ -81,6 +81,7 @@ Optional polish, whenever:
 
 - **Testimonials** on `job-search-help.html` - reserved as a commented-out block in the file, ready to uncomment once real ones exist.
 - Other `job-search-help.html` additions worth considering: an FAQ (pricing/format/turnaround), a "who this is for" section, or a before/after resume sample.
+- **JSON-LD structured data for individual case studies** (`_layouts/case.html` currently has none - only the site-wide `Person` schema in `_include/header.html` exists). Deferred because it's not yet settled how permanent/authoritative case studies are meant to be; revisit once that's decided.
 - **Dark mode.** Feasible, but not a drop-in addition: the color system in `_css/main.scss` is all compile-time SCSS `$variables`, not runtime CSS custom properties, and a proper implementation (e.g. `light-dark()` + `color-scheme`, as in [this approach](https://fedknu.com/blog/adding-dark-mode-to-11ty-blog/)) needs runtime-switchable values. That means migrating the whole `$color*` system to CSS custom properties first - a real refactor, not a toggle bolted on top. It's also a genuine design question, not just technical: the site already deliberately mixes dark (hero/nav) and light (article/case-study) sections as part of its identity, rather than being uniformly "light" with a dark alternative - "dark mode" would need its own definition here, not just an inverted palette. Low urgency; worth doing only if/when the color system gets revisited for other reasons.
 
 ## License
