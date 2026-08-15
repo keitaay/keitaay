@@ -385,6 +385,59 @@ ol {
   margin: 5vh 0;
 }
 
+/* Registered so the browser can smoothly interpolate --hero-parallax as a
+   percentage across the view-progress animation below, instead of treating
+   it as an opaque, non-interpolable string. */
+@property --hero-parallax {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 0%;
+}
+/* Case-study hero: a real <img> (needed for the eleventy-img optimization
+   pipeline) layered behind .article-summary, replacing the old CSS
+   background-image. Scoped to this class so it can't affect the other
+   .yokoso sections, which never had image backgrounds. */
+.has-hero-image {
+  z-index: 0;
+  overflow: hidden;
+}
+
+.has-hero-image .hero-img {
+  position: absolute;
+  /* Slightly oversized and offset so the parallax translation below never
+     reveals empty edges. */
+  top: -10%;
+  left: 0;
+  width: 100%;
+  height: 120%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  z-index: -1;
+  transform: translateY(var(--hero-parallax));
+}
+
+@supports (animation-timeline: view()) {
+  /* The view() timeline is applied to .has-hero-image itself, not
+     .hero-img: view() resolves against the nearest ANCESTOR scroll
+     container of its subject, and .has-hero-image's own overflow:hidden
+     (needed to clip the oversized .hero-img) would otherwise get picked up
+     as that scroller for .hero-img - which never actually scrolls, leaving
+     the timeline permanently inactive. Animating a custom property here
+     and consuming it via var() on the descendant sidesteps that. */
+  .has-hero-image {
+    animation: heroParallax linear both;
+    animation-timeline: view();
+    animation-range: cover 0% cover 100%;
+  }
+}
+@keyframes heroParallax {
+  from {
+    --hero-parallax: -20%;
+  }
+  to {
+    --hero-parallax: 20%;
+  }
+}
 .content {
   display: flex;
   z-index: 400;
