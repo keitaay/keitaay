@@ -18,7 +18,7 @@ description: Case studies from Kéita Yokoyama's work across biomedical engineer
     {% for case in visibleCases %}
     <a class="tile" href="{{ case.url | url }}"
         style="background-color:#111144">
-        <img src="{{ case.data.imageHero | url }}" class="bg-img" alt="" loading="lazy" />
+        <img src="{{ case.data.imageHero | url }}" class="bg-img" alt="" loading="lazy" {% if case.data.imageHero | isSvg %}eleventy:ignore{% endif %} />
         <div class="tile-overlay">
             <div class="artPrelude">{{ case.data.subject }}</div>
             <div class="artTagline">{{ case.data.title }}</div>
@@ -27,7 +27,7 @@ description: Case studies from Kéita Yokoyama's work across biomedical engineer
     {% endfor %}
     {% if visibleCases.length > 0 %}
     <a class="tile" id="random-case-btn" href="#" style="background-color:#111144">
-        <img src="/cases/img/placeholder-hero.svg" class="bg-img" alt="" loading="lazy" />
+        <img src="/cases/img/placeholder-hero.svg" class="bg-img" alt="" loading="lazy" eleventy:ignore />
         <div class="tile-overlay">
             <div class="artPrelude">But&nbsp;wait, there's&nbsp;more!</div>
             <div class="artTagline">Click&nbsp;here to&nbsp;view a random case&nbsp;study.</div>

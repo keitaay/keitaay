@@ -2,7 +2,7 @@
 layout: base.html
 ---
 <div class="slide yokoso has-hero-image" id="pgtop">
-    <img class="hero-img" src="{{ imageHero | url }}" alt="" loading="eager" fetchpriority="high" sizes="100vw">
+    <img class="hero-img" src="{{ imageHero | url }}" alt="" loading="eager" fetchpriority="high" sizes="100vw" {% if imageHero | isSvg %}eleventy:ignore{% endif %}>
     <div class="article-summary">
         <div>{% include "goback.html" %}</div>
         <p style="margin-top:1.5em; margin-bottom:0.6em;"><i style="font-weight:200; letter-spacing:0.1em">{{ dateProj }}{% if location %} - {{ location }}{% endif %}</i></p>
@@ -81,7 +81,7 @@ layout: base.html
     {% for case in relatedCases %}
     <a class="tile" href="{{ case.url | url }}"
         style="background-color:#111144;background-image:url('{{ case.data.imageHero | url }}')">
-        <img src="{{ case.data.imageHero | url }}" class="bg-img" alt="" loading="lazy" />
+        <img src="{{ case.data.imageHero | url }}" class="bg-img" alt="" loading="lazy" {% if case.data.imageHero | isSvg %}eleventy:ignore{% endif %} />
         <div class="tile-overlay">
             <div class="artPrelude">{{ case.data.subject }}</div>
             <div class="artTagline">{{ case.data.title }}</div>

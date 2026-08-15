@@ -22,7 +22,7 @@ permalink: /tags/{{ tag }}/
     {% for case in visibleItems %}
     <a class="tile" href="{{ case.url | url }}"
         style="background-color:#111144">
-        <img src="{{ case.data.imageHero | url }}" class="bg-img" alt="" loading="lazy" />
+        <img src="{{ case.data.imageHero | url }}" class="bg-img" alt="" loading="lazy" {% if case.data.imageHero | isSvg %}eleventy:ignore{% endif %} />
         <div class="tile-overlay">
             <div class="artPrelude">{{ case.data.roles[0] }}: {{ case.data.subject }}</div>
             <div class="artTagline">{{ case.data.title }}</div>

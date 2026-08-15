@@ -39,6 +39,30 @@ module.exports = function (eleventyConfig) {
         },
     });
 
+    // Optimize case-study images (imageHero) into responsive, modern-format
+    // <img>/<picture> output. Walks the rendered HTML directly, so every
+    // <img src="{{ imageHero }}"> site across the templates is covered
+    // automatically - nothing to wire up per-template beyond the
+    // eleventy:ignore attribute used to skip the SVG placeholder (see the
+    // isSvg filter below), since this is a raster-only pipeline.
+    const { eleventyImageTransformPlugin } = require("@11ty/eleventy-img");
+    eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
+        extensions: "html",
+        formats: ["webp", "jpeg"],
+        widths: [400, 800, 1600, "auto"],
+        urlPath: "/img/optimized/",
+        outputDir: `${pathOut}/img/optimized/`,
+        // Tolerates a currently-broken imageHero reference (gbcc.md's
+        // missing cg2.jpg, still built directly despite doIgnore:true, per
+        // the "known limitation" documented in ROADMAP.md) exactly as
+        // today - a silent broken image - rather than turning it into a
+        // hard build failure.
+        failOnError: false,
+        htmlOptions: {
+            imgAttributes: { decoding: "async" },
+        },
+    });
+
     // Create filters for some common tasks
     eleventyConfig.addFilter("getYear", function (date) {
         /*
@@ -101,6 +125,14 @@ module.exports = function (eleventyConfig) {
         }
         const filtered = arr.filter(item => item.data.tags && item.data.tags.includes(tag));
         return filtered.length > 0 ? filtered[0] : {};
+    });
+    eleventyConfig.addFilter("isSvg", function (src) {
+        /*
+        Given an image path/URL, return whether it points at an SVG - used to
+        keep the (vector, not something a raster pipeline should touch)
+        placeholder-hero.svg out of the eleventy-img optimization pipeline.
+        */
+        return typeof src === "string" && src.toLowerCase().endsWith(".svg");
     });
     eleventyConfig.addFilter("relatedCases", function(cases, currentUrl, currentTags, limit = 5) {
         /*
