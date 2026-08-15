@@ -5,7 +5,7 @@ $min_tablet: 600px;
 $max_tablet: 999.99px;
 $min_desktop: 1000px;
 $topnavHeight: 4em;
-$alpha: 0.5;
+$alpha: 0.7;
 $angGolden: 35.4deg;
 $angGoRvrs: -1 * $angGolden;
 $colorW: #eeeeee;
@@ -923,6 +923,14 @@ form {
 .email > span:nth-child(3),
 .email > span:nth-child(5) {
   display: none;
+}
+
+/* Hidden by default (JS rewrites #conversion into a working mailto: link,
+   making this plain-text fallback redundant); email.html's <noscript>
+   overrides this back to visible for the no-JS case, where #conversion's
+   href is never rewritten. */
+.email {
+  visibility: hidden;
 }
 
 /* responsive to variable screen sizes */
