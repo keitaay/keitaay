@@ -32,6 +32,7 @@
   "overrides": {
     "eleventy-plugin-gen-favicons": {
       "sharp": "^0.35.3"
-    }
+    },
+    "puppeteer": "^25.7.0"
   }
 }

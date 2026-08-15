@@ -7,7 +7,7 @@ This folder contains the source code for my personal website, deployed as a stat
 To create a local copy, download:
 
 - A system with a modern web browser
-- [Node.js](https://nodejs.org/en/) v22.0 or higher
+- [Node.js](https://nodejs.org/en/) v22.12.0 or higher
 - [11ty](https://www.11ty.dev/) v3.1.6 (as of Aug. 2026, code is not prepared for naming changes proposed in Build Awesome v4)
 - [Prettier](https://prettier.io/) to maintain consistent code formatting
 
@@ -29,6 +29,9 @@ npx @11ty/eleventy --serve
 ```
 
 > **Note:** [`package.json`](./package.json), which governs what `npm install` installs, also includes a third dependency: `sharp`. However, this library is actually a dependency of `eleventy-plugin-gen-favicons`. `package.json` file explicitly indicates it as a requirement only because some Node installations fail to install it automatically; this website does not directly call `sharp` at the time of writing.
+
+>[!NOTE]
+> `package.json`'s `overrides` includes dependency overrides for some tools that are only used for internal development. Notably, `pa11y-ci` (an accessibility audit tool) has the transitive dependency `puppeteer`, (and downstream to it, `extract-zip`, which has an unpatched high-severity advisory without any fixes released). This behavior is overridden by updating `puppeteer` such that `extract-zip` is replaced by the safer `modern-tar`.
 
 
 ## Repository structure
