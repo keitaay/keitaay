@@ -158,8 +158,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 cursorScale += 1.0 * Math.exp(-dist * 3); // tweak factor as desired
             }
 
-            // Update circle radius
-            const rNow = (rBase + rAmp * Math.tanh(A)) * cursorScale;
+            // Update circle radius (clamped: SVG rejects a negative r, and
+            // rBase - rAmp is negative given the current parameters)
+            const rNow = Math.max(0, (rBase + rAmp * Math.tanh(A)) * cursorScale);
             c.el.setAttribute("r", rNow.toFixed(3));
         });
         requestAnimationFrame(animate);
