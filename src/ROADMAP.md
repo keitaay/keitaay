@@ -38,6 +38,5 @@ The following non-content, non-copy work should be done before treating this sit
 - **Case studies need to actually be visible.** See [Content backlog](#content-backlog) above.
 - **Live cross-browser/device testing**, including the `<noscript>` fallback path (untested with JS actually disabled) and the obfuscated email link in `_js/ui.js` (works in dev; never explicitly confirmed against the production build).
 - **SEO verification, once live:** submit the sitemap to Google Search Console and Bing Webmaster Tools; spot-check social-share previews (OG/Twitter card) on a few pages with a real link-preview tool, since several case studies still have a placeholder `imageHero` feeding `og:image`.
-- ~~QA automation: find a lightweight way to run an accessibility check~~ **Done (wiring only):** `npm run test:a11y` builds the site, serves `_public/` locally, and runs `pa11y-ci` (WCAG2AA, via `axe` and `htmlcs`) against 4 representative pages via local script. First run surfaced real findings (23-35 issues per page, mostly color-contrast) rather than passing green; triaging/fixing those is separate, not-yet-done follow-up work, not part of wiring the check up.
 
 Site security headers (CSP, `X-Frame-Options`, etc.) are already live via Cloudflare Transform Rules and verified working. Uptime monitoring is being handled directly through Cloudflare, not tracked here.
