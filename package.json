@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "node scripts/check-content.mjs",
+    "test:a11y": "npm run build && start-server-and-test \"http-server _public -p 8081 -s\" http://127.0.0.1:8081 pa11y-ci",
     "build": "eleventy && node scripts/minify-assets.mjs"
   },
   "repository": {
@@ -23,7 +24,10 @@
   },
   "devDependencies": {
     "dotenv": "^16.4.5",
-    "gray-matter": "^4.0.3"
+    "gray-matter": "^4.0.3",
+    "http-server": "^14.1.1",
+    "pa11y-ci": "^4.1.1",
+    "start-server-and-test": "^3.0.12"
   },
   "overrides": {
     "eleventy-plugin-gen-favicons": {
